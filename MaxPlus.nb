@@ -1,0 +1,153 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      4470,        144]
+NotebookOptionsPosition[      3957,        123]
+NotebookOutlinePosition[      4313,        139]
+CellTagsIndexPosition[      4270,        136]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"ClearAll", "[", "\"\<Global`*\>\"", "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"x_", " ", "\[CirclePlus]", " ", "y_"}], " ", ":=", " ", 
+   RowBox[{"Max", "[", 
+    RowBox[{"x", ",", "y"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{
+  3.5950162078163767`*^9, {3.595018690252239*^9, 3.595018693324938*^9}, {
+   3.595019069648137*^9, 3.595019073142927*^9}}],
+
+Cell[BoxData[
+ RowBox[{"SetAttributes", "[", 
+  RowBox[{"CirclePlus", ",", "Listable"}], "]"}]], "Input",
+ CellChangeTimes->{{3.595019155712454*^9, 3.59501921982362*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"x_", " ", "\[CircleTimes]", " ", "y_"}], " ", ":=", 
+   RowBox[{"Plus", "[", 
+    RowBox[{"x", ",", "y"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.5950161528331347`*^9, 3.5950161544969378`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"x_List", " ", "\[CircleDot]", " ", "y_List"}], " ", ":=", 
+  RowBox[{"Inner", "[", 
+   RowBox[{"Plus", ",", "x", ",", "y", ",", "Max"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.595016165401903*^9, 3.595016219599444*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"MPIdentity", "[", "n_", "]"}], ":=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"i", "\[Equal]", "j"}], ",", "0", ",", 
+      RowBox[{"-", "\[Infinity]"}]}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", "n"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"j", ",", "1", ",", "n"}], "}"}]}], "]"}], " "}]], "Input",
+ CellChangeTimes->{{3.5950164726580353`*^9, 3.595016472937957*^9}, {
+  3.595016515377273*^9, 3.59501651570448*^9}, {3.595016631390881*^9, 
+  3.595016746557413*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"KleeneStar", "[", 
+   RowBox[{"x_", ",", "order_"}], "]"}], ":=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"Max", "[", 
+     RowBox[{"Union", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"MPIdentity", "[", 
+          RowBox[{"Length", "[", "x", "]"}], "]"}], "[", 
+         RowBox[{"[", 
+          RowBox[{"i", ",", "j"}], "]"}], "]"}], "}"}], ",", 
+       RowBox[{
+        RowBox[{"NestList", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"x", "\[CircleDot]", "#"}], "&"}], ",", "x", ",", 
+          "order"}], "]"}], "[", 
+        RowBox[{"[", 
+         RowBox[{"All", ",", "i", ",", "j"}], "]"}], "]"}]}], "]"}], "]"}], 
+    ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", 
+      RowBox[{"Length", "[", "x", "]"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"j", ",", "1", ",", 
+      RowBox[{"Length", "[", "x", "]"}]}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.5950168081363783`*^9, 3.595016880053197*^9}, 
+   3.595016949123461*^9, {3.595018030900172*^9, 3.5950180493599787`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Table", "[", 
+  RowBox[{
+   RowBox[{"KleeneStar", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "\[Infinity]"}], ",", "2"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "\[Infinity]"}], ",", 
+         RowBox[{"-", "2"}]}], "}"}]}], "}"}], ",", "i"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"i", ",", "20"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.595016883376519*^9, 3.5950169243579893`*^9}, {
+  3.595018059138524*^9, 3.59501813878334*^9}, {3.5950190030858517`*^9, 
+  3.595019046422031*^9}}]
+},
+WindowSize->{740, 589},
+WindowMargins->{{Automatic, 111}, {Automatic, 0}},
+FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
+2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 76, 1, 28, "Input"],
+Cell[636, 23, 325, 8, 28, "Input"],
+Cell[964, 33, 170, 3, 28, "Input"],
+Cell[1137, 38, 249, 6, 28, "Input"],
+Cell[1389, 46, 256, 5, 28, "Input"],
+Cell[1648, 53, 579, 15, 28, "Input"],
+Cell[2230, 70, 1097, 31, 63, "Input"],
+Cell[3330, 103, 623, 18, 28, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
