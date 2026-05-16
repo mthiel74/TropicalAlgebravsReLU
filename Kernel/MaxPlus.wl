@@ -164,6 +164,35 @@ TropicalRationalEval::usage =
 "TropicalRationalEval[<|\"P\" -> p, \"Q\" -> q|>, x] = TropicalEval[p, x] \
 - TropicalEval[q, x].";
 
+(* analytical tools that go beyond the standard literature *)
+
+MPRealisedPatterns::usage =
+"MPRealisedPatterns[net, dom, n] returns the list of distinct \
+activation patterns realised by the trained net on an n x n grid \
+over the rectangle dom.";
+
+MPRegionGradient::usage =
+"MPRegionGradient[net, sigma] returns the gradient of the network \
+function on the region with activation pattern sigma: \
+the sum  Sum_{j : sigma[[j]] == 1} c_j a_j.";
+
+MPExactLipschitz::usage =
+"MPExactLipschitz[net, dom, n] computes the TIGHT (not just an upper \
+bound on) Lipschitz constant of the trained ReLU classifier net on the \
+rectangle dom, by enumerating realised activation patterns on an n x n \
+grid and taking the maximum gradient norm.";
+
+MPDeadUnits::usage =
+"MPDeadUnits[net, dom] returns the set of hidden-unit indices j whose \
+pre-activation a_j . x + b_j stays non-positive (or non-negative) for \
+all x in the rectangle dom -- units that contribute nothing to the \
+network on dom and can be removed without changing the function.";
+
+MPPruneDeadUnits::usage =
+"MPPruneDeadUnits[net, dom] returns a new network with the dead units \
+removed and the constant term adjusted, so it computes EXACTLY the \
+same function on dom but with fewer hidden units.";
+
 (* ===== implementation ============================================ *)
 
 Begin["`Private`"];
@@ -454,6 +483,109 @@ TropicalRationalEval[<|"P" -> p_, "Q" -> q_|>, x_?VectorQ] :=
 
 TropicalRationalEval[<|"P" -> p_, "Q" -> q_|>, X_?MatrixQ] :=
   TropicalRationalEval[<|"P" -> p, "Q" -> q|>, #] & /@ X;
+
+(* --- analytical tools ------------------------------------------- *)
+
+(* Realised activation patterns on a grid. *)
+MPRealisedPatterns[net_Association,
+    dom_ : {{-3., 3.}, {-3., 3.}}, n_Integer : 200] := Module[
+  {a, b, xs, ys, pts, sig},
+  {a, b} = Lookup[net, {"A", "b"}];
+  xs = Subdivide[dom[[1, 1]], dom[[1, 2]], n - 1];
+  ys = Subdivide[dom[[2, 1]], dom[[2, 2]], n - 1];
+  pts = Flatten[Table[{x, y}, {x, xs}, {y, ys}], 1];
+  sig = Boole[Thread[a . # + b > 0]] & /@ pts;
+  DeleteDuplicates[sig]
+];
+
+(* Gradient on the region with activation pattern sigma. *)
+MPRegionGradient[net_Association, sigma_?VectorQ] := Module[
+  {a, b, c, active},
+  {a, b, c} = Lookup[net, {"A", "b", "c"}];
+  active = Position[sigma, 1] // Flatten;
+  If[active === {}, ConstantArray[0., Length[a[[1]]]],
+    Total[c[[#]] a[[#]] & /@ active]]
+];
+
+(* Exact (tight) Lipschitz constant via enumeration of realised
+   activation patterns.  For a 1-hidden-layer ReLU network the
+   function f is piecewise-affine; on each region the gradient is
+   sum_{j active} c_j a_j, and the global Lipschitz constant is the
+   maximum of the gradient norms over realised patterns.            *)
+
+MPExactLipschitz[net_Association,
+    dom_ : {{-3., 3.}, {-3., 3.}}, n_Integer : 200] := Module[
+  {patterns, grads, norms},
+  patterns = MPRealisedPatterns[net, dom, n];
+  grads    = MPRegionGradient[net, #] & /@ patterns;
+  norms    = Norm /@ grads;
+  <|"Lipschitz" -> Max[norms],
+    "Patterns" -> Length[patterns],
+    "ArgMaxPattern" -> patterns[[First @ Ordering[norms, -1]]],
+    "GradientNorms" -> norms|>
+];
+
+(* Dead unit detection: on a bounded rectangle dom the pre-activation
+   a_j.x + b_j is an affine function whose max is attained at a corner.
+   The unit is dead-low (ReLU never fires) iff that max is <= 0.       *)
+
+MPDeadUnits[net_Association,
+    dom_ : {{-3., 3.}, {-3., 3.}}] := Module[
+  {a, b, corners, maxes, mins, deadLow, deadHigh},
+  {a, b} = Lookup[net, {"A", "b"}];
+  corners = Tuples[dom];                          (* 4 corners of rect *)
+  maxes = Table[Max[a[[j]] . # + b[[j]] & /@ corners], {j, Length[b]}];
+  mins  = Table[Min[a[[j]] . # + b[[j]] & /@ corners], {j, Length[b]}];
+  deadLow  = Pick[Range[Length[b]], NonPositive /@ maxes];
+  deadHigh = Pick[Range[Length[b]], NonNegative /@ mins];
+  <|"NeverActive" -> deadLow,
+    "AlwaysActive" -> deadHigh|>
+];
+
+(* Construct an equivalent network with dead units removed.
+     - units in "NeverActive" (max(a.x+b) <= 0 on dom):   always ReLU = 0,
+       drop them entirely (they add nothing to f).
+     - units in "AlwaysActive" (min(a.x+b) >= 0 on dom):  ReLU is just
+       the affine pre-activation, so we can FOLD it into the bias d by
+       adding c_j (a_j . x + b_j) directly to the output linear layer.
+       Concretely, after removing the unit, we add  c_j a_j  to a new
+       "constant slope" vector and  c_j b_j  to d.  Since the rest of
+       the output is c.h + d, we need to attach an explicit affine head:
+
+           f(x) = c_kept . h_kept(x) + (c_always . a_always.x + c_always . b_always) + d.
+
+       For simplicity we represent this as an "affine head" in the
+       returned association.                                            *)
+
+MPPruneDeadUnits[net_Association,
+    dom_ : {{-3., 3.}, {-3., 3.}}] := Module[
+  {a, b, c, d, dead, drop, keep, alwaysOn, neverOn, newA, newB, newC,
+   newD, headSlope, headBias},
+  {a, b, c, d} = Lookup[net, {"A", "b", "c", "d"}];
+  dead   = MPDeadUnits[net, dom];
+  neverOn  = dead["NeverActive"];
+  alwaysOn = dead["AlwaysActive"];
+  drop = Union[neverOn, alwaysOn];
+  keep = Complement[Range[Length[b]], drop];
+
+  newA = a[[keep]];
+  newB = b[[keep]];
+  newC = c[[keep]];
+
+  (* Roll the always-active units into a constant affine head. *)
+  headSlope = If[alwaysOn === {}, ConstantArray[0., Length[a[[1]]]],
+    Total[c[[#]] a[[#]] & /@ alwaysOn]];
+  headBias  = If[alwaysOn === {}, 0.,
+    Total[c[[#]] b[[#]] & /@ alwaysOn]];
+  newD = d + headBias;
+
+  <|"A" -> newA, "b" -> newB, "c" -> newC, "d" -> newD,
+    "AffineHead" -> <|"Slope" -> headSlope, "Bias" -> 0.|>,
+    "Removed" -> <|"NeverActive" -> neverOn, "AlwaysActive" -> alwaysOn|>,
+    "OriginalUnits" -> Length[b],
+    "KeptUnits" -> Length[keep]
+  |>
+];
 
 End[];     (* `Private` *)
 
