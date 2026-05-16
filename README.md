@@ -38,6 +38,46 @@ Liwen Zhang, Gregory Naitzat, Lek-Heng Lim,
 *Tropical Geometry of Deep Neural Networks*, ICML 2018.
 [arXiv:1805.07091](https://arxiv.org/abs/1805.07091)
 
+## Gallery
+
+### Forward pass equivalence (ReLU vs max-plus)
+
+On three trained networks (XOR, moons, spirals), the maximum
+discrepancy between the classical real-arithmetic forward pass and a
+max-plus-only forward pass is about `10⁻¹⁴` over 1400+ points each.
+Identical functions, two different algebras.
+
+![forward equivalence](figures/01_forward_equivalence.png)
+
+### Decision boundary as tropical hypersurface
+
+Pastel patches are the activation-pattern regions cut out by the `n`
+hidden-unit creases `aⱼ · x + bⱼ = 0`; the black `{f = 0}` ReLU
+boundary and the red dashed `{P = Q}` max-plus hypersurface overlay
+each other exactly.
+
+![decision boundary](figures/02_decision_tropical_hypersurface.png)
+
+### Newton polytope
+
+Top row: monomials of `P` for the trained moons network, lifted to
+`R³` and shaded with their upper hull, alongside the linear pieces `P`
+realises on the input plane. Bottom row: same for `Q`. The
+`upper-hull ↔ regular subdivision ↔ input-plane pieces` duality is
+visible.
+
+![Newton polytope](figures/03_newton_polytope.png)
+
+### Linear regions vs hidden width
+
+Sweeping `n ∈ {2, 4, 8, 16, 32, 64, 96}` and counting realised
+activation patterns on a 400 × 400 grid:
+
+![region count vs width](figures/04_region_count_vs_width.png)
+
+The empirical curve tracks the Zaslavsky upper bound
+`Z(n) = 1 + n + C(n, 2)` at slope `≈ 2` on log-log axes.
+
 ## Structure
 
 ```
