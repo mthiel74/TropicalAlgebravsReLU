@@ -52,21 +52,29 @@ Liwen Zhang, Gregory Naitzat, Lek-Heng Lim,
 
 ## Gallery
 
-### Max-plus algebra side by side with classical algebra
+The post uses two layers of figures: four **editorial illustrations**
+generated with OpenAI's `gpt-image-2` that carry no math in them —
+they are purely visual openers for the conceptual sections — and a
+series of **Wolfram Language data plots** for the actual algorithmic
+content. All equations and derivations live in the notebook itself,
+either as inline-LaTeX text or as runnable WL code; nothing
+mathematical is baked into an image.
 
-![semiring card](figures/13_semiring_card.png)
+### Illustration: two algebras side by side
 
-### ReLU is the tropical sum `0 ⊕ x`
+![two algebras](figures/13_semiring_landscapes.png)
 
-![ReLU is tropical](figures/14_relu_is_tropical.png)
+### Illustration: ReLU as a tropical ridge
 
-### Shortest paths as a tropical min-plus mat-vec
+![ReLU ridge](figures/14_relu_ridge.png)
 
-![shortest paths infographic](figures/15_shortest_paths_infographic.png)
+### Illustration: shortest paths through a network
 
-### Newton-polytope duality
+![shortest paths](figures/15_graph_paths.png)
 
-![Newton-polytope duality](figures/16_newton_duality_infographic.png)
+### Illustration: tropical hypersurface as decision boundary
+
+![decision terrain](figures/16_decision_terrain.png)
 
 ### A univariate tropical polynomial and its Newton polygon
 
@@ -87,18 +95,6 @@ Liwen Zhang, Gregory Naitzat, Lek-Heng Lim,
 ### Tropical eigenvalue (Karp's algorithm)
 
 ![Karp's eigenvalue](figures/09_karp_eigenvalue.png)
-
-### Symbolic derivation: 2 → 1 → 1 ReLU network as a tropical rational
-
-![analytical 2-1-1](figures/10_analytical_2-1-1.png)
-
-### The decisive identity
-
-![tropical product identity](figures/11_analytical_tropical_product.png)
-
-### Symbolic derivation: 2 → 2 → 1 ReLU network
-
-![analytical 2-2-1](figures/12_analytical_2-2-1.png)
 
 ### Forward pass equivalence (ReLU vs max-plus)
 
