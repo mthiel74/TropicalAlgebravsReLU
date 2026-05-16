@@ -35,10 +35,7 @@ DecisionBoundaryPlot::usage =
 "DecisionBoundaryPlot[net, opts] plots the decision boundary together with \
 the hidden-unit crease lines.";
 
-NewtonPolytope::usage =
-"NewtonPolytope[monomials] returns the Newton polytope of a list of tropical \
-monomials {slope_i, intercept_i}: the upper convex hull of \
-{(slope_i, intercept_i)} in R^3.";
+(* Newton polytope helper lives in MaxPlus`NewtonPolytope. *)
 
 (* --- implementation --- *)
 
@@ -203,16 +200,9 @@ Options[DecisionBoundaryPlot] = {
   "Domain" -> {{-3, 3}, {-3, 3}}
 };
 
-(* ---------------- Newton polytope ---------------- *)
-
-NewtonPolytope[monomials_List] := Module[{pts3, hull},
-  (* monomials = {{slope, intercept}, ...} with slope a 2-vector, intercept scalar.
-     The Newton polytope is the convex hull of slopes; we lift by intercepts.    *)
-  pts3 = Append[#1, #2] & @@@ monomials;
-  hull = ConvexHullMesh[pts3];
-  <|"Lifted" -> pts3, "Hull3D" -> hull,
-    "Newton2D" -> ConvexHullMesh[#[[1 ;; 2]] & /@ pts3]|>
-];
+(* Newton polytope helper lives in MaxPlus`NewtonPolytope; the
+   TropicalDecomposition above exposes the monomial list directly so a
+   user can build their own representation. *)
 
 End[];
 EndPackage[];
