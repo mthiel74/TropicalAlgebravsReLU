@@ -80,16 +80,18 @@ datasets = <|
 widths = <|"xor" -> 8, "moons" -> 12, "spirals" -> 32|>;
 
 Do[
-  Module[{ds = datasets[name], asc, net, file, sample},
-    Print["[", name, "] ", Length[ds], " points, training width ", widths[name]];
-    asc = toAssoc[ds];
-    net = trainNet[asc, widths[name]];
-    Print["[", name, "] train accuracy = ", net["TrainAcc"]];
+  Module[{dataset = datasets[name], asc, trainedNet, file},
+    Print["[", name, "] ", Length[dataset], " points, training width ", widths[name]];
+    asc = toAssoc[dataset];
+    trainedNet = trainNet[asc, widths[name]];
+    Print["[", name, "] train accuracy = ", trainedNet["TrainAcc"]];
     file = FileNameJoin[{dataDir, name <> "_net.mx"}];
-    DumpSave[file, {net, ds}];
+    (* assign to Global` symbols using *different* local names so Module's
+       renaming doesn't conflict with the Global` target. *)
+    Global`net = trainedNet;
+    Global`ds  = dataset;
+    DumpSave[file, {"Global`net", "Global`ds"}];
     Print["[", name, "] saved -> ", file];
-    sample = ds[[;; ;; Quotient[Length[ds], 4]]];
-    Print["[", name, "] sample points -> ", sample[[All, 1]]];
   ],
   {name, Keys[datasets]}
 ];
