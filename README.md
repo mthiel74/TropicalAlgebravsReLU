@@ -19,18 +19,30 @@ of the trained classifier.
 
 This repository:
 
-1. Trains a tiny ReLU classifier on a 2D dataset in the Wolfram Language.
-2. Rewrites the trained network in max-plus arithmetic.
-3. Verifies that the two forward passes are numerically identical.
-4. Extracts the tropical polynomials `P` and `Q` explicitly.
-5. Visualises the decision boundary as the tropical hypersurface
+1. Ships a **self-contained `MaxPlus.wl` package** (Kernel/MaxPlus.wl) —
+   tropical operators `⊕`, `⊗`, `⊖`, `⊙` attached to the System`
+   symbols, tropical matrices and Kleene star, tropical
+   determinant (= permanent), Karp's algorithm for the maximum cycle
+   mean (= tropical eigenvalue), tropical polynomials with Newton
+   polytopes, tropical curve plotting, plus a small library of
+   classical applications (shortest paths, PERT scheduling, max-plus
+   discrete-time linear systems).
+2. Trains a tiny ReLU classifier on a 2D dataset in the Wolfram Language.
+3. Rewrites the trained network in max-plus arithmetic.
+4. Verifies that the two forward passes are numerically identical.
+5. Extracts the tropical polynomials `P` and `Q` explicitly.
+6. Visualises the decision boundary as the tropical hypersurface
    `{P = Q}`, overlaid on the input plane partitioned into linear
    regions by the network's activation patterns.
-6. Plots the **Newton polytope** of `P ⊕ Q` and relates its edges to
-   the pieces of the decision boundary.
-7. Sweeps hidden-layer width and compares the empirical number of linear
+7. Plots the **Newton polytope** of `P` and `Q` and relates its edges
+   to the pieces of the decision boundary.
+8. Sweeps hidden-layer width and compares the empirical number of linear
    regions to the Zhang–Naitzat–Lim / Pascanu–Montúfar–Bengio upper
    bounds.
+9. Derives the `P, Q` decomposition symbolically for the `2 → 1 → 1`
+   and `2 → 2 → 1` networks, and includes pedagogical infographics
+   on max-plus algebra, ReLU as `0 ⊕ x`, shortest paths as a min-plus
+   mat-vec, and the Newton-polytope duality.
 
 ## Reference
 
@@ -39,6 +51,54 @@ Liwen Zhang, Gregory Naitzat, Lek-Heng Lim,
 [arXiv:1805.07091](https://arxiv.org/abs/1805.07091)
 
 ## Gallery
+
+### Max-plus algebra side by side with classical algebra
+
+![semiring card](figures/13_semiring_card.png)
+
+### ReLU is the tropical sum `0 ⊕ x`
+
+![ReLU is tropical](figures/14_relu_is_tropical.png)
+
+### Shortest paths as a tropical min-plus mat-vec
+
+![shortest paths infographic](figures/15_shortest_paths_infographic.png)
+
+### Newton-polytope duality
+
+![Newton-polytope duality](figures/16_newton_duality_infographic.png)
+
+### A univariate tropical polynomial and its Newton polygon
+
+![univariate tropical polynomial](figures/05_tropical_poly_1d.png)
+
+### A bivariate tropical polynomial and its 4 linear regions
+
+![bivariate tropical curve](figures/06_tropical_curve_2d.png)
+
+### Shortest paths in a 5-node weighted digraph
+
+![shortest paths worked example](figures/07_shortest_paths.png)
+
+### PERT-style project scheduling via tropical Kleene star
+
+![PERT scheduling](figures/08_pert_scheduling.png)
+
+### Tropical eigenvalue (Karp's algorithm)
+
+![Karp's eigenvalue](figures/09_karp_eigenvalue.png)
+
+### Symbolic derivation: 2 → 1 → 1 ReLU network as a tropical rational
+
+![analytical 2-1-1](figures/10_analytical_2-1-1.png)
+
+### The decisive identity
+
+![tropical product identity](figures/11_analytical_tropical_product.png)
+
+### Symbolic derivation: 2 → 2 → 1 ReLU network
+
+![analytical 2-2-1](figures/12_analytical_2-2-1.png)
 
 ### Forward pass equivalence (ReLU vs max-plus)
 
