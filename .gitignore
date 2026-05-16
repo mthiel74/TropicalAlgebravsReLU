@@ -1,0 +1,17 @@
+.DS_Store
+.vscode/
+__pycache__/
+*.pyc
+
+# Wolfram autosave / backups
+*.nb.bak
+*.nb.autosave
+*.bak
+*.mx.bak
+
+# Cache directories
+.cache/
+.tmp/
+
+# Large local data, kept out of repo
+data/raw/
