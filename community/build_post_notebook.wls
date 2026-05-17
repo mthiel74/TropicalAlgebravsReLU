@@ -63,16 +63,21 @@ displayMath[expr_] := Cell[
 
 ClearAll[CodeWithOutput, OutCell];
 
-OutCell[expr_, "List"]   := Cell[BoxData[ToBoxes[expr]], "Output"];
-OutCell[expr_, "Table"]  :=
-  Cell[BoxData[ToBoxes[TableForm[expr]]], "Output", CellFrame -> False];
-OutCell[expr_, "Graph"]  :=
-  Cell[BoxData[ToBoxes[Magnify[expr, 0.55]]], "Output",
-       CellFrame -> False, CellLabel -> None];
-OutCell[expr_, "Image"]  :=
-  Cell[BoxData[ToBoxes[Magnify[expr, 0.55]]], "Output",
-       CellFrame -> False, CellLabel -> None];
-OutCell[expr_, "Default"]:= Cell[BoxData[ToBoxes[expr]], "Output"];
+(* All Output cells are horizontally centred via TextAlignment -> Center
+   AND via wrapping the boxes in a centred Pane.  The combination
+   handles both text-flavoured outputs (numbers, lists) and graphics
+   (images, plots, graphs, tables).                                    *)
+centredOutput[boxes_, opts___] :=
+  Cell[BoxData[ToBoxes[Pane[RawBoxes[boxes],
+        Alignment -> {Center, Top}, ImageSize -> Full]]],
+    "Output", TextAlignment -> Center,
+    CellFrame -> False, CellLabel -> None, opts];
+
+OutCell[expr_, "List"]   := centredOutput[ToBoxes[expr]];
+OutCell[expr_, "Table"]  := centredOutput[ToBoxes[TableForm[expr]]];
+OutCell[expr_, "Graph"]  := centredOutput[ToBoxes[Magnify[expr, 0.55]]];
+OutCell[expr_, "Image"]  := centredOutput[ToBoxes[Magnify[expr, 0.55]]];
+OutCell[expr_, "Default"]:= centredOutput[ToBoxes[expr]];
 
 CodeWithOutput[code_String, output_, outForm_: "Default"] :=
   Sequence @@ {Cell[code, "Input"], OutCell[output, outForm]};
@@ -84,8 +89,12 @@ ImageFig[path_, caption_String, scale_: 0.55] := Module[{img},
            Graphics[{Text[Style["missing: " <> path, Red, 18]]},
               ImageSize -> 600]];
   Sequence @@ {
-    Cell[BoxData[ToBoxes[Magnify[img, scale]]], "Output",
-         CellFrame -> False, CellLabel -> None],
+    (* horizontally centred via a wrapping Pane *)
+    Cell[BoxData[ToBoxes[
+      Pane[Magnify[img, scale],
+        Alignment -> {Center, Top}, ImageSize -> Full]]],
+      "Output", TextAlignment -> Center,
+      CellFrame -> False, CellLabel -> None],
     Cell[caption, "Text",
          FontFamily -> "Helvetica",
          FontSlant -> Italic, FontSize -> 11,
@@ -1368,7 +1377,8 @@ decision boundary."
     FrameStyle -> Directive[GrayLevel[0.5]],
     Spacings   -> {2, 1.2},
     Alignment  -> {Left, Center}]
-  ]], "Output", CellFrame -> False, CellLabel -> None],
+  ]], "Output", TextAlignment -> Center,
+       CellFrame -> False, CellLabel -> None],
 
   text["Everything that ReLU networks do, max-plus algebra already \
 does -- and the last three rows are gifts that ordinary analysis \
