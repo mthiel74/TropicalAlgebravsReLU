@@ -29,10 +29,16 @@ subsection[s_] := Cell[s, "Subsection"];
 text[content_List]   := Cell[TextData[content], "Text"];
 text[content_String] := Cell[TextData[{content}], "Text"];
 
+(* StyleBox versions are right for inline use inside TextData (text cells).
+   Style versions are right for use inside ToBoxes[Grid[...]] etc.   *)
 ib[s_] := StyleBox[s, FontSlant -> "Italic"];
 bd[s_] := StyleBox[s, FontWeight -> "Bold"];
 mono[s_] := StyleBox[s, FontFamily -> "Source Code Pro",
                       Background -> GrayLevel[0.95]];
+
+(* high-level Style[] wrappers for use inside Grid / ToBoxes contexts *)
+gridMono[s_] := Style[s, FontFamily -> "Source Code Pro", 12];
+gridBold[s_] := Style[s, Bold, 13, White, FontFamily -> "Helvetica"];
 
 (* Inline math typeset properly via TraditionalForm boxes.
    HoldFirst is required because we routinely pass expressions like
@@ -343,10 +349,10 @@ B = {{0, -1}, {2, 4}};
                                 MPIdentity[2] \\[CircleDot] A
 } // TableForm",
     {
-      "A . B (classical)"     -> {{4, 6}, {6, -3}},
-      "A \[CircleDot] B"      -> {{4, 6}, {3, 4}},
-      "A^2 (classical)"       -> {{7, 2}, {3, 6}},
-      "A^2 (tropical)"        -> {{5, 3}, {4, 5}},
+      "A . B (classical)"            -> {{4, 7}, {0, -3}},
+      "A \[CircleDot] B"             -> {{4, 6}, {3, 4}},
+      "A^2 (classical)"              -> {{7, 2}, {3, 6}},
+      "A^2 (tropical)"               -> {{5, 3}, {4, 5}},
       "MPIdentity[2] \[CircleDot] A" -> {{1, 2}, {3, 0}}
     },
     "Table"
@@ -942,9 +948,9 @@ MaxoutUnit[{1.0, 1.0}, W, b]",
   displayMath[
     "ResBlock"[x] == x + "F"[x] == x \[CircleTimes] "F"[x]
   ],
-  text["Classical addition is tropical ", math[CircleTimes],
+  text[{"Classical addition is tropical ", math[CircleTimes],
     ", so a residual connection is just a tropical product. A ResNet \
-of ReLU layers stays inside the tropical algebra."],
+of ReLU layers stays inside the tropical algebra."}],
 
   (* ================================================================== *)
 
@@ -1327,41 +1333,41 @@ decision boundary."
 
   Cell[BoxData[ToBoxes[
     Grid[{
-      {bd["classical / ReLU view"], bd["tropical / max-plus view"]},
-      {mono["Max[0, W x + b]  per layer"],
-       mono["tropical polynomial in x"]},
-      {mono["scalar output f(x)\[Element]R"],
-       mono["P(x) - Q(x), P, Q tropical polys"]},
-      {mono["decision boundary {f = 0}"],
-       mono["tropical hypersurface {P = Q}"]},
-      {mono["activation crease lines"],
-       mono["regular subdivision of Newt(P\[CirclePlus]Q)"]},
-      {mono["linear regions vs width n"],
-       mono["Zaslavsky bound  1 + n + C(n, 2)"]},
-      {mono["mat-vec  W x + b"],
-       mono["tropical mat-vec  A \[CircleDot] x \[CircleTimes] b"]},
-      {mono["Bellman-Ford shortest paths"],
-       mono["same tropical mat-vec, min-plus"]},
-      {mono["PERT longest path"],
-       mono["tropical Kleene star"]},
-      {mono["leaky ReLU / MaxPool / maxout"],
-       mono["pure tropical operations"]},
-      {mono["skip connection x + F(x)"],
-       mono["tropical product x \[CircleTimes] F(x)"]},
-      {mono["product-of-layer-norms Lipschitz bound"],
-       mono["EXACT Lipschitz via gradient-norm max"]},
-      {mono["dead neurons -- detected by held-out data"],
-       mono["dead neurons -- detected by 4-corner LP"]},
-      {mono["pruning -- approximate, needs retraining"],
-       mono["pruning -- EXACT via dead-unit minimiser"]}
+      {gridBold["classical / ReLU view"],
+       gridBold["tropical / max-plus view"]},
+      {gridMono["Max[0, W x + b]  per layer"],
+       gridMono["tropical polynomial in x"]},
+      {gridMono["scalar output f(x) in R"],
+       gridMono["P(x) - Q(x), P, Q tropical polys"]},
+      {gridMono["decision boundary {f = 0}"],
+       gridMono["tropical hypersurface {P = Q}"]},
+      {gridMono["activation crease lines"],
+       gridMono["regular subdivision of Newt(P + Q)"]},
+      {gridMono["linear regions vs width n"],
+       gridMono["Zaslavsky bound  1 + n + C(n, 2)"]},
+      {gridMono["mat-vec  W x + b"],
+       gridMono["tropical mat-vec  A \[CircleDot] x \[CircleTimes] b"]},
+      {gridMono["Bellman-Ford shortest paths"],
+       gridMono["same tropical mat-vec, min-plus"]},
+      {gridMono["PERT longest path"],
+       gridMono["tropical Kleene star"]},
+      {gridMono["leaky ReLU / MaxPool / maxout"],
+       gridMono["pure tropical operations"]},
+      {gridMono["skip connection x + F(x)"],
+       gridMono["tropical product x \[CircleTimes] F(x)"]},
+      {gridMono["product-of-layer-norms Lipschitz bound"],
+       gridMono["EXACT Lipschitz via gradient-norm max"]},
+      {gridMono["dead neurons via held-out data"],
+       gridMono["dead neurons via 4-corner LP"]},
+      {gridMono["pruning - approximate, needs retraining"],
+       gridMono["pruning - EXACT via dead-unit minimiser"]}
     },
-    Background -> {None,
-       Join[{Directive[White, Bold,
-              Background -> RGBColor[0.18, 0.30, 0.55]]},
-            ConstantArray[None, 12]]},
-    Frame -> All,
-    Spacings -> {2, 1.2},
-    Alignment -> {Left, Center}]
+    (* per-row background: row 1 is the navy header, rest are plain *)
+    Background -> {None, {1 -> RGBColor[0.18, 0.30, 0.55]}},
+    Frame      -> All,
+    FrameStyle -> Directive[GrayLevel[0.5]],
+    Spacings   -> {2, 1.2},
+    Alignment  -> {Left, Center}]
   ]], "Output", CellFrame -> False, CellLabel -> None],
 
   text["Everything that ReLU networks do, max-plus algebra already \

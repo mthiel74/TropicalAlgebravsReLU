@@ -10,15 +10,15 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       154,          7]
-NotebookDataLength[  19307372,     318528]
-NotebookOptionsPosition[  19285649,     318304]
-NotebookOutlinePosition[  19286060,     318320]
-CellTagsIndexPosition[  19286017,     318317]
+NotebookDataLength[  19303127,     318494]
+NotebookOptionsPosition[  19281405,     318270]
+NotebookOutlinePosition[  19281816,     318286]
+CellTagsIndexPosition[  19281773,     318283]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
-Cell["Tropical Algebra of ReLU Networks", "Title",ExpressionUUID->"462f5667-437e-4b5f-99cf-b9b9d5606509"],
+Cell["Tropical Algebra of ReLU Networks", "Title",ExpressionUUID->"8a8819e0-6f53-4d67-a844-39faaa276b37"],
 
 Cell[TextData[{
  StyleBox["A ReLU neural network is literally a tropical rational map.",
@@ -38,7 +38,7 @@ derive three results that go beyond the standard literature: the ",
   FontSlant->"Italic"],
  " neurons on any bounded input domain, and an exact lossless network \
 minimiser."
-}], "Text",ExpressionUUID->"2e05558b-a02e-4ad5-9fae-6d37f41eda50"],
+}], "Text",ExpressionUUID->"04dc079d-bedc-425f-913e-3d5bad21ea52"],
 
 Cell[TextData[{
  "Every code block below is executable Wolfram Language. The cells have been \
@@ -49,7 +49,7 @@ repository: ",
   FontFamily->"Source Code Pro",
   Background->GrayLevel[0.95]],
  "."
-}], "Text",ExpressionUUID->"213cd185-e95f-4ff3-beb4-3ce6b5edc647"],
+}], "Text",ExpressionUUID->"6f2b6668-66e1-48f5-a50d-42a7335b9fcc"],
 
 Cell[TextData[{
  "Primary reference: L. Zhang, G. Naitzat, L.-H. Lim, ",
@@ -60,7 +60,7 @@ concrete WL implementations of the standard tropical machinery \
 (Maclagan-Sturmfels, Butkovic) and with the analytical tools in \[Section]18 \
 that follow naturally from the tropical viewpoint but are not in the ICML \
 paper."
-}], "Text",ExpressionUUID->"70bfd40c-44de-4f8d-97ba-1d7955c7be65"],
+}], "Text",ExpressionUUID->"cf7f295e-847a-4f4b-a31b-85a50e682e09"],
 
 Cell[BoxData[
  StyleBox[
@@ -81703,7 +81703,7 @@ cfPzSnHsEB012RTjDSleYUNtJTGyiIlNTmEvtvMjIwf1iU2A0ji2sJwjCzxu
    PlotRange->{{0, 1536.}, {0, 1024.}}],
   StripOnInput->False,
   Magnification->0.55 Inherited]], "Output",
- CellFrame->False,ExpressionUUID->"8b58d68d-e626-4d26-b69e-96ee0270e90f"],
+ CellFrame->False,ExpressionUUID->"05cc6976-a402-467c-84d6-d9d4d2604a6a"],
 
 Cell["\<\
 Two windows on two algebras. Left: the smooth, continuous world of classical \
@@ -81714,14 +81714,14 @@ small bridge.\
  TextAlignment->Center,
  FontFamily->"Helvetica",
  FontSize->11,
- FontSlant->Italic,ExpressionUUID->"67f63d46-44bf-42cb-b252-77bda5f3249e"],
+ FontSlant->Italic,ExpressionUUID->"75b2b8b3-d4cb-425f-bf2e-3d1c876c085e"],
 
-Cell["1.  The max-plus semiring in 60 seconds", "Section",ExpressionUUID->"c091d069-7aba-4820-a5bd-a7da0424c777"],
+Cell["1.  The max-plus semiring in 60 seconds", "Section",ExpressionUUID->"ed74adcd-27b5-4741-a2dc-42a9083942da"],
 
 Cell["\<\
 The tropical (max-plus) semiring is the set of real numbers extended with \
 negative infinity,\
-\>", "Text",ExpressionUUID->"31890c44-2259-40ab-ba67-af3026cc091a"],
+\>", "Text",ExpressionUUID->"2045e38a-45ef-4950-ab0d-0531cb46d96d"],
 
 Cell[BoxData[
  RowBox[{
@@ -81729,12 +81729,12 @@ Cell[BoxData[
   RowBox[{"R", "\[Union]", 
    RowBox[{"{", 
     RowBox[{"-", "\[Infinity]"}], "}"}]}]}]], "InlineFormula",ExpressionUUID->\
-"85ff842a-d52c-4894-a51f-65063e9d8fc7"],
+"2610a865-48b9-406b-a301-a09d07587eb5"],
 
 Cell["\<\
 equipped with two operations that look like the addition and multiplication \
 of classical algebra but are:\
-\>", "Text",ExpressionUUID->"6554a418-3415-4619-a974-596890d1449e"],
+\>", "Text",ExpressionUUID->"18260c2c-ecca-4e19-9a8e-9db75be89ee2"],
 
 Cell[BoxData[
  TagBox[
@@ -81748,7 +81748,7 @@ Cell[BoxData[
    TraditionalForm],
   TraditionalForm,
   Editable->True]], "DisplayFormula",
- TextAlignment->Center,ExpressionUUID->"70d16927-d9a3-4d8a-8400-92362036e049"],
+ TextAlignment->Center,ExpressionUUID->"94e2d14c-5948-4292-9f9b-e1b00c549a2d"],
 
 Cell[BoxData[
  TagBox[
@@ -81761,7 +81761,7 @@ Cell[BoxData[
    TraditionalForm],
   TraditionalForm,
   Editable->True]], "DisplayFormula",
- TextAlignment->Center,ExpressionUUID->"452f719c-eb47-498e-a831-e880552ef2d4"],
+ TextAlignment->Center,ExpressionUUID->"a3ba8e21-42e0-442c-ba11-d5dfaf35e161"],
 
 Cell[TextData[{
  "The identities flip: the additive identity is ",
@@ -81774,7 +81774,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "52dbf8a6-da21-4a5d-8dc6-5daccb0c5eca"],
+  "b3c6896b-68a4-4c4c-8fa3-2a508ef2ea94"],
  " (since ",
  Cell[BoxData[
   TagBox[
@@ -81787,7 +81787,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "40dd2120-ee8b-4984-900a-880158454e7a"],
+  "0a8613e1-857a-4e14-941c-cfb06f643c71"],
  " = ",
  Cell[BoxData[
   TagBox[
@@ -81797,7 +81797,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "b77c2bc0-9f38-4cc3-8216-63ca96f78c05"],
+  "552b5987-fb49-4cc9-9577-f005e3c252a5"],
  "), and the multiplicative identity is ",
  Cell[BoxData[
   TagBox[
@@ -81807,7 +81807,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "33dbadcd-eaec-4418-9f69-a4693f763d2e"],
+  "5ec2b417-cf4d-47e4-8be7-4509242c6f38"],
  " (since ",
  Cell[BoxData[
   TagBox[
@@ -81818,7 +81818,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "936e765e-625a-4688-9767-4d8746ce259f"],
+  "95f7e683-4c81-46f5-a4f7-ffd38f79f29c"],
  " = ",
  Cell[BoxData[
   TagBox[
@@ -81828,7 +81828,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "de1e3fb1-19e7-4574-9596-75c58b004d04"],
+  "a8a2aa6e-a186-49aa-a793-eda9388b6017"],
  "). Apart from the absence of additive inverses (",
  Cell[BoxData[
   TagBox[
@@ -81839,10 +81839,10 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "86a9dcce-5d8c-49d7-8abb-17565b2149b9"],
+  "37c54da5-ca7b-45bf-983a-70dc09326ca3"],
  " is a semiring, not a ring), every familiar axiom of a commutative ring \
 carries over. Distributivity in particular: "
-}], "Text",ExpressionUUID->"73eff372-2e95-4037-bcb2-18a138d6f573"],
+}], "Text",ExpressionUUID->"13286cd3-b3ef-46b6-a1a1-0c8080b6f484"],
 
 Cell[BoxData[
  TagBox[
@@ -81859,7 +81859,7 @@ Cell[BoxData[
    TraditionalForm],
   TraditionalForm,
   Editable->True]], "DisplayFormula",
- TextAlignment->Center,ExpressionUUID->"ca765fc6-6f74-471a-a2ce-c645b954f616"],
+ TextAlignment->Center,ExpressionUUID->"50ca78d0-1fca-4617-aba1-f8d23aede86d"],
 
 Cell[TextData[{
  "It is worth pausing on what this re-labelling really buys you. Classical \
@@ -81872,7 +81872,7 @@ addition and multiplication are continuous and smooth, whereas ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "169a1f11-0131-4e38-9949-1a605b30eeb8"],
+  "53b8142e-544f-4ac5-8ca7-58d8c1e36a47"],
  " has a non-differentiable corner. So every identity of ordinary algebra \
 translates into an identity about piecewise-linear convex functions. \
 Polynomials become piecewise-linear functions. Powers become repeated \
@@ -81883,9 +81883,9 @@ convex piecewise-linear function",
  " -- a deeply non-obvious fact in ordinary analysis, but a trivial \
 consequence of the semiring axioms once you have the right operator names. \
 This is the lever the rest of the post pulls on."
-}], "Text",ExpressionUUID->"444f5239-76a5-48e8-b17b-2dabb6574b86"],
+}], "Text",ExpressionUUID->"24d42964-8385-428c-b552-868af6b20ea0"],
 
-Cell["Operators in WL", "Subsection",ExpressionUUID->"89c7674b-aa7a-4e43-bea9-4a7925fd4f4e"],
+Cell["Operators in WL", "Subsection",ExpressionUUID->"87dce79d-cce1-41de-9486-b3dcf2574fe0"],
 
 Cell[TextData[{
  "We attach the definitions of ",
@@ -81897,7 +81897,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "44572ce4-ea67-4675-955c-b24c2db28a50"],
+  "14a6039c-14c8-4504-a9c6-0d4248ee165a"],
  ", ",
  Cell[BoxData[
   TagBox[
@@ -81907,7 +81907,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "0163d2bf-ac44-46f9-a86c-e45da2f6ed1d"],
+  "8bb0b570-d707-4ca6-ab93-f538a5a983df"],
  ", and ",
  Cell[BoxData[
   TagBox[
@@ -81917,12 +81917,12 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "97f1cbc0-cbd5-4e5c-874f-56b18064dfb3"],
+  "0375030c-e76a-466a-8137-f0816f2a78a7"],
  " to the System` symbols once, so the standard infix syntax just works. The \
 Listable, Flat, OneIdentity, Orderless attributes give us elementwise \
 behaviour, n-ary forms, and the simplifications a commutative associative \
 operator should have."
-}], "Text",ExpressionUUID->"dd446f7c-aa33-47f1-aff1-2cd0b91b12bd"],
+}], "Text",ExpressionUUID->"b01dbd8d-8fb2-49b1-898d-4001cd54f050"],
 
 Cell["\<\
 Unprotect[System`CirclePlus, System`CircleTimes, System`CircleDot];
@@ -81944,7 +81944,7 @@ Protect[System`CirclePlus, System`CircleTimes, System`CircleDot];
 {3 \\[CirclePlus] 7,  3 \\[CircleTimes] 7,
  {1, 2, 3} \\[CirclePlus] {4, 0, 5},
  {1, 2, 3} \\[CircleTimes] 10}\
-\>", "Input",ExpressionUUID->"bada251b-ed0a-4c2b-8624-a2f5978c9c56"],
+\>", "Input",ExpressionUUID->"a1df4b44-5958-4813-86c1-4619d753e450"],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -81953,7 +81953,7 @@ Cell[BoxData[
     RowBox[{"4", ",", "2", ",", "5"}], "}"}], ",", 
    RowBox[{"{", 
     RowBox[{"11", ",", "12", ",", "13"}], "}"}]}], "}"}]], "Output",Expression\
-UUID->"aab3f4ca-7eb7-4ad2-9642-95e50b745edf"],
+UUID->"e234d39f-07c2-4943-aad4-ca0668400ff3"],
 
 Cell[TextData[{
  "The list arithmetic comes for free because of the Listable attribute. The \
@@ -81967,7 +81967,7 @@ first two scalar results say that, in max-plus, ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "ee8d9a43-2d9e-48a4-9b31-360479194112"],
+  "08b7f3e8-eb5c-42cf-b12e-f9e9ce9d289e"],
  " is 7 (the larger of the two) and ",
  Cell[BoxData[
   TagBox[
@@ -81978,7 +81978,7 @@ first two scalar results say that, in max-plus, ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "74286960-6065-4c57-96c9-a9102e99427d"],
+  "ef5cac79-2fde-4d65-8c79-8922e14c254b"],
  " is 10 (their classical sum). The vector ",
  Cell[BoxData[
   TagBox[
@@ -81993,7 +81993,7 @@ first two scalar results say that, in max-plus, ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "ca114018-e227-495e-87d1-b4f3f27b6d66"],
+  "496ab78f-b85b-42e0-a353-14266e30be2f"],
  " is the elementwise max ",
  Cell[BoxData[
   TagBox[
@@ -82005,18 +82005,18 @@ first two scalar results say that, in max-plus, ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "5cae8067-8d04-4bd5-9cae-509a40a27c7e"],
+  "abdeb171-4f0e-4bed-b5e2-fd6d2dd1668b"],
  ". The last expression scales every entry by 10 in the tropical sense, which \
 is classical addition of 10 to each."
-}], "Text",ExpressionUUID->"8537e2d7-c873-41ff-87dc-c0b063df80f3"],
+}], "Text",ExpressionUUID->"bb2c8c45-7e93-40bf-acf6-2cfdef09f5cb"],
 
-Cell["2.  Tropical vectors and matrices", "Section",ExpressionUUID->"c5aed417-06f3-46d7-8dd3-7677e51129da"],
+Cell["2.  Tropical vectors and matrices", "Section",ExpressionUUID->"c6ce1e32-f1a9-4434-89d9-fd25da496b60"],
 
 Cell["\<\
 A tropical vector or matrix is just a real array; what changes is the \
 multiplication. The tropical matrix product replaces the usual \"sum of \
 products\" with \"max of sums\":\
-\>", "Text",ExpressionUUID->"72841c3b-b640-4c67-a33f-5b6c6c2a3a3c"],
+\>", "Text",ExpressionUUID->"4eb9ff95-659d-4867-99ec-a0d6ea9c9b0b"],
 
 Cell[BoxData[
  TagBox[
@@ -82038,7 +82038,7 @@ Cell[BoxData[
    TraditionalForm],
   TraditionalForm,
   Editable->True]], "DisplayFormula",
- TextAlignment->Center,ExpressionUUID->"3461d9a1-6e37-4eae-904d-07c0efec7827"],
+ TextAlignment->Center,ExpressionUUID->"607a38ed-8c65-4bdd-ba64-9dd428628deb"],
 
 Cell[TextData[{
  "implemented as ",
@@ -82055,7 +82055,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "1b0f7d30-4bf3-4084-a8d6-6a7e8caf490d"],
+  "deee8ad9-079f-41cd-a0e3-8677e1da170a"],
  " elsewhere (since ",
  Cell[BoxData[
   TagBox[
@@ -82066,9 +82066,9 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "dc647d65-2924-4aa2-8a3d-a4e2b142a7f9"],
+  "67e8599a-527b-42cf-bee7-9e67018894ec"],
  " is the new \"zero\")."
-}], "Text",ExpressionUUID->"1800f904-11d7-47ab-9712-85f93e801cc2"],
+}], "Text",ExpressionUUID->"ec2a721a-56aa-4ac0-9252-788aeb3365bf"],
 
 Cell["\<\
 MPIdentity[n_Integer] :=
@@ -82088,7 +82088,7 @@ B = {{0, -1}, {2, 4}};
   \"MPIdentity[2] \\[CircleDot] A\" ->
                                 MPIdentity[2] \\[CircleDot] A
 } // TableForm\
-\>", "Input",ExpressionUUID->"24558106-ae4c-4832-9949-6b4237da683b"],
+\>", "Input",ExpressionUUID->"e980cec1-1b65-4705-8417-430cc011dba3"],
 
 Cell[BoxData[
  TagBox[
@@ -82098,9 +82098,9 @@ Cell[BoxData[
        RowBox[{"{", 
         RowBox[{
          RowBox[{"{", 
-          RowBox[{"4", ",", "6"}], "}"}], ",", 
+          RowBox[{"4", ",", "7"}], "}"}], ",", 
          RowBox[{"{", 
-          RowBox[{"6", ",", 
+          RowBox[{"0", ",", 
            RowBox[{"-", "3"}]}], "}"}]}], "}"}]}]},
      {
       RowBox[{"\<\"A \[CircleDot] B\"\>", "\[Rule]", 
@@ -82146,7 +82146,7 @@ Cell[BoxData[
    Column],
   Function[BoxForm`e$, 
    TableForm[BoxForm`e$]]]], "Output",
- CellFrame->False,ExpressionUUID->"d02da469-180a-482f-b2d7-79dbe6325574"],
+ CellFrame->False,ExpressionUUID->"4f1a93d5-1139-45c5-9e66-6b1ff912d4e3"],
 
 Cell[TextData[{
  "Compare the second row: classical ",
@@ -82159,7 +82159,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "9774bb95-2af5-4f93-b922-315dd6310fce"],
+  "2b0e22c8-5f0a-4e0f-91d6-4721fa01b8d1"],
  " is ",
  Cell[BoxData[
   TagBox[
@@ -82182,7 +82182,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "5883a262-0993-4daa-aac3-a3bf6dbe414e"],
+  "231ee71e-a503-4941-b833-7d65a285208d"],
  " whereas tropical ",
  Cell[BoxData[
   TagBox[
@@ -82193,7 +82193,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "df0fc9cc-6636-4746-87b8-3895ca0acfad"],
+  "1c030e4a-d403-450c-bde3-3a12e0dedfa6"],
  " is ",
  Cell[BoxData[
   TagBox[
@@ -82215,7 +82215,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "29a46c32-4716-48fc-a7b5-13ce7d45dd36"],
+  "781a3267-bd9d-4fd9-9043-7d1d24654fc7"],
  ". Entry ",
  Cell[BoxData[
   TagBox[
@@ -82226,7 +82226,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "ede22fcf-fb36-4a63-b054-6e1bd502fabd"],
+  "bd33b542-f91a-4bf3-81a6-061361dcc141"],
  " of the tropical product is ",
  Cell[BoxData[
   TagBox[
@@ -82240,7 +82240,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "885ccffe-65f6-4589-a654-ba09f44a2aac"],
+  "fa1c04fa-7453-4b75-9f11-6f20050bb6e9"],
  " = ",
  Cell[BoxData[
   TagBox[
@@ -82250,7 +82250,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "1d72bbda-616d-4623-bceb-bbd2407b593f"],
+  "3429b1be-0b41-44cb-884f-81c5b549f7ad"],
  ", and so on. The identity matrix really is an identity: ",
  Cell[BoxData[
   TagBox[
@@ -82262,7 +82262,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "834f895a-c43d-4ebf-a04d-5acd13d42b4f"],
+  "1067b004-e883-4657-ae48-ceca51ca3680"],
  " = ",
  Cell[BoxData[
   TagBox[
@@ -82272,11 +82272,11 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "62ea4ca5-113a-450d-812f-6404d2f21004"],
+  "84c7fba3-d6a0-4f96-b202-6f1c1bae6c5b"],
  "."
-}], "Text",ExpressionUUID->"38df8b0c-5aff-4562-a914-57167f051916"],
+}], "Text",ExpressionUUID->"71d0e690-a640-49cb-bfb1-a1d9ac80ee9c"],
 
-Cell["The Kleene star", "Subsection",ExpressionUUID->"4e1f6376-2df8-4eb0-90d1-87eec22e6800"],
+Cell["The Kleene star", "Subsection",ExpressionUUID->"e2a6ff03-790d-4614-bc25-571fc1f196f3"],
 
 Cell[TextData[{
  "For a square tropical matrix ",
@@ -82288,9 +82288,9 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "6f0faa3a-a904-4089-a3ef-29ee241f1091"],
+  "94d3404a-d829-46df-9208-76abb344e2ac"],
  " the Kleene star (\"transitive closure\" in min-plus) is"
-}], "Text",ExpressionUUID->"a5112e95-41ec-47a0-9539-8d68b3496537"],
+}], "Text",ExpressionUUID->"61198844-c26d-4c36-896f-6d23b8466705"],
 
 Cell[BoxData[
  TagBox[
@@ -82311,7 +82311,7 @@ Cell[BoxData[
    TraditionalForm],
   TraditionalForm,
   Editable->True]], "DisplayFormula",
- TextAlignment->Center,ExpressionUUID->"b0514330-028d-434c-a4bc-76913b059ca5"],
+ TextAlignment->Center,ExpressionUUID->"eac4a5d1-9cf0-4ec9-ae24-51da98b433e2"],
 
 Cell[TextData[{
  "i.e. the matrix whose ",
@@ -82324,7 +82324,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "2dd703e1-4bff-489e-8e29-5c3589fe8195"],
+  "8b45f361-798a-46e4-8f10-da516bbab488"],
  " entry is the largest-weight path of any length from ",
  Cell[BoxData[
   TagBox[
@@ -82334,7 +82334,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "77db5874-c234-4104-b054-ca0421215331"],
+  "563fc6fa-ffec-472a-9513-21149c7aa5e5"],
  " to ",
  Cell[BoxData[
   TagBox[
@@ -82344,7 +82344,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "55d0315a-6ab4-4340-ae5f-35847bac3f47"],
+  "3f4541d3-3782-4baf-941a-2db167462e4f"],
  ". On a graph with no positive-weight cycle the series stabilises after at \
 most ",
  Cell[BoxData[
@@ -82356,9 +82356,9 @@ most ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "5919a46d-05f9-4d0e-87af-817fdb43f3c9"],
+  "f8fe4189-b033-45a7-8b0f-15ef9b1ecc3a"],
  " products. We compute it explicitly:"
-}], "Text",ExpressionUUID->"32793955-d563-426c-baef-de3cca7b6536"],
+}], "Text",ExpressionUUID->"eeffc03f-ba84-489e-86d2-2a2e1cdc774a"],
 
 Cell["\<\
 KleeneStar[A_?MatrixQ] := Module[{n = Length[A], acc, term},
@@ -82376,7 +82376,7 @@ adj = {{-Infinity, 2, -Infinity},
        {-Infinity, -Infinity, 3},
        {-Infinity, -Infinity, -Infinity}};
 KleeneStar[adj] // MatrixForm\
-\>", "Input",ExpressionUUID->"41f0bbc7-fa5d-4132-87bf-494d54a54d02"],
+\>", "Input",ExpressionUUID->"8f8b88d1-6a43-4ff4-b070-e277e22fc524"],
 
 Cell[BoxData[
  TagBox[
@@ -82397,8 +82397,8 @@ Cell[BoxData[
          Offset[0.4]}, 
         Offset[0.2]}}], "\[NoBreak]", ")"}],
   Function[BoxForm`e$, 
-   MatrixForm[BoxForm`e$]]]], "Output",ExpressionUUID->"b031b69e-5bfb-4620-\
-8b5a-66e1a31660de"],
+   MatrixForm[BoxForm`e$]]]], "Output",ExpressionUUID->"0f8ea457-1941-4e7c-\
+ab80-608f9e1bec4d"],
 
 Cell[TextData[{
  "Reading off: from node 1 you can reach node 3 with weight ",
@@ -82410,7 +82410,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "57f65c2f-a174-45de-aa12-3d1ddeb899f6"],
+  "9c6992ce-6bbf-4723-aa8f-84465986d43c"],
  " = ",
  Cell[BoxData[
   TagBox[
@@ -82421,7 +82421,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "493168cb-6faa-4faf-b8a9-407564c379ea"],
+  "5a76cccc-6e61-4c66-8a38-d4fa2120fee7"],
  " via 1\[Rule]2\[Rule]3. The ",
  Cell[BoxData[
   TagBox[
@@ -82432,7 +82432,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "3c970b24-bd5a-4e62-bc74-ce743c21fd59"],
+  "69f7171c-cfc0-42ea-bc8d-166fe355490a"],
  " entries mean \"unreachable\" -- the additive identity, which absorbs ",
  Cell[BoxData[
   TagBox[
@@ -82442,11 +82442,11 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "ad2431bd-f706-497c-9bd3-82cb2221b066"],
+  "755d970f-3853-47f3-bca2-203db2d7565c"],
  "."
-}], "Text",ExpressionUUID->"22b6a9d7-7ebe-4e5e-9f84-1eb2c8b39e0e"],
+}], "Text",ExpressionUUID->"857dd83e-eb33-4032-b154-68e9475c8271"],
 
-Cell["3.  Classical application -- shortest paths", "Section",ExpressionUUID->"168b34ac-5c96-4d25-936a-121860372a67"],
+Cell["3.  Classical application -- shortest paths", "Section",ExpressionUUID->"3fb9fcc6-aff2-4b8b-8a0a-e336c908ca4a"],
 
 Cell[TextData[{
  "Switch ",
@@ -82458,7 +82458,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "ac112629-9e43-4dc8-b66c-5236a465881e"],
+  "749cd931-a89b-41fe-8b60-dc57bb9d7b4f"],
  " for ",
  Cell[BoxData[
   TagBox[
@@ -82468,7 +82468,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "1f219102-a177-4acc-9cea-b982c95796e3"],
+  "af486643-747b-4ebf-9345-4fcaa652bf0d"],
  " and ",
  Cell[BoxData[
   TagBox[
@@ -82479,7 +82479,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "778e2729-ddf0-45c1-9257-7a7a9485f927"],
+  "5d0383a5-e214-4af5-85b6-1812f8965d67"],
  " for ",
  Cell[BoxData[
   TagBox[
@@ -82490,10 +82490,10 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "a24bfdcc-a6d3-4f40-8160-1c86c92124ca"],
+  "b4e8c275-3008-4cb7-9bec-ecab398a9d00"],
  " and the tropical Kleene star computes shortest-path distances. Concretely: \
 the Bellman-Ford recurrence"
-}], "Text",ExpressionUUID->"87a57093-7d19-40ad-8b08-8d7d2b7cff73"],
+}], "Text",ExpressionUUID->"cfb94666-3dff-4d83-b365-41aa0b30f6ef"],
 
 Cell[BoxData[
  TagBox[
@@ -82514,13 +82514,13 @@ Cell[BoxData[
    TraditionalForm],
   TraditionalForm,
   Editable->True]], "DisplayFormula",
- TextAlignment->Center,ExpressionUUID->"06f5a326-dc9e-4682-b4c2-ffb0f97eb04e"],
+ TextAlignment->Center,ExpressionUUID->"472bd216-d667-4ef6-bf17-0b618f6df2a5"],
 
 Cell["\<\
 is, in min-plus algebra, literally a tropical matrix-vector product. \
 Iterating to a fixed point gives the Kleene star of the cost matrix, hence \
 the entire all-pairs distance matrix.\
-\>", "Text",ExpressionUUID->"06414353-3aba-4ba7-b143-0dcdb4890552"],
+\>", "Text",ExpressionUUID->"7dcbdde5-3f0a-45b9-859f-3f05ed1c6be9"],
 
 Cell[TextData[{
  "Our convenience wrapper ",
@@ -82528,7 +82528,7 @@ Cell[TextData[{
   FontFamily->"Source Code Pro",
   Background->GrayLevel[0.95]],
  " negates the cost matrix, runs the max-plus KleeneStar, and negates back:"
-}], "Text",ExpressionUUID->"87988082-f917-4f11-916d-b364dd5a8caf"],
+}], "Text",ExpressionUUID->"42435542-7090-4a54-9bcf-34ed7e325c27"],
 
 Cell["\<\
 MPShortestPathDistances[adj_?MatrixQ] :=
@@ -82545,7 +82545,7 @@ Do[
 
 distM = MPShortestPathDistances[costM];
 distM // MatrixForm\
-\>", "Input",ExpressionUUID->"6be06a5e-4f9d-48b7-9133-d403e9e1069e"],
+\>", "Input",ExpressionUUID->"99e5f71d-a627-4fa8-8cc3-07381d819a3e"],
 
 Cell[BoxData[
  TagBox[
@@ -82565,8 +82565,8 @@ Cell[BoxData[
          Offset[0.4]}, 
         Offset[0.2]}}], "\[NoBreak]", ")"}],
   Function[BoxForm`e$, 
-   MatrixForm[BoxForm`e$]]]], "Output",ExpressionUUID->"d987020d-0838-4a0d-\
-98fb-19beffb6d724"],
+   MatrixForm[BoxForm`e$]]]], "Output",ExpressionUUID->"68312302-1e0f-43b5-\
+8ba7-3f942b7e5f26"],
 
 Cell[TextData[{
  "The matrix is the complete shortest-path distance table. Entry ",
@@ -82579,7 +82579,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "87e3a47c-b0ec-4fc3-9f18-07908e9ae4db"],
+  "0ddf558d-5a5d-4021-bc14-02dc67024d23"],
  " is the cost of the cheapest 1\[Rule]5 path: 1\[Rule]2\[Rule]3\[Rule]5 with \
 cost ",
  Cell[BoxData[
@@ -82591,7 +82591,7 @@ cost ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "f3416514-591d-4562-a2c4-4d0047dab24b"],
+  "050231c7-43e9-45b5-97e3-3e464c2c91e1"],
  " = ",
  Cell[BoxData[
   TagBox[
@@ -82601,7 +82601,7 @@ cost ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "fdfd5c09-2ec8-4a08-9350-09ed1239f81d"],
+  "66afaa2a-ecef-4018-8692-26e01f54a9cd"],
  ", matching ",
  Cell[BoxData[
   TagBox[
@@ -82613,9 +82613,9 @@ cost ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "53ddf1be-18c1-42a4-98e1-bf2b271867f8"],
+  "c686add3-e8fb-4777-8693-64243815bd31"],
  "."
-}], "Text",ExpressionUUID->"e10011c5-d40b-459a-aa8d-de3c30df8f95"],
+}], "Text",ExpressionUUID->"ab26103c-827d-4150-a551-8dd2d3b79d2c"],
 
 Cell[BoxData[
  StyleBox[
@@ -137016,7 +137016,7 @@ vDeS//OBbB/IfjDzoJ6v++XrPfnPPUbz/j9/B15s
    PlotRange->{{0, 1536.}, {0, 1024.}}],
   StripOnInput->False,
   Magnification->0.55 Inherited]], "Output",
- CellFrame->False,ExpressionUUID->"e43b2ad5-b1b3-4d2d-ad60-add33423af95"],
+ CellFrame->False,ExpressionUUID->"480eaba8-594f-4689-98f0-d0ed31bc60b5"],
 
 Cell["\<\
 Illustration. A directed network with edge weights; the dim edges are the \
@@ -137026,7 +137026,7 @@ what the tropical mat-vec selects.\
  TextAlignment->Center,
  FontFamily->"Helvetica",
  FontSize->11,
- FontSlant->Italic,ExpressionUUID->"a18a0b6f-cafb-4721-bf2d-407ed9357249"],
+ FontSlant->Italic,ExpressionUUID->"c7bc004c-b4a8-4bf4-bb0c-5f22b000e691"],
 
 Cell[BoxData[
  StyleBox[
@@ -138801,7 +138801,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAw8v8ABp7uqw==
    PlotRange->{{0, 863.28}, {0, 231.12}}],
   StripOnInput->False,
   Magnification->0.5 Inherited]], "Output",
- CellFrame->False,ExpressionUUID->"5a9df2e5-2097-41fe-856d-6fca60c3bd15"],
+ CellFrame->False,ExpressionUUID->"4f0c7a7c-3805-4a3b-a5aa-b850fa3dfe6c"],
 
 Cell["\<\
 Worked example. The 5-node graph with edge weights and its full shortest-path \
@@ -138810,9 +138810,9 @@ distance matrix.\
  TextAlignment->Center,
  FontFamily->"Helvetica",
  FontSize->11,
- FontSlant->Italic,ExpressionUUID->"d51ee429-457d-4cb2-b6b4-d4aae6788c9c"],
+ FontSlant->Italic,ExpressionUUID->"bda89968-c9dc-449d-9c95-93d6452d73ca"],
 
-Cell["4.  Classical application -- project scheduling", "Section",ExpressionUUID->"c623203c-62e0-497a-bcfe-a74f871bd9d1"],
+Cell["4.  Classical application -- project scheduling", "Section",ExpressionUUID->"e4f21200-c3b8-4ede-a1fe-0b32d97d5254"],
 
 Cell[TextData[{
  "Suppose ",
@@ -138824,7 +138824,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "b7491f83-1e53-4311-bad1-d6659ce734a7"],
+  "37af6ce7-8d3d-42e3-9854-7d7312b6ac0c"],
  " tasks have durations ",
  Cell[BoxData[
   TagBox[
@@ -138835,7 +138835,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "690ff1a2-0b8b-42e2-81c2-25f4769c7332"],
+  "86d5e2d3-f539-4e6a-8afc-6fc73acc313f"],
  " and precedence constraints ",
  Cell[BoxData[
   TagBox[
@@ -138846,7 +138846,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "554139c7-8c46-49c9-bab8-f178eae8a4f1"],
+  "e2568f87-7c25-44b6-a45d-59e01b4b35c7"],
  " meaning \"task ",
  Cell[BoxData[
   TagBox[
@@ -138856,7 +138856,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "b1f78598-f4a6-4b18-a965-1fa4d477a04f"],
+  "bf439a56-60fd-4e82-a047-b292b473be0c"],
  " must finish before task ",
  Cell[BoxData[
   TagBox[
@@ -138866,7 +138866,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "89eb3c82-6dae-430c-8bf2-d8d325319cb1"],
+  "755dd782-3c1c-4e04-a647-6eaf72446edd"],
  " starts\". The earliest completion time of each task is the longest path \
 from any source to that task plus its own duration -- again a tropical \
 mat-vec / Kleene star, this time with ",
@@ -138878,7 +138878,7 @@ mat-vec / Kleene star, this time with ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "7515c63e-8be4-4628-aa10-85b430f577af"],
+  "602b9578-bbf2-45fb-9c93-1d4526264081"],
  " for ",
  Cell[BoxData[
   TagBox[
@@ -138888,15 +138888,15 @@ mat-vec / Kleene star, this time with ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "025d2b71-75ea-440e-bf75-4a91be666543"],
+  "c5f18bf4-ac11-4419-9a86-d7fc006ce1aa"],
  "."
-}], "Text",ExpressionUUID->"61cb3f09-cba3-4db9-97d4-18f86b2d7683"],
+}], "Text",ExpressionUUID->"4e0f9a1b-6b28-4ce4-acc1-317bf2ffbd84"],
 
 Cell["\<\
 durations = {3, 2, 4, 1, 3, 2, 4, 2};
 prereqs   = {1 -> 3, 2 -> 3, 3 -> 5, 4 -> 5, 5 -> 7, 6 -> 7, 7 -> 8};
 schedule = MPSchedule[durations, prereqs]\
-\>", "Input",ExpressionUUID->"4e3ca839-2ccf-4e62-a0cd-9557a58fee08"],
+\>", "Input",ExpressionUUID->"957de9c8-dca4-493c-82f5-bb8fc38bcbe1"],
 
 Cell[BoxData[
  RowBox[{"\[LeftAssociation]", 
@@ -138912,8 +138912,8 @@ Cell[BoxData[
      "3", ",", "2", ",", "7", ",", "1", ",", "3", ",", "2", ",", "4", ",", 
       "2"}], "}"}]}], ",", 
    RowBox[{"\<\"Makespan\"\>", "\[Rule]", "7"}]}], 
-  "\[RightAssociation]"}]], "Output",ExpressionUUID->"708a5d37-b6ab-4186-bb4f-\
-35380a7ebd90"],
+  "\[RightAssociation]"}]], "Output",ExpressionUUID->"4eeba0fd-5c2c-41a3-bc00-\
+cc293002498c"],
 
 Cell[TextData[{
  "The earliest each task can finish, given the dependencies, is in ",
@@ -138930,12 +138930,12 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "a74f8d60-ece8-49e9-9fc5-97e2593a80e7"],
+  "3fa24b46-13d3-443d-92d8-f9bdc6393717"],
  ". This is the length of the longest path through the DAG -- the ",
  StyleBox["critical path",
   FontSlant->"Italic"],
  "."
-}], "Text",ExpressionUUID->"980647bf-bfe0-4833-ad40-2054fe7c0070"],
+}], "Text",ExpressionUUID->"2e374c2f-5baf-4410-a7c5-727368b9c38a"],
 
 Cell[BoxData[
  StyleBox[
@@ -141677,7 +141677,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYBKoC8KW
    PlotRange->{{0, 1246.32}, {0, 842.76}}],
   StripOnInput->False,
   Magnification->0.55 Inherited]], "Output",
- CellFrame->False,ExpressionUUID->"b7042d4f-0c22-4fc7-8fb0-03f0f0521cae"],
+ CellFrame->False,ExpressionUUID->"92cc9ce8-1aff-4d35-8405-f13e86348907"],
 
 Cell["\<\
 An 8-task project DAG (left) and its earliest schedule (right). The makespan \
@@ -141687,16 +141687,16 @@ star measures.\
  TextAlignment->Center,
  FontFamily->"Helvetica",
  FontSize->11,
- FontSlant->Italic,ExpressionUUID->"e4974c8f-2860-4e04-ba82-015d2aa0c6c6"],
+ FontSlant->Italic,ExpressionUUID->"c5224a61-b58c-4a7e-9f41-b2fff2cc446b"],
 
-Cell["5.  Tropical polynomials in one variable", "Section",ExpressionUUID->"ee5e9757-7597-4495-8ed0-fdd8ebea8eb7"],
+Cell["5.  Tropical polynomials in one variable", "Section",ExpressionUUID->"896f7631-a357-438f-ab39-66f65f01a931"],
 
 Cell[TextData[{
  "A ",
  StyleBox["tropical polynomial",
   FontWeight->"Bold"],
  " in one variable is a max of finitely many affine functions:"
-}], "Text",ExpressionUUID->"3904647a-3502-4ad8-8e73-80af550608de"],
+}], "Text",ExpressionUUID->"c7c7d8ab-cef9-4799-bb8a-38ec3bbeba6a"],
 
 Cell[BoxData[
  TagBox[
@@ -141715,7 +141715,7 @@ Cell[BoxData[
    TraditionalForm],
   TraditionalForm,
   Editable->True]], "DisplayFormula",
- TextAlignment->Center,ExpressionUUID->"fd8fa79b-83b6-4b93-8ef6-5c9d4b250258"],
+ TextAlignment->Center,ExpressionUUID->"fd59f45d-904a-4759-9889-cb77b51b1d1f"],
 
 Cell[TextData[{
  "with exponent ",
@@ -141728,7 +141728,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "dd89fcaa-a042-4505-91c1-b0043ab60f5e"],
+  "4fbde0b0-8622-41d6-a7a9-507e2b032b4a"],
  " and coefficient ",
  Cell[BoxData[
   TagBox[
@@ -141739,7 +141739,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "19cd950e-0ba9-4cf7-becd-d3787e417f58"],
+  "665333bc-7344-4f9b-b88b-761c0074f1be"],
  ". Geometrically it is convex piecewise-linear: a sequence of straight \
 segments meeting at corners. The ",
  StyleBox["Newton polygon",
@@ -141753,7 +141753,7 @@ segments meeting at corners. The ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "e4074938-12c2-4879-b1c3-d686938415f4"],
+  "7ba05490-8f68-4d56-83d9-f21b4364f51f"],
  " is the upper convex hull of the lifted points ",
  Cell[BoxData[
   TagBox[
@@ -141767,7 +141767,7 @@ segments meeting at corners. The ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "6f546086-1ba4-4fa0-b142-5eae38f7255b"],
+  "9c50ef0b-f32b-45b1-84fc-8ced7703072a"],
  " in the plane. Only monomials whose lifted point lies on the upper hull \
 contribute a segment to ",
  Cell[BoxData[
@@ -141778,21 +141778,21 @@ contribute a segment to ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "1c313b7e-acdc-46a6-9e8b-137f4fea5f06"],
+  "4adbc25f-e23c-41ee-a561-ad67ee2703e8"],
  "; interior monomials are dominated by other terms everywhere and contribute \
 nothing."
-}], "Text",ExpressionUUID->"3bcbe1d5-7f15-468c-b1ea-7d5844bf9eb5"],
+}], "Text",ExpressionUUID->"37ee7276-ad6c-458f-8ac3-0fbe2b1468dc"],
 
 Cell["\<\
 poly = TropicalPolynomial[{{0}, {2}, {1}, {3}}, {2, 1, 2, -2}];
 (* TropicalEval gives the value at a point *)
 TropicalEval[poly, #] & /@ Transpose[{{-1, 0, 0.5, 1, 2}}]\
-\>", "Input",ExpressionUUID->"3164a277-842c-4d7b-9871-770409d0d9dd"],
+\>", "Input",ExpressionUUID->"f09a01a0-9ded-41bb-be83-cf7ce5aaf8ec"],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{"2", ",", "2", ",", "2.5`", ",", "3", ",", "5"}], "}"}]], "Output",E\
-xpressionUUID->"11db8947-229a-4a04-9c0e-86a6e8cceee9"],
+xpressionUUID->"10e9b3d1-2f9b-4506-a517-6129e13f7cd4"],
 
 Cell[TextData[{
  "The four monomials of ",
@@ -141804,7 +141804,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "07c8b81c-566f-41d9-8d14-773b6951b938"],
+  "168eda13-925d-458d-ba5b-b9ad0507f909"],
  " are ",
  Cell[BoxData[
   TagBox[
@@ -141814,7 +141814,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "78541eaf-d3a7-4302-9995-1a62f59099fa"],
+  "ecce3be9-af8b-4409-a6cb-7a3918d5be66"],
  ", ",
  Cell[BoxData[
   TagBox[
@@ -141826,7 +141826,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "bf0571e3-0b56-4b52-ab96-50d954273f13"],
+  "749ba1ee-ac44-4154-8087-25a8bd3f0510"],
  ", ",
  Cell[BoxData[
   TagBox[
@@ -141837,7 +141837,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "41b22e74-f956-450a-b7d5-67674dde30b9"],
+  "e05097f8-6c2c-4ab9-9793-94ce8965eae4"],
  ", ",
  Cell[BoxData[
   TagBox[
@@ -141849,7 +141849,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "c2b10272-76b4-45b3-94fd-c60ae1351a90"],
+  "eaff8240-03c4-4693-a758-dfe5e5bc7692"],
  ". For ",
  Cell[BoxData[
   TagBox[
@@ -141861,7 +141861,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "96487093-6c41-4c02-abac-b75cc7a60828"],
+  "ead17bab-a4e1-45f3-b099-593d8864a8a3"],
  " the values are ",
  Cell[BoxData[
   TagBox[
@@ -141876,7 +141876,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "4096d1e3-a057-49e1-8552-bd7b364dad75"],
+  "a93b386c-20c6-4f42-aa95-891b34ea6548"],
  " whose max is ",
  Cell[BoxData[
   TagBox[
@@ -141888,9 +141888,9 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "754ae4c3-1a99-45dc-9112-44ca2519f998"],
+  "b0c5129c-ae65-4144-9789-0486bd0e9803"],
  ", and so on."
-}], "Text",ExpressionUUID->"c970f2d9-697f-4cd1-8a88-67acbb6fa064"],
+}], "Text",ExpressionUUID->"9a155a5d-6b05-497d-8693-945f82f3bebf"],
 
 Cell[BoxData[
  StyleBox[
@@ -144700,7 +144700,7 @@ Wv8HKycbLg==
    PlotRange->{{0, 1200.24}, {0, 513.72}}],
   StripOnInput->False,
   Magnification->0.5 Inherited]], "Output",
- CellFrame->False,ExpressionUUID->"70b388b6-9f8e-4985-a1fb-718143278d20"],
+ CellFrame->False,ExpressionUUID->"62445d21-d3b5-452a-8085-eda4942e78ec"],
 
 Cell["\<\
 Univariate tropical polynomial p(x) and its Newton polygon. All four \
@@ -144709,9 +144709,9 @@ monomials sit on the upper hull, so the envelope has three corners.\
  TextAlignment->Center,
  FontFamily->"Helvetica",
  FontSize->11,
- FontSlant->Italic,ExpressionUUID->"5c030fec-a46f-4838-8366-2f0c6938b3af"],
+ FontSlant->Italic,ExpressionUUID->"d03029ba-da70-4fbd-b7c8-74e4affb9d74"],
 
-Cell["6.  Tropical polynomials in two variables", "Section",ExpressionUUID->"fe4e0c91-9866-4eaa-aadc-0bf9a98d1860"],
+Cell["6.  Tropical polynomials in two variables", "Section",ExpressionUUID->"bf83a5f0-11f2-42bf-b7e6-004365a5d34a"],
 
 Cell[TextData[{
  "The bivariate case is a max of affine functions ",
@@ -144729,7 +144729,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "9e84bf0c-da11-4404-9257-3eb35fd0e2a6"],
+  "c43ac1cf-fa51-4f67-b350-94405a7f45ad"],
  ". On each open region of the plane, exactly one of the monomials attains \
 the max; the resulting partition is the linear-region decomposition. The \
 Newton polytope is the convex hull of the exponents ",
@@ -144745,25 +144745,25 @@ Newton polytope is the convex hull of the exponents ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "362ec766-e745-451e-8e73-f614be28c36e"],
+  "af82f0a5-7836-4f44-920e-6fd4c1e2d73b"],
  ", and the upper convex hull of the lifted points induces a regular \
 subdivision of that polytope ",
  StyleBox["dual",
   FontSlant->"Italic"],
  " to the linear-region decomposition (Maclagan-Sturmfels Ch.3). For our \
 coming neural-network application, this duality is the central technical fact."
-}], "Text",ExpressionUUID->"3a1cf946-7d90-45eb-b08b-5a7b77ef33f5"],
+}], "Text",ExpressionUUID->"64acceda-64ce-4268-ad55-f014933a63d3"],
 
 Cell["\<\
 poly2 = TropicalPolynomial[{{0, 0}, {1, 0}, {0, 1}, {1, 1}},
                            {0, 0, 0, -1}];
 TropicalEval[poly2, #] & /@ {{0, 0}, {1, 1}, {-1, -1}}\
-\>", "Input",ExpressionUUID->"0dd76e8f-b378-4bf9-b928-d720f6020d28"],
+\>", "Input",ExpressionUUID->"f891bc07-77ee-463a-87e9-2840b857c37f"],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{"0", ",", "1", ",", "0"}], "}"}]], "Output",ExpressionUUID->\
-"29ee36ec-0473-486b-954d-a9dcfa505531"],
+"0b018f54-26cf-408f-88b0-c1326e22be2d"],
 
 Cell[TextData[{
  "At ",
@@ -144777,7 +144777,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "4c3f82c5-768a-4248-a4ad-24478b339799"],
+  "1671ed8f-0d49-4f52-9fef-ee32d010d60d"],
  " the values of the four monomials are ",
  Cell[BoxData[
   TagBox[
@@ -144792,7 +144792,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "7d459a27-0bdc-4382-ba14-d6725bbb7226"],
+  "e5aa8965-d6d6-459a-8232-0b65672e6223"],
  " and the max is ",
  Cell[BoxData[
   TagBox[
@@ -144804,7 +144804,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "c4b2fb8d-9a46-45c8-a253-6748dcc86f45"],
+  "096167aa-3d9d-4e45-a693-b1e291392a07"],
  ". At ",
  Cell[BoxData[
   TagBox[
@@ -144816,7 +144816,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "e1f4d51d-d03e-451c-8602-1854bc777767"],
+  "b4c5769d-e5b7-43ac-be72-d2665621a98c"],
  " they are ",
  Cell[BoxData[
   TagBox[
@@ -144831,7 +144831,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "3732ee6f-033c-42b4-beca-c808c6b85e8b"],
+  "9df79a57-90c5-4d74-908b-ee5ab1cfb4ce"],
  " and the max is ",
  Cell[BoxData[
   TagBox[
@@ -144843,9 +144843,9 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "fd390eb9-dac4-4025-8b25-300dd7daf7ee"],
+  "51f66cb8-2bec-459b-b765-cd77695a0dbc"],
  "."
-}], "Text",ExpressionUUID->"5114ca2e-698a-4412-b299-4f799189da06"],
+}], "Text",ExpressionUUID->"d209b7f7-1573-4f0d-b7ad-26d4fabb4176"],
 
 Cell[BoxData[
  StyleBox[
@@ -146742,7 +146742,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADzM/gfsyz1y
    PlotRange->{{0, 1100.16}, {0, 608.4}}],
   StripOnInput->False,
   Magnification->0.5 Inherited]], "Output",
- CellFrame->False,ExpressionUUID->"55e75e5d-974c-40a3-a763-8e5aed0de448"],
+ CellFrame->False,ExpressionUUID->"882bd6b3-29a6-41f6-8972-44ac4cf1ee82"],
 
 Cell["\<\
 Bivariate tropical polynomial p(x, y) = max(0, x, y, x + y - 1) has four \
@@ -146751,9 +146751,9 @@ linear pieces (left) and Newton polytope the unit square (right).\
  TextAlignment->Center,
  FontFamily->"Helvetica",
  FontSize->11,
- FontSlant->Italic,ExpressionUUID->"413bf443-a4cd-4492-8dad-83f58a039205"],
+ FontSlant->Italic,ExpressionUUID->"06e868a6-c1c1-48c9-b197-66b97d6da027"],
 
-Cell["7.  Tropical eigenvalues -- Karp's algorithm", "Section",ExpressionUUID->"35d6bf2a-e783-4233-9496-97adf7fe6f72"],
+Cell["7.  Tropical eigenvalues -- Karp's algorithm", "Section",ExpressionUUID->"542f9476-3b0c-4dbe-9291-bce79893fbbb"],
 
 Cell[TextData[{
  "For a square tropical matrix ",
@@ -146765,10 +146765,10 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "f2d1b5dd-e36e-4917-b6fb-92c27c5883ce"],
+  "d758a4a1-ba35-4bee-8f60-e0117e9b7da0"],
  " the role of the eigenvalue is played by the maximum mean cycle weight of \
 the associated weighted digraph,"
-}], "Text",ExpressionUUID->"a1527d2c-708c-43cd-a0fe-702f3a2f0264"],
+}], "Text",ExpressionUUID->"d504a7a2-c15b-4adb-aacb-89eead2a608c"],
 
 Cell[BoxData[
  TagBox[
@@ -146785,7 +146785,7 @@ Cell[BoxData[
    TraditionalForm],
   TraditionalForm,
   Editable->True]], "DisplayFormula",
- TextAlignment->Center,ExpressionUUID->"a057512d-2e16-4ca1-a322-747fc62ae2d4"],
+ TextAlignment->Center,ExpressionUUID->"9c6128f1-25ee-40e3-9688-fa4395bf53df"],
 
 Cell[TextData[{
  "i.e. the largest value of (sum of edge weights in ",
@@ -146797,7 +146797,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "1e18943b-d7b4-42b2-9351-470fec82fedd"],
+  "2636bd72-43cf-484a-9066-c86e0ceb63aa"],
  ") / (length of ",
  Cell[BoxData[
   TagBox[
@@ -146807,7 +146807,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "ffa437ae-1d22-4c41-b865-f75f202d4de6"],
+  "16440fb1-3589-4605-a207-5ea96551e902"],
  ") over all directed cycles ",
  Cell[BoxData[
   TagBox[
@@ -146817,7 +146817,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "f7ace043-26bc-439f-8c9a-173d6e78c932"],
+  "d774ecfc-ef0a-499c-aa9f-e0e891a11ec3"],
  ". This is the unique tropical eigenvalue when ",
  Cell[BoxData[
   TagBox[
@@ -146827,7 +146827,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "d5ea4ce7-ca7c-4382-86e3-79bfd17d33d7"],
+  "7f147876-38b5-4b2b-9d67-3d5f78f98514"],
  " is irreducible. Karp's algorithm computes it in ",
  Cell[BoxData[
   TagBox[
@@ -146837,7 +146837,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "79690498-eb94-498d-8644-7293e9c5ad51"],
+  "77b0631f-7563-4e8d-8ae9-656bf81a086c"],
  " by tracking maximum-weight paths of every length up to ",
  Cell[BoxData[
   TagBox[
@@ -146847,9 +146847,9 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "ed80b77a-ceea-4138-aa6a-cc1e24131fc8"],
+  "07e6ba8f-659b-44c9-902d-202c7ccf2f77"],
  "."
-}], "Text",ExpressionUUID->"000d25e4-e98a-4921-8c0c-151a50491093"],
+}], "Text",ExpressionUUID->"d973ece5-d2a6-42db-81cb-823814a8a348"],
 
 Cell["\<\
 karpA = {{-Infinity, 2,        -Infinity, -Infinity},
@@ -146862,7 +146862,7 @@ karpA = {{-Infinity, 2,        -Infinity, -Infinity},
   \"main cycle: 1->2->3->4->1, weights\" ->
                                  \"2+3+1+4=10, mean 2.5\"
 } // TableForm\
-\>", "Input",ExpressionUUID->"b5b698a6-577d-4b58-9e72-a16dc579d4f1"],
+\>", "Input",ExpressionUUID->"e3468541-9835-4d5f-8752-30c27fd68f01"],
 
 Cell[BoxData[
  TagBox[
@@ -146886,7 +146886,7 @@ Cell[BoxData[
    Column],
   Function[BoxForm`e$, 
    TableForm[BoxForm`e$]]]], "Output",
- CellFrame->False,ExpressionUUID->"2d6d4243-995e-4d6a-89f6-c169f342dca6"],
+ CellFrame->False,ExpressionUUID->"3a2c59a9-cc0c-4b7d-ab91-32aefb4c38bd"],
 
 Cell[TextData[{
  "Iterating ",
@@ -146903,7 +146903,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "5233289b-fd61-44b5-88d5-fb396bea766e"],
+  "e0919144-d35e-4e15-af26-ee5501606987"],
  " from any starting vector makes the mean of ",
  Cell[BoxData[
   TagBox[
@@ -146913,7 +146913,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "07df99fb-93fa-4400-b63f-f7c1ae04c525"],
+  "af82d2fb-68db-4aa7-afbc-09d0d08a42f2"],
  " grow asymptotically at rate ",
  Cell[BoxData[
   TagBox[
@@ -146924,22 +146924,22 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "651c7da2-9267-466d-bebd-a85a286f81ac"],
+  "8ceff9d8-0cd4-4dcc-9af5-949bc4e9e022"],
  " per step:"
-}], "Text",ExpressionUUID->"70abb471-952a-4037-90ef-9964c23ad78c"],
+}], "Text",ExpressionUUID->"eced0b6f-dea5-435f-88e2-e0169e4ec6b2"],
 
 Cell["\<\
 x0 = ConstantArray[0., 4];
 traj = MPLinearSystemEvolve[karpA, x0, 12];
 Differences[Mean /@ traj]\
-\>", "Input",ExpressionUUID->"959cf689-885d-4d01-abdf-86bacb8d5243"],
+\>", "Input",ExpressionUUID->"c4d0dd36-f155-4b53-a648-f1e393f8de16"],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{
   "2.5`", ",", "2.75`", ",", "2.5`", ",", "2.5`", ",", "2.5`", ",", "2.5`", ",",
     "2.5`", ",", "2.5`", ",", "2.5`", ",", "2.5`", ",", "2.5`", ",", "2.5`"}],
-   "}"}]], "Output",ExpressionUUID->"313456e5-e32f-4b4f-a921-7796c2f249ab"],
+   "}"}]], "Output",ExpressionUUID->"8df4767b-3230-440a-bc5b-400fb7f0599c"],
 
 Cell[TextData[{
  "The increments settle to ",
@@ -146951,7 +146951,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "2d611016-8e82-499b-9b63-b6ed8dcec89c"],
+  "ad8cfcb9-51c5-4d81-a650-bf0729a13bf5"],
  " after a brief transient -- exactly ",
  Cell[BoxData[
   TagBox[
@@ -146962,9 +146962,9 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "e0add1d7-50c8-47fa-8771-1ea3a1778d99"],
+  "a9cbb729-4f0b-4848-8cd6-c3b0a4a53fc1"],
  "."
-}], "Text",ExpressionUUID->"e73aa8c3-a15d-445a-97c8-a14b7a88045b"],
+}], "Text",ExpressionUUID->"6728c534-609c-4ea5-a801-236d197733f4"],
 
 Cell[BoxData[
  StyleBox[
@@ -149489,7 +149489,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAACUw/8DvV1Gow==
    PlotRange->{{0, 1106.28}, {0, 492.12}}],
   StripOnInput->False,
   Magnification->0.5 Inherited]], "Output",
- CellFrame->False,ExpressionUUID->"91932225-5f94-4b0c-9d72-e95934ee8a88"],
+ CellFrame->False,ExpressionUUID->"5a435143-8e42-4d16-b59a-23adfb741d3a"],
 
 Cell["\<\
 A digraph with a dominant 4-cycle of total weight 10. Iterating x_{t+1} = A \
@@ -149498,9 +149498,9 @@ A digraph with a dominant 4-cycle of total weight 10. Iterating x_{t+1} = A \
  TextAlignment->Center,
  FontFamily->"Helvetica",
  FontSize->11,
- FontSlant->Italic,ExpressionUUID->"aba8ac33-d6aa-4697-b9bd-4ac6e19f0570"],
+ FontSlant->Italic,ExpressionUUID->"33337e6d-50e5-4e95-ac72-0a6a88a8f973"],
 
-Cell["8.  ReLU = the tropical sum  0 \[CirclePlus] x", "Section",ExpressionUUID->"e913106d-8a0b-4485-9b31-62ed7c9f2378"],
+Cell["8.  ReLU = the tropical sum  0 \[CirclePlus] x", "Section",ExpressionUUID->"b2267bb1-b9e1-4756-a994-3d3d62478f7d"],
 
 Cell[TextData[{
  "We have spent half the post inside the tropical semiring with no neural \
@@ -149508,7 +149508,7 @@ networks in sight. The bridge to neural networks is a single observation: ",
  StyleBox["ReLU is the unit operation of the max-plus semiring",
   FontWeight->"Bold"],
  "."
-}], "Text",ExpressionUUID->"9b592c74-caba-456d-af01-a585e98582b5"],
+}], "Text",ExpressionUUID->"fe348169-4bd0-46c2-bf68-7f756af2b9c5"],
 
 Cell[BoxData[
  TagBox[
@@ -149523,7 +149523,7 @@ Cell[BoxData[
    TraditionalForm],
   TraditionalForm,
   Editable->True]], "DisplayFormula",
- TextAlignment->Center,ExpressionUUID->"a8cabc5d-6037-4afb-9bbf-5b4b4296fb87"],
+ TextAlignment->Center,ExpressionUUID->"6d5e1fb8-5eca-47a5-b4ff-f358d1c7f8b5"],
 
 Cell[TextData[{
  "It is the tropical sum of the input with the multiplicative identity ",
@@ -149535,7 +149535,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "32dddf70-ee97-4570-9702-e55f8621b318"],
+  "f34aca6d-b3e8-4653-8a76-22e45e09a8e0"],
  ". A single ReLU unit on a pre-activation ",
  Cell[BoxData[
   TagBox[
@@ -149547,9 +149547,9 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "347ac755-a879-49ac-83e3-b5aecc4124d0"],
+  "8cf08ad7-1749-499f-b23d-17e8b566d9a9"],
  " is therefore the smallest possible degree-1 tropical polynomial:"
-}], "Text",ExpressionUUID->"4ea5c759-a61f-4b43-b7b8-7da27e363d28"],
+}], "Text",ExpressionUUID->"a07658af-e172-4cfc-a14a-a55956e7d643"],
 
 Cell[BoxData[
  TagBox[
@@ -149569,7 +149569,7 @@ Cell[BoxData[
    TraditionalForm],
   TraditionalForm,
   Editable->True]], "DisplayFormula",
- TextAlignment->Center,ExpressionUUID->"b8c3b1d6-cbe3-4b89-8de5-7465f1dd8e10"],
+ TextAlignment->Center,ExpressionUUID->"9b779986-9c76-4b86-814c-75373eacec29"],
 
 Cell[TextData[{
  "Two affine \"monomials\" -- ",
@@ -149581,7 +149581,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "04abe5e4-0acf-44a1-b769-fb0e3a0ecb3f"],
+  "61edd76f-c00d-48c2-90a4-f6f148139938"],
  " and ",
  Cell[BoxData[
   TagBox[
@@ -149593,11 +149593,11 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "a63458d2-f299-46e6-8ab2-cfecfdd64df1"],
+  "629b1b8b-6a8b-44c9-bec0-fc09dfa3d6d9"],
  " -- combined with one tropical sum. From here on, every operation a ReLU \
 network performs has a direct counterpart in the max-plus algebra of \
 \[Section]1--\[Section]7."
-}], "Text",ExpressionUUID->"8e553ef9-0b98-4d19-a2a6-b94e8fdf59f7"],
+}], "Text",ExpressionUUID->"409e42cb-c7ed-4e49-9c2a-efb54fd65b11"],
 
 Cell[BoxData[
  StyleBox[
@@ -202476,7 +202476,7 @@ OLed75tsFWMj/yf1NokbxU648aKNu96YfX+d/P8d/5zq
    PlotRange->{{0, 1536.}, {0, 1024.}}],
   StripOnInput->False,
   Magnification->0.55 Inherited]], "Output",
- CellFrame->False,ExpressionUUID->"e31b9fe4-7c68-4b93-a77d-be5cec67959b"],
+ CellFrame->False,ExpressionUUID->"7afa3625-0a7e-41b4-a9d1-825b45f1a9a9"],
 
 Cell["\<\
 Illustration. ReLU as a single piecewise-linear ridge: a flat shadow plateau \
@@ -202486,9 +202486,9 @@ network is built by stacking and summing copies of this shape.\
  TextAlignment->Center,
  FontFamily->"Helvetica",
  FontSize->11,
- FontSlant->Italic,ExpressionUUID->"d4f7df5b-4796-43b8-974e-204df4bb6feb"],
+ FontSlant->Italic,ExpressionUUID->"ad39aefb-bb1d-4dde-b7ef-2039562c826c"],
 
-Cell["9.  The decisive identity", "Section",ExpressionUUID->"014744b6-2967-4692-a862-10253059420a"],
+Cell["9.  The decisive identity", "Section",ExpressionUUID->"ad2748ca-590e-42a7-85c9-cb86808b28af"],
 
 Cell[TextData[{
  "A 1-hidden-layer ReLU network is a ",
@@ -202496,7 +202496,7 @@ Cell[TextData[{
   FontWeight->"Bold"],
  " of ReLU units. The identity that turns a classical sum into a single \
 tropical polynomial is"
-}], "Text",ExpressionUUID->"3cb1b2d8-9b8c-453b-b30f-8b218d817e9e"],
+}], "Text",ExpressionUUID->"50c14e6d-4088-430e-a3f7-38740df22e83"],
 
 Cell[BoxData[
  TagBox[
@@ -202515,9 +202515,9 @@ Cell[BoxData[
    TraditionalForm],
   TraditionalForm,
   Editable->True]], "DisplayFormula",
- TextAlignment->Center,ExpressionUUID->"503e2bc1-4911-4d26-b34b-7cb04e6e67fe"],
+ TextAlignment->Center,ExpressionUUID->"c4efc9db-24d8-4470-bbff-0da972e9dcd6"],
 
-Cell["which, read tropically, says", "Text",ExpressionUUID->"e28bbbcd-9ebb-4716-b9da-1e4ff764bc10"],
+Cell["which, read tropically, says", "Text",ExpressionUUID->"a3bc0702-a2d1-4965-8cd1-98041a6abcc1"],
 
 Cell[BoxData[
  TagBox[
@@ -202535,7 +202535,7 @@ Cell[BoxData[
    TraditionalForm],
   TraditionalForm,
   Editable->True]], "DisplayFormula",
- TextAlignment->Center,ExpressionUUID->"7ca76693-246a-4606-a3c6-65dc21511ead"],
+ TextAlignment->Center,ExpressionUUID->"cbbe0172-febc-421e-b4f2-9fd2ec40eb42"],
 
 Cell[TextData[{
  "The classical sum of two ReLU units is the ",
@@ -202544,7 +202544,7 @@ Cell[TextData[{
  " of their tropical polynomials -- each unit contributing two monomials, the \
 product giving four. This identity is the engine behind everything that \
 follows."
-}], "Text",ExpressionUUID->"16cbd508-5f85-465f-b96a-181677a77fc7"],
+}], "Text",ExpressionUUID->"be41ecf7-7471-4947-aa03-d49e963be914"],
 
 Cell["\<\
 SeedRandom[1];
@@ -202553,7 +202553,7 @@ Table[
     {NumberForm[Max[0, aval] + Max[0, bval],   {5, 4}],
      NumberForm[Max[0, aval, bval, aval + bval], {5, 4}]}],
   {5}] // TableForm\
-\>", "Input",ExpressionUUID->"170b8ea6-17ea-45a3-a5fd-12375f8707b4"],
+\>", "Input",ExpressionUUID->"2cb1f57e-2843-41d4-b292-fc22f7cf7809"],
 
 Cell[BoxData[
  TagBox[GridBox[{
@@ -202643,14 +202643,14 @@ Cell[BoxData[
        Offset[0.2]}}],
   Function[BoxForm`e$, 
    TableForm[BoxForm`e$]]]], "Output",
- CellFrame->False,ExpressionUUID->"c1b82dba-d390-4e9c-9775-78ab072de7a1"],
+ CellFrame->False,ExpressionUUID->"3de8d818-6740-4854-9961-879c38ca9924"],
 
 Cell["\<\
 Five random draws, two columns of equal numbers. The identity holds pointwise \
 -- it is an algebraic equation, not an approximation.\
-\>", "Text",ExpressionUUID->"7f077637-6447-423d-a4d8-5d1b160a24b0"],
+\>", "Text",ExpressionUUID->"07ea5427-a2bb-4769-b41d-e8746a7ae2c2"],
 
-Cell["10.  Symbolic derivation: 2 \[Rule] 1 \[Rule] 1 network", "Section",ExpressionUUID->"f2a0eca2-c70e-431e-b5c3-415d6a14bc0a"],
+Cell["10.  Symbolic derivation: 2 \[Rule] 1 \[Rule] 1 network", "Section",ExpressionUUID->"fe8de24e-f7de-474b-a62d-9f060af712c6"],
 
 Cell[TextData[{
  "The smallest non-trivial classifier has one hidden ReLU unit. With weights ",
@@ -202662,7 +202662,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "70de3171-58b0-4122-82a3-0d532083ffa7"],
+  "97df721e-a381-4718-ab71-510bb9c10c5c"],
  ", ",
  Cell[BoxData[
   TagBox[
@@ -202672,7 +202672,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "0dd7491c-29a7-4d14-be99-b6b5ca8deac6"],
+  "f218b9e9-a614-48af-b82e-a11656c08338"],
  ", bias ",
  Cell[BoxData[
   TagBox[
@@ -202682,7 +202682,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "d7e209cc-3dd0-46be-b507-9886e02565f2"],
+  "b9017df3-b603-4062-b016-64e4ae8c812a"],
  ", output weight ",
  Cell[BoxData[
   TagBox[
@@ -202692,7 +202692,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "4b045faa-4067-43f3-af4e-fd7aa0c61009"],
+  "4495f74b-ae9d-4363-a6a0-cbc966ee290f"],
  " and output bias ",
  Cell[BoxData[
   TagBox[
@@ -202702,9 +202702,9 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "25c0a77b-8dc9-4815-88f1-1b86df3181f9"],
+  "b887bba9-572b-4686-b170-ec505c3b3e13"],
  ":"
-}], "Text",ExpressionUUID->"cedcc9ad-a590-4a7d-867a-284f2f26b9b8"],
+}], "Text",ExpressionUUID->"234acbad-c8cb-4612-93cf-c5634c62911c"],
 
 Cell[BoxData[
  TagBox[
@@ -202722,7 +202722,7 @@ Cell[BoxData[
    TraditionalForm],
   TraditionalForm,
   Editable->True]], "DisplayFormula",
- TextAlignment->Center,ExpressionUUID->"2b9ae6e0-5060-414a-beb7-19b313803c85"],
+ TextAlignment->Center,ExpressionUUID->"9744ab60-4af6-4f34-b706-ff4244d3b533"],
 
 Cell[BoxData[
  TagBox[
@@ -202735,9 +202735,9 @@ Cell[BoxData[
    TraditionalForm],
   TraditionalForm,
   Editable->True]], "DisplayFormula",
- TextAlignment->Center,ExpressionUUID->"2bc0fa13-7d77-4edc-b193-19d24e56617c"],
+ TextAlignment->Center,ExpressionUUID->"1ae1c2bf-76a3-4062-b664-620bda6c551a"],
 
-Cell["Case 1.  w > 0", "Subsection",ExpressionUUID->"52621104-a60b-4911-b4ad-0b01c71eb567"],
+Cell["Case 1.  w > 0", "Subsection",ExpressionUUID->"62d14e2b-672b-4724-a54f-b8314f88d92e"],
 
 Cell[TextData[{
  "Since ",
@@ -202749,7 +202749,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "b7a94daf-4cf9-40e2-bf4e-73f3ae17d045"],
+  "91bb22a7-0bc4-4186-b59b-3737545e0eb0"],
  " is positive we can pull it inside the ",
  Cell[BoxData[
   TagBox[
@@ -202759,7 +202759,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "2a274fc5-62f3-4b01-bd4a-8620f9a64dca"],
+  "58a84bdf-b630-4985-8da2-bdac0070e2c9"],
  " (",
  Cell[BoxData[
   TagBox[
@@ -202777,9 +202777,9 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "b0557768-3235-4bbe-885c-9973958d39b1"],
+  "b2c126c6-403e-46a5-9c43-adc2af51c565"],
  "). That gives"
-}], "Text",ExpressionUUID->"de1e7f40-da3e-4c24-bc74-3475fe2b50ba"],
+}], "Text",ExpressionUUID->"2946548e-41a5-4099-b65b-4e17b51be2dc"],
 
 Cell[BoxData[
  TagBox[
@@ -202801,7 +202801,7 @@ Cell[BoxData[
    TraditionalForm],
   TraditionalForm,
   Editable->True]], "DisplayFormula",
- TextAlignment->Center,ExpressionUUID->"dd7a78a9-2a43-43d9-aca4-6739bf42e47c"],
+ TextAlignment->Center,ExpressionUUID->"6e14e6dd-3b74-45e3-9b0e-d8ddd0c5e418"],
 
 Cell[TextData[{
  "which is ",
@@ -202816,7 +202816,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "f3324058-e749-4914-b2a2-4709ee8fa23c"],
+  "dda1dd31-cf6b-4336-b9dc-8c57526870ca"],
  " with ",
  Cell[BoxData[
   TagBox[
@@ -202827,7 +202827,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "b2ab7aae-9ce1-42aa-a58d-076d0ee02e83"],
+  "780cf376-27d9-46a8-a7d2-4ee4ab4cadd5"],
  " and ",
  Cell[BoxData[
   TagBox[
@@ -202837,11 +202837,11 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "3d6a337b-80f8-4b81-8040-ebec84d1d2b3"],
+  "344e3b0a-db9d-45d4-ac75-ba36f066a58b"],
  " a tropical polynomial of degree 1 (two monomials)."
-}], "Text",ExpressionUUID->"178aa511-2be1-48aa-95f5-de5dd9e1efb6"],
+}], "Text",ExpressionUUID->"ece95068-c5ff-4e5f-9aae-40e149795e49"],
 
-Cell["Case 2.  w < 0", "Subsection",ExpressionUUID->"41271584-b3a0-46b3-b700-edb5b24734f2"],
+Cell["Case 2.  w < 0", "Subsection",ExpressionUUID->"e1d5bcd2-6242-47e9-a38b-ae0432729a99"],
 
 Cell[TextData[{
  "Write ",
@@ -202857,7 +202857,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "0ef63a01-91f8-47b1-91a9-9ea149e9fd58"],
+  "c7687566-645a-4e4e-8728-6b98080e9d6c"],
  ". Then ",
  Cell[BoxData[
   TagBox[
@@ -202880,9 +202880,9 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "9441a17a-6111-4992-b86c-7939c3df5080"],
+  "f60813f7-dea1-4899-91f5-80abaea8d70a"],
  ", so"
-}], "Text",ExpressionUUID->"c9e7afe0-34fb-4c26-ac4d-4f24f49e3b9d"],
+}], "Text",ExpressionUUID->"c042ea29-f4bb-408c-bcfc-17eaa3b7d1ce"],
 
 Cell[BoxData[
  TagBox[
@@ -202905,7 +202905,7 @@ Cell[BoxData[
    TraditionalForm],
   TraditionalForm,
   Editable->True]], "DisplayFormula",
- TextAlignment->Center,ExpressionUUID->"416ce802-c95c-4b18-9d57-900c24ae4d92"],
+ TextAlignment->Center,ExpressionUUID->"41516d70-723e-4c85-a1e8-4e1fd2a5ed06"],
 
 Cell[TextData[{
  "which is ",
@@ -202920,7 +202920,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "7c5c2db4-1ed5-4e59-a6ab-46d4cf300374"],
+  "96e5344b-f56c-4bc3-8cc2-5c76a7895a0f"],
  " with ",
  Cell[BoxData[
   TagBox[
@@ -202931,7 +202931,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "e70a4914-a310-434c-8451-aeed34f4dd97"],
+  "cacbb129-f930-47c5-9db7-1fc3cc86415e"],
  " (a constant tropical polynomial) and ",
  Cell[BoxData[
   TagBox[
@@ -202941,7 +202941,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "685c09ee-ca6e-44f6-a8d9-167a71ad044f"],
+  "edbd1993-7bfc-4429-8e93-8b9f49e9a928"],
  " a tropical polynomial of degree 1. In both cases the decision boundary ",
  Cell[BoxData[
   TagBox[
@@ -202953,7 +202953,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "e6424532-49f0-4321-b6bb-e61948d45c5f"],
+  "29978fc4-36d6-4173-aa3f-4c82a3ecafdd"],
  " is the locus ",
  Cell[BoxData[
   TagBox[
@@ -202965,9 +202965,9 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "30ae68eb-5ec2-4450-ad83-7b0e5da8d94c"],
+  "2d6be2fd-c2ac-472c-b29b-1831b8f86823"],
  " -- the tropical hypersurface."
-}], "Text",ExpressionUUID->"3ace82f0-6660-4c59-b674-a725ef37d448"],
+}], "Text",ExpressionUUID->"1aa5a93b-493d-4f20-98af-f12868c10c94"],
 
 Cell[TextData[{
  "We check the derivation algebraically. The two expressions below must agree \
@@ -202980,7 +202980,7 @@ for every choice of ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "70dadda3-ded5-4322-8fb1-a6dfc18171da"],
+  "5646d4c7-d7ef-4317-a5a9-9242b0382e55"],
  ", ",
  Cell[BoxData[
   TagBox[
@@ -202990,7 +202990,7 @@ for every choice of ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "a35cfd1a-c2b6-43aa-ae1c-aa7f347cd226"],
+  "e2381be3-28cd-4add-98ab-5bda4d62b062"],
  ", ",
  Cell[BoxData[
   TagBox[
@@ -203000,7 +203000,7 @@ for every choice of ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "f29c8500-04e3-486a-ab23-61573d1b3849"],
+  "7094e207-71bb-4302-b2d1-c538c9176511"],
  ", ",
  Cell[BoxData[
   TagBox[
@@ -203010,7 +203010,7 @@ for every choice of ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "7145c805-4987-4cf3-9a4a-7aa123da3262"],
+  "5c6661a4-dfcd-4e6b-a6d4-18d41e909057"],
  ", ",
  Cell[BoxData[
   TagBox[
@@ -203020,7 +203020,7 @@ for every choice of ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "5ac2efe5-eb84-4cdc-823b-ff9262f22023"],
+  "41f6fc51-2a8c-45d4-8f6d-05dec237d43c"],
  ", ",
  Cell[BoxData[
   TagBox[
@@ -203031,7 +203031,7 @@ for every choice of ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "75265ab4-712b-43f7-8ea2-f0353042eefe"],
+  "8cc2cf59-f78b-4820-b326-0fa8e448ba4a"],
  ", ",
  Cell[BoxData[
   TagBox[
@@ -203042,9 +203042,9 @@ for every choice of ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "aa31785e-098e-4039-a78b-e023a6451291"],
+  "427b4b13-d9f3-4261-aca7-aa0a5a44a059"],
  ". WL's Simplify says yes:"
-}], "Text",ExpressionUUID->"ff869d66-52a6-4a76-a550-fb352271ab67"],
+}], "Text",ExpressionUUID->"daf9017c-0281-4358-a566-9fe5faf1f759"],
 
 Cell["\<\
 ClearAll[a, b, c, w, e, x1, x2];
@@ -203067,7 +203067,7 @@ Module[{vals},
     {500}];
   Max[vals]
 ]\
-\>", "Input",ExpressionUUID->"d4d079de-d8bb-4d2b-bb4c-1498d90dd23b"],
+\>", "Input",ExpressionUUID->"35f54dd4-f222-4644-865c-1b12d3d3b2fc"],
 
 Cell[TextData[{
  "(Evaluating this cell prints ",
@@ -203079,17 +203079,17 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "74071acb-8144-4dfb-badd-1dcf08413148"],
+  "1ae86d2b-0954-4ce7-8a39-dc0dbb725527"],
  ".  The two expressions are identical on every numerical sample.)"
-}], "Text",ExpressionUUID->"7743c3af-f256-425a-83c3-40ef19f7a10f"],
+}], "Text",ExpressionUUID->"92bf9f9f-41a2-44ee-a15f-e33e16322c21"],
 
-Cell["11.  Symbolic derivation: 2 \[Rule] 2 \[Rule] 1 network", "Section",ExpressionUUID->"1769eb1d-de56-437b-bb87-0bbd1b76ee1d"],
+Cell["11.  Symbolic derivation: 2 \[Rule] 2 \[Rule] 1 network", "Section",ExpressionUUID->"6fd69294-be48-40bf-a388-578b1b136769"],
 
 Cell["\<\
 With two hidden units we can already produce a non-trivial tropical rational \
 (mixed signs) or a tropical polynomial with four monomials (both signs \
 positive). Let\
-\>", "Text",ExpressionUUID->"401f74bd-5dea-4213-8eb6-5b4de7cddf45"],
+\>", "Text",ExpressionUUID->"85675cd4-5b7f-4027-a23c-769f1b5db268"],
 
 Cell[BoxData[
  TagBox[
@@ -203111,7 +203111,7 @@ Cell[BoxData[
    TraditionalForm],
   TraditionalForm,
   Editable->True]], "DisplayFormula",
- TextAlignment->Center,ExpressionUUID->"047cd42f-de07-486e-9fef-7c6cce19b0a5"],
+ TextAlignment->Center,ExpressionUUID->"95bcc656-e99b-4d4c-b03e-550bcab27a88"],
 
 Cell[BoxData[
  TagBox[
@@ -203129,11 +203129,11 @@ Cell[BoxData[
    TraditionalForm],
   TraditionalForm,
   Editable->True]], "DisplayFormula",
- TextAlignment->Center,ExpressionUUID->"ceb7bb05-b107-479a-8349-9777af1c62e4"],
+ TextAlignment->Center,ExpressionUUID->"6f36c63a-a304-48e7-acda-66c6d2eb9de1"],
 
-Cell["Both output weights positive", "Subsection",ExpressionUUID->"926983f2-2f59-4c21-936b-f3047a9e2978"],
+Cell["Both output weights positive", "Subsection",ExpressionUUID->"872f775d-1983-4400-898a-f0b5845615be"],
 
-Cell["Apply the identity of \[Section]9 to the two ReLU units:", "Text",ExpressionUUID->"6e33dd26-67e3-488f-8f22-4a2ad99b8c3a"],
+Cell["Apply the identity of \[Section]9 to the two ReLU units:", "Text",ExpressionUUID->"aa43dedc-7bb2-4943-880d-77713198ad1f"],
 
 Cell[BoxData[
  TagBox[
@@ -203161,7 +203161,7 @@ Cell[BoxData[
    TraditionalForm],
   TraditionalForm,
   Editable->True]], "DisplayFormula",
- TextAlignment->Center,ExpressionUUID->"f7de59ce-af93-4820-a570-528a09bfc852"],
+ TextAlignment->Center,ExpressionUUID->"f863ad18-9887-4665-854e-183e6943362c"],
 
 Cell[TextData[{
  "with ",
@@ -203183,7 +203183,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "b20bfae0-4d57-472e-9eda-7f2097269c1e"],
+  "3a1c81fc-0756-45af-a291-90ff8d5735db"],
  ". Four monomials in ",
  Cell[BoxData[
   TagBox[
@@ -203197,13 +203197,13 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "23b12fa9-5342-4dc7-a3b6-23b36a3608c8"],
+  "848b78bb-c452-46d4-a750-3a0c2506ae84"],
  " with exponents that form the Minkowski sum of the two single-unit Newton \
 segments and the origin, i.e. the four corners of the parallelogram with \
 sides (w1 a1, w1 b1) and (w2 a2, w2 b2)."
-}], "Text",ExpressionUUID->"6d12907e-b037-45f0-bae7-d5cf26ed5910"],
+}], "Text",ExpressionUUID->"3894f00d-fc4c-4153-87b1-3bdb227421fb"],
 
-Cell["Mixed signs", "Subsection",ExpressionUUID->"7933fb44-cdf2-4a88-b5e5-5d81c0891082"],
+Cell["Mixed signs", "Subsection",ExpressionUUID->"e85236cb-5fee-498b-8427-2ab403bce010"],
 
 Cell[TextData[{
  "With ",
@@ -203217,7 +203217,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "32fe6878-454f-433d-b4b3-1c8ea9aa8c08"],
+  "1c78e88c-59c5-4579-817f-697970d06439"],
  " and ",
  Cell[BoxData[
   TagBox[
@@ -203229,9 +203229,9 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "0c9fa733-f679-4747-9448-6858cf1f185e"],
+  "724cbc1f-6415-4dd8-bcb0-2f09c2f9bdf1"],
  ":"
-}], "Text",ExpressionUUID->"d43752fb-cf99-4e47-8016-a56f1a7c46fa"],
+}], "Text",ExpressionUUID->"bc02fb77-f697-489b-a5cd-0a01c678cea1"],
 
 Cell[BoxData[
  TagBox[
@@ -203248,7 +203248,7 @@ Cell[BoxData[
    TraditionalForm],
   TraditionalForm,
   Editable->True]], "DisplayFormula",
- TextAlignment->Center,ExpressionUUID->"e31ebeb1-0247-4794-863c-74069e9ea64a"],
+ TextAlignment->Center,ExpressionUUID->"f1308296-5db0-4b62-81df-4e6e451ab990"],
 
 Cell[BoxData[
  TagBox[
@@ -203266,22 +203266,22 @@ Cell[BoxData[
    TraditionalForm],
   TraditionalForm,
   Editable->True]], "DisplayFormula",
- TextAlignment->Center,ExpressionUUID->"7665e1a4-3bb2-4619-8b72-5932806fb9db"],
+ TextAlignment->Center,ExpressionUUID->"6f864d74-325a-46ea-84ef-cfacc41eb5ac"],
 
 Cell["\<\
 A proper tropical rational. Adding more hidden units of the same sign \
 tropical-multiplies into P (or Q), doubling the monomial count in the worst \
 case.\
-\>", "Text",ExpressionUUID->"17da3057-52b7-4320-8d74-e89114f1a84a"],
+\>", "Text",ExpressionUUID->"9d93d861-7134-4f8e-88bf-996e84655de4"],
 
-Cell["12.  Other tropical-compatible layers", "Section",ExpressionUUID->"86bea655-8723-4846-a835-d22913fc8e39"],
+Cell["12.  Other tropical-compatible layers", "Section",ExpressionUUID->"44fd9e5d-cb8e-4fc2-9f8f-9985b733d8bc"],
 
 Cell["\<\
 The ReLU \[Rule] tropical correspondence is not a one-off curio. Many \
 standard deep-learning building blocks are already tropical:\
-\>", "Text",ExpressionUUID->"cb25b4da-8fe8-43be-8ba7-0a8ad6224d30"],
+\>", "Text",ExpressionUUID->"387de697-bf66-4147-87b4-571e60060c8f"],
 
-Cell["Leaky ReLU", "Subsection",ExpressionUUID->"897e5827-8c57-4db5-86e6-0ffde77ef2b8"],
+Cell["Leaky ReLU", "Subsection",ExpressionUUID->"c9dd7f42-8ee6-4d40-bb27-8dce7673602d"],
 
 Cell[BoxData[
  TagBox[
@@ -203299,27 +203299,27 @@ Cell[BoxData[
    TraditionalForm],
   TraditionalForm,
   Editable->True]], "DisplayFormula",
- TextAlignment->Center,ExpressionUUID->"64b6cb94-55fe-4097-af5a-91fd31014110"],
+ TextAlignment->Center,ExpressionUUID->"5530e812-4e4a-4381-bff7-1ecfa6ef3350"],
 
 Cell["\<\
 Two monomials of slopes \[Alpha] and 1; for \[Alpha] in (0, 1) the leaky \
 variant simply rotates the negative half of the ReLU off the x-axis. Still a \
 degree-1 tropical polynomial.\
-\>", "Text",ExpressionUUID->"27415aeb-8ad0-4b9b-8475-1139b6d6d709"],
+\>", "Text",ExpressionUUID->"37f845df-fe09-45a1-b682-92077d686d8d"],
 
 Cell["\<\
 LeakyReLU[x_, alpha_] := alpha x \\[CirclePlus] x;
 LeakyReLU[#, 0.1] & /@ {-2., -0.5, 0., 0.7, 2.}\
-\>", "Input",ExpressionUUID->"5ec8946a-5313-4614-bd9a-457e51f2908f"],
+\>", "Input",ExpressionUUID->"b5b870af-5018-4173-b396-051890cdc485"],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{
    RowBox[{"-", "0.2`"}], ",", 
    RowBox[{"-", "0.05`"}], ",", "0.`", ",", "0.7`", ",", "2.`"}], 
-  "}"}]], "Output",ExpressionUUID->"b077fafa-664e-4014-b4de-225e1246fcb3"],
+  "}"}]], "Output",ExpressionUUID->"5e41e4f9-f323-4583-bc94-644d5c9db7b8"],
 
-Cell["MaxPool", "Subsection",ExpressionUUID->"cf701df8-4bbd-440c-af22-bd68e3eab333"],
+Cell["MaxPool", "Subsection",ExpressionUUID->"aee5b40f-7b3b-4c54-a186-238240023e1a"],
 
 Cell[TextData[{
  "Max-pooling over a window ",
@@ -203331,7 +203331,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "03d8c95d-904c-40ef-9090-cbf4369bd35d"],
+  "63bfb3f2-e3c1-469c-bd11-97d6a03a4966"],
  " of size ",
  Cell[BoxData[
   TagBox[
@@ -203341,9 +203341,9 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "5974993a-1928-47aa-a1cd-04e619313dbe"],
+  "4286e8ba-00ca-43af-a9c6-735fdee0861a"],
  " is, by definition, a tropical sum:"
-}], "Text",ExpressionUUID->"84c6dc02-a946-4b53-a1cd-babf3d787ace"],
+}], "Text",ExpressionUUID->"4c38ca88-6450-4f8f-9ae2-4aa1841cb41d"],
 
 Cell[BoxData[
  TagBox[
@@ -203365,26 +203365,26 @@ Cell[BoxData[
    TraditionalForm],
   TraditionalForm,
   Editable->True]], "DisplayFormula",
- TextAlignment->Center,ExpressionUUID->"46fe651d-f760-4450-93d8-7534b6343cc3"],
+ TextAlignment->Center,ExpressionUUID->"b1e6b286-2f6e-4163-b16e-53976c902d48"],
 
 Cell["\<\
 A CNN built from convolutions + ReLU + MaxPool is therefore already a \
 tropical rational map -- with no other operations involved.\
-\>", "Text",ExpressionUUID->"bf5f7001-9c4f-4066-ab76-d09153437316"],
+\>", "Text",ExpressionUUID->"b1a61acc-e7e2-477a-8842-b77d1938eb7a"],
 
 Cell["\<\
 MaxPool1D[x_List, k_Integer] :=
   Table[Max @@ x[[i ;; i + k - 1]], {i, 1, Length[x] - k + 1}];
 
 MaxPool1D[{1, 3, 2, 7, 4, 5, 2, 8, 1}, 3]\
-\>", "Input",ExpressionUUID->"f3688ffb-c99c-4d66-89e3-139b77b46bb1"],
+\>", "Input",ExpressionUUID->"66cd5753-08bd-47f1-b598-ce073cba128a"],
 
 Cell[BoxData[
  RowBox[{"{", 
   RowBox[{"3", ",", "7", ",", "7", ",", "7", ",", "5", ",", "8", ",", "8"}], 
-  "}"}]], "Output",ExpressionUUID->"068a2e3e-242c-46d5-b72b-7033c029faa9"],
+  "}"}]], "Output",ExpressionUUID->"638ce2a5-7fa7-4fb3-907c-9fc7fc773e31"],
 
-Cell["Hard tanh", "Subsection",ExpressionUUID->"c38fb527-daea-41a1-b5a1-a8fb0b9ced99"],
+Cell["Hard tanh", "Subsection",ExpressionUUID->"d9c4b76e-a869-4d1f-89aa-4ae6a42ccecd"],
 
 Cell[BoxData[
  TagBox[
@@ -203401,15 +203401,15 @@ Cell[BoxData[
    TraditionalForm],
   TraditionalForm,
   Editable->True]], "DisplayFormula",
- TextAlignment->Center,ExpressionUUID->"7417fa48-d66e-4397-af8a-1e15ed3c15d1"],
+ TextAlignment->Center,ExpressionUUID->"d623941d-fcf2-4ab8-9239-61363930779a"],
 
 Cell["\<\
 A composition of one tropical sum and one classical \"min\". The min-plus \
 algebra and the max-plus algebra are duals of one another (negate the \
 values); so hard-tanh is a min-max-plus rational.\
-\>", "Text",ExpressionUUID->"5c4037dc-3485-4093-9e0e-97f1d25c4158"],
+\>", "Text",ExpressionUUID->"8bdafae0-927d-4e93-92ac-2a29ccb1e261"],
 
-Cell["Maxout (Goodfellow et al., 2013)", "Subsection",ExpressionUUID->"d2d7f789-3e2e-46aa-8321-1dd1dc0e1a20"],
+Cell["Maxout (Goodfellow et al., 2013)", "Subsection",ExpressionUUID->"5f10238c-5396-4b76-adb4-4a51bad4fbec"],
 
 Cell[TextData[{
  "A maxout unit computes ",
@@ -203421,7 +203421,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "36426bcb-ff41-4388-95dc-215b3674e560"],
+  "370fdae7-7fba-46ce-bcaf-5f4b399c794e"],
  " of ",
  Cell[BoxData[
   TagBox[
@@ -203431,9 +203431,9 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "eaed4580-efb1-4038-b30c-5596082eeb3e"],
+  "230acfa8-344e-4ab3-8723-6868e69e1a63"],
  " affine functions of its input:"
-}], "Text",ExpressionUUID->"c11355e5-f733-4c82-82d8-9229c4364088"],
+}], "Text",ExpressionUUID->"aec1f83b-f10e-483d-a1f7-34e0cad899a7"],
 
 Cell[BoxData[
  TagBox[
@@ -203452,7 +203452,7 @@ Cell[BoxData[
    TraditionalForm],
   TraditionalForm,
   Editable->True]], "DisplayFormula",
- TextAlignment->Center,ExpressionUUID->"97835706-c68e-4267-a8f3-d9f3e5ccf494"],
+ TextAlignment->Center,ExpressionUUID->"e85f40b8-e303-49b7-baaf-f6aad67a0db7"],
 
 Cell[TextData[{
  "Equivalently, ",
@@ -203462,7 +203462,7 @@ Cell[TextData[{
 and the whole network is a tropical rational map by construction -- no \
 decomposition needed, no positive/negative weight split. From the tropical \
 standpoint, maxout is a more natural activation than ReLU."
-}], "Text",ExpressionUUID->"32a31697-a824-4b10-af66-fccd30f89e4a"],
+}], "Text",ExpressionUUID->"d644cfc8-55c7-44f8-bdeb-98a290cb15a1"],
 
 Cell["\<\
 MaxoutUnit[x_?VectorQ, W_?MatrixQ, biases_?VectorQ] :=
@@ -203471,11 +203471,11 @@ MaxoutUnit[x_?VectorQ, W_?MatrixQ, biases_?VectorQ] :=
 W = {{1., 0.5}, {-1., 2.}, {0., -1.}};
 b = {0.1, -0.2, 0.3};
 MaxoutUnit[{1.0, 1.0}, W, b]\
-\>", "Input",ExpressionUUID->"bdd65d80-6980-4683-a11e-e1ffb1aa3c16"],
+\>", "Input",ExpressionUUID->"6c11068c-3320-4e73-b026-ed7cf8a1d9b8"],
 
-Cell[BoxData["1.6`"], "Output",ExpressionUUID->"97cb86fa-cbd8-4c7e-94bd-7f8ec3ff719f"],
+Cell[BoxData["1.6`"], "Output",ExpressionUUID->"7ecf32a1-14a3-49e0-8d3a-1b93b8c8b3b8"],
 
-Cell["Skip connections", "Subsection",ExpressionUUID->"00a18d7c-b1e0-42ca-8c6d-1f882ad3c312"],
+Cell["Skip connections", "Subsection",ExpressionUUID->"21365f18-5cab-4a7d-a631-d88f012e3a1e"],
 
 Cell[BoxData[
  TagBox[
@@ -203491,26 +203491,29 @@ Cell[BoxData[
    TraditionalForm],
   TraditionalForm,
   Editable->True]], "DisplayFormula",
- TextAlignment->Center,ExpressionUUID->"27053f79-9521-4d91-90fd-f938b2a46b38"],
+ TextAlignment->Center,ExpressionUUID->"6507fadf-9f1d-49f5-a297-1427ee98f167"],
 
-Cell[BoxData[
- $CellContext`text["Classical addition is tropical ", 
-  Cell[
-   BoxData[
-    TagBox[
-     FormBox[
-      TagBox["CircleTimes", HoldForm], TraditionalForm], TraditionalForm, 
-     Editable -> True]], "InlineFormula"], 
-  ", so a residual connection is just a tropical product. A ResNet of ReLU \
-layers stays inside the tropical algebra."]], "Input",ExpressionUUID->\
-"e937941e-97b0-422f-8415-356b1eb80495"],
+Cell[TextData[{
+ "Classical addition is tropical ",
+ Cell[BoxData[
+  TagBox[
+   FormBox[
+    TagBox["CircleTimes",
+     HoldForm],
+    TraditionalForm],
+   TraditionalForm,
+   Editable->True]], "InlineFormula",ExpressionUUID->
+  "cbdbe97d-b848-46fd-8e0a-feafe90672cf"],
+ ", so a residual connection is just a tropical product. A ResNet of ReLU \
+layers stays inside the tropical algebra."
+}], "Text",ExpressionUUID->"b0476982-fe18-43be-a48c-0fc196cacd7c"],
 
-Cell["13.  Train a tiny classifier and verify", "Section",ExpressionUUID->"9d821967-2a4a-43cf-b074-e865e5354c8f"],
+Cell["13.  Train a tiny classifier and verify", "Section",ExpressionUUID->"ae40d2a0-56d1-46e8-8a20-b6e17c323505"],
 
 Cell["\<\
 We pick the two-moons dataset and a 2 \[Rule] 12 \[Rule] 1 ReLU MLP. The \
 whole block runs in a fresh kernel:\
-\>", "Text",ExpressionUUID->"3a79c6f1-05bc-41c0-831f-9b4ae74479ca"],
+\>", "Text",ExpressionUUID->"54efb988-dc7d-49fd-8846-263253e32c26"],
 
 Cell["\<\
 SeedRandom[7];
@@ -203540,11 +203543,11 @@ A = Normal @ NetExtract[trained, {1, \"Weights\"}];
 b = Normal @ NetExtract[trained, {1, \"Biases\"}];
 c = Flatten @ Normal @ NetExtract[trained, {3, \"Weights\"}];
 d = First @ Flatten @ Normal @ NetExtract[trained, {3, \"Biases\"}];\
-\>", "Input",ExpressionUUID->"d8bb432f-8ce5-44fd-8560-f46564b43189"],
+\>", "Input",ExpressionUUID->"edbc8f9c-c781-477b-8b7e-81cf177f4886"],
 
 Cell["\<\
 Now write the two forward passes explicitly and compare them:\
-\>", "Text",ExpressionUUID->"a9edf059-abf9-4dda-b969-f7d9c56febe9"],
+\>", "Text",ExpressionUUID->"8e74b2aa-5b83-472e-8fad-716f451450d4"],
 
 Cell["\<\
 fReLU[x_]    := c . Map[Max[0, #] &, A . x + b] + d;
@@ -203562,9 +203565,9 @@ fMaxPlus[x_] := Module[{P, Q},
 SeedRandom[123];
 xs = RandomReal[{-2, 2}, {2000, 2}];
 Max[Abs[fReLU /@ xs - fMaxPlus /@ xs]]\
-\>", "Input",ExpressionUUID->"1b4bc1f7-3fd3-4790-987a-65850f6a2262"],
+\>", "Input",ExpressionUUID->"5db2068d-3e48-4d54-a739-7810ac7f4641"],
 
-Cell[BoxData["2.3314683517128287`*^-15"], "Output",ExpressionUUID->"2e304412-007b-47f3-8cdc-3e9f168e2a4d"],
+Cell[BoxData["2.3314683517128287`*^-15"], "Output",ExpressionUUID->"69623e08-d37a-4e47-9628-4a4360008f5b"],
 
 Cell[TextData[{
  "The two evaluators agree to ",
@@ -203576,10 +203579,10 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "6d177024-1fcb-49ef-8d85-020170b2db2b"],
+  "4519742f-6aaf-47f5-8a58-3a0b7a4a9399"],
  " over 2000 random points. They compute the same function -- in two \
 different algebras."
-}], "Text",ExpressionUUID->"ea10858f-b7a1-44ea-993e-5d45432dfff8"],
+}], "Text",ExpressionUUID->"1aaf42b3-e36d-4f84-ad3f-b6d1afb31fec"],
 
 Cell[BoxData[
  StyleBox[
@@ -206377,7 +206380,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQLj8P2mL1kA=
    PlotRange->{{0, 1000.1454545454545`}, {0, 354.1090909090909}}],
   StripOnInput->False,
   Magnification->0.45 Inherited]], "Output",
- CellFrame->False,ExpressionUUID->"1850df4d-700b-45a9-8bfa-2c47ed13a206"],
+ CellFrame->False,ExpressionUUID->"2b5670d7-2d83-4f88-a213-2423add54ed9"],
 
 Cell["\<\
 Figure 1. Across three trained networks (XOR, moons, spirals), the ReLU \
@@ -206387,9 +206390,9 @@ each. Same function, two different algebras.\
  TextAlignment->Center,
  FontFamily->"Helvetica",
  FontSize->11,
- FontSlant->Italic,ExpressionUUID->"41904c5e-d2c6-4421-87e8-2ee2299f2366"],
+ FontSlant->Italic,ExpressionUUID->"daf0930c-c958-48e0-a724-827bea517aa5"],
 
-Cell["14.  Decision boundary as a tropical hypersurface", "Section",ExpressionUUID->"af9b78f4-832a-488c-8bd3-c439c2f14dcf"],
+Cell["14.  Decision boundary as a tropical hypersurface", "Section",ExpressionUUID->"7bf2a169-fc6a-42b3-9fc9-c51e8a099628"],
 
 Cell[TextData[{
  "The ",
@@ -206401,7 +206404,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "2876b077-7c3c-443f-959e-422b0b947c04"],
+  "196d96e9-14ef-4b52-a021-bc969538af68"],
  " hidden units cut input space along ",
  Cell[BoxData[
   TagBox[
@@ -206411,7 +206414,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "4dd35ee2-194a-4cb1-989f-5857402f65d3"],
+  "722eff2f-d2b4-45f9-bdf7-1afe3c16fcca"],
  " straight crease lines ",
  Cell[BoxData[
   TagBox[
@@ -206426,7 +206429,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "0fe5c1bd-697e-46e4-b972-aa4969abc9a8"],
+  "5e27bf4c-77d4-487e-8cf5-b926b8077e87"],
  ". On each open region of the resulting arrangement, the activation pattern ",
  Cell[BoxData[
   TagBox[
@@ -206440,7 +206443,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "c8da5a3b-e88c-477d-823b-3f978f9f16e7"],
+  "0c0af02c-f7a9-47ef-a6de-0607bdd307fe"],
  " is constant and ",
  Cell[BoxData[
   TagBox[
@@ -206450,7 +206453,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "e8b8ee2a-6f6b-4cbc-b991-5f080a53afc4"],
+  "fb2e3b57-de95-4d05-a0ca-673e47fbb3c6"],
  " is affine. The decision boundary ",
  Cell[BoxData[
   TagBox[
@@ -206462,7 +206465,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "1b99f7d5-3801-4eab-8420-6a68a61226d2"],
+  "313a0625-dbf1-490e-a868-785764e33b5d"],
  " is the locus where the two convex piecewise-linear surfaces ",
  Cell[BoxData[
   TagBox[
@@ -206472,7 +206475,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "2117b91d-5082-467b-b315-fdbb67a0035b"],
+  "9b22cdca-7d27-4fd8-9b0f-145d4c1817a4"],
  " and ",
  Cell[BoxData[
   TagBox[
@@ -206482,9 +206485,9 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "15666e39-8cc9-4808-89cf-36c52bf038bf"],
+  "08a875b2-7597-48ff-b6e4-afe1e9814c8d"],
  " meet -- a tropical hypersurface."
-}], "Text",ExpressionUUID->"98dda320-b663-4f01-bb39-8f3fb13a148d"],
+}], "Text",ExpressionUUID->"0b63c152-3862-4104-a670-b2d75abf1df0"],
 
 Cell[BoxData[
  StyleBox[
@@ -280971,7 +280974,7 @@ vEC0PfjPAOsM8w==
    PlotRange->{{0, 1536.}, {0, 1024.}}],
   StripOnInput->False,
   Magnification->0.55 Inherited]], "Output",
- CellFrame->False,ExpressionUUID->"bc3988e3-3b81-4a5a-b007-46b1f7c49468"],
+ CellFrame->False,ExpressionUUID->"240e2c56-608b-44a7-be94-31c996149d4c"],
 
 Cell["\<\
 Illustration. A scattering of coral dots (class +1) and blue dots (class -1) \
@@ -280981,7 +280984,7 @@ plane -- the decision boundary of a trained ReLU classifier.\
  TextAlignment->Center,
  FontFamily->"Helvetica",
  FontSize->11,
- FontSlant->Italic,ExpressionUUID->"1d3618d5-3c19-4e2e-b999-5e07b9cf151f"],
+ FontSlant->Italic,ExpressionUUID->"5ca5acb7-5209-457f-ad1d-eee511c506c1"],
 
 Cell[BoxData[
  StyleBox[
@@ -310065,7 +310068,7 @@ Yg==
    PlotRange->{{0, 1700.1818181818182`}, {0, 750.4363636363636}}],
   StripOnInput->False,
   Magnification->0.55 Inherited]], "Output",
- CellFrame->False,ExpressionUUID->"082e4644-9b01-4a09-8ebe-34c5b4fac132"],
+ CellFrame->False,ExpressionUUID->"5784aa80-3fb2-433b-80c2-f8034fbdcdf4"],
 
 Cell["\<\
 Figure 2. Decision boundary = tropical hypersurface for three trained \
@@ -310076,9 +310079,9 @@ regions; thin grey lines are the ReLU creases; the black curve is the ReLU {f \
  TextAlignment->Center,
  FontFamily->"Helvetica",
  FontSize->11,
- FontSlant->Italic,ExpressionUUID->"c2930c7a-d52a-4efb-8ad2-329ba6624335"],
+ FontSlant->Italic,ExpressionUUID->"2195838c-acf3-4eec-9b39-bf554b234d0e"],
 
-Cell["15.  Newton polytope of the trained network", "Section",ExpressionUUID->"e31a823c-9f67-410b-82e1-9d1767d194c2"],
+Cell["15.  Newton polytope of the trained network", "Section",ExpressionUUID->"1abc6d50-bbe7-46fa-9a80-9831cac7ffe9"],
 
 Cell[TextData[{
  "Each ReLU unit ",
@@ -310090,7 +310093,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "4feb0232-31bb-4dcb-a341-1a32be0cdac3"],
+  "e460cfcd-5577-4094-a633-7dad7016de6a"],
  " with output weight ",
  Cell[BoxData[
   TagBox[
@@ -310101,7 +310104,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "08e35958-ca2e-4483-9fc1-efeb1c85292c"],
+  "6c9af76f-f173-4b0d-9966-854bb86b5794"],
  " contributes a tropical monomial of slope ",
  Cell[BoxData[
   TagBox[
@@ -310114,7 +310117,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "fbc69733-f491-484a-9e87-0c10de83ae0f"],
+  "60f78e92-b6a3-434e-a0b3-b92356aed3c1"],
  " and intercept ",
  Cell[BoxData[
   TagBox[
@@ -310127,7 +310130,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "886ea31b-d742-4a51-9722-2595c9e8fb82"],
+  "65ad1850-89ea-46af-94fe-948fb0ff04aa"],
  ", in ",
  Cell[BoxData[
   TagBox[
@@ -310137,7 +310140,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "e0763811-023d-4866-84c4-16460789df22"],
+  "d3c764cd-03d4-4d47-bf31-8e700da96bda"],
  " if its output weight is positive and in ",
  Cell[BoxData[
   TagBox[
@@ -310147,7 +310150,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "0fbdbe9e-aa65-43ff-a4e9-c4ddf5222caf"],
+  "ff3b5512-8a6b-429f-a8fb-0cbc1e210549"],
  " if negative (the constant terms are the positive and negative parts of the \
 output bias ",
  Cell[BoxData[
@@ -310158,19 +310161,19 @@ output bias ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "d61a15b9-38f6-4324-b704-38be40813314"],
+  "1fbaf3cc-b5e6-4244-91c1-464eaa170dfe"],
  ")."
-}], "Text",ExpressionUUID->"9664c30f-75e6-4d2f-9afb-3cda62c0b18d"],
+}], "Text",ExpressionUUID->"fd84179d-b784-44f8-a846-f6bf32e9280f"],
 
 Cell["\<\
 dec = TropicalDecomposition[<|\"A\" -> A, \"b\" -> b, \"c\" -> c,
                               \"d\" -> d|>];
 {Length[dec[\"Pmon\"]] + 1, Length[dec[\"Qmon\"]] + 1}\
-\>", "Input",ExpressionUUID->"5d620e6f-2ace-4c2b-bee6-c097014657c5"],
+\>", "Input",ExpressionUUID->"bf07ee3f-270a-4d6d-b36c-797f0b247701"],
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{"7", ",", "7"}], "}"}]], "Output",ExpressionUUID->"33e5055a-55c6-45ac-b28b-b4f67957fe9e"],
+  RowBox[{"7", ",", "7"}], "}"}]], "Output",ExpressionUUID->"e151b461-dca1-48ea-8159-06f43788ec25"],
 
 Cell[TextData[{
  "Counting the implicit constant monomial, ",
@@ -310182,7 +310185,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "8a3ddc39-7707-4999-8d48-71380f7b99c3"],
+  "54d69baa-b570-4478-9985-e4af80bade05"],
  " has ",
  Cell[BoxData[
   TagBox[
@@ -310192,7 +310195,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "686af397-9acb-4e43-a5dd-45a9dd6319eb"],
+  "edccabd1-5474-4c72-947e-d3278338cb4b"],
  " monomials and ",
  Cell[BoxData[
   TagBox[
@@ -310202,7 +310205,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "599ae2cd-29a5-451b-b643-17a83ef1503f"],
+  "4d6fd554-4872-4dc8-8aa6-d4fa4b9fcb4f"],
  " has ",
  Cell[BoxData[
   TagBox[
@@ -310212,11 +310215,11 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "c938b60a-ecdc-4647-b3a0-ec3f9c5be482"],
+  "ae26bc89-cf62-403c-83b0-cfe30f0a7514"],
  " -- the trained network's positive and negative \"halves\" each have a \
 Newton polygon of this many candidate vertices in slope-intercept space. Only \
 the ones on the upper hull realise a region in input space:"
-}], "Text",ExpressionUUID->"7d61daba-78be-4bb9-a27a-01a80ca0b032"],
+}], "Text",ExpressionUUID->"fee3fac9-d0ee-4b45-bfd1-2e593c0d1412"],
 
 Cell[BoxData[
  StyleBox[
@@ -314428,7 +314431,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgIP8HfEix6Q==
    PlotRange->{{0, 946.1454545454545}, {0, 979.5272727272727}}],
   StripOnInput->False,
   Magnification->0.55 Inherited]], "Output",
- CellFrame->False,ExpressionUUID->"44c2177c-5e88-4cc3-b7bf-2af4b4b134a7"],
+ CellFrame->False,ExpressionUUID->"42d588ed-3da4-4fba-9bed-33b73afcd45d"],
 
 Cell["\<\
 Figure 3. Newton polytope of P (top row) and Q (bottom row) for the trained \
@@ -314440,9 +314443,9 @@ exactly the kind of redundancy we are about to exploit in \[Section]18.\
  TextAlignment->Center,
  FontFamily->"Helvetica",
  FontSize->11,
- FontSlant->Italic,ExpressionUUID->"0f4bf37a-a1bd-4dd4-a48d-d49f137f4371"],
+ FontSlant->Italic,ExpressionUUID->"5b2a173c-a6c0-4995-9b3a-e0c1a1380f52"],
 
-Cell["16.  Linear regions scale like n^2", "Section",ExpressionUUID->"b6eacfbf-3add-47d6-8c19-1eaa1a65490e"],
+Cell["16.  Linear regions scale like n^2", "Section",ExpressionUUID->"dbb17ad7-23e6-415a-8841-6697de156096"],
 
 Cell[TextData[{
  "By Zaslavsky's theorem, ",
@@ -314454,7 +314457,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "9eec8de0-44f1-46c5-9623-e65c1f5423b9"],
+  "c72cec19-d387-4774-b28e-5e96c2653ecb"],
  " straight lines in general position in ",
  Cell[BoxData[
   TagBox[
@@ -314465,9 +314468,9 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "e4efb97c-0bb9-470f-9115-19d65751ef66"],
+  "a42e3047-7448-496a-8537-33ef78cabdeb"],
  " partition the plane into at most"
-}], "Text",ExpressionUUID->"3c35edd3-e534-4104-bdc8-58b8dd37063d"],
+}], "Text",ExpressionUUID->"3a5f9752-dc7a-4205-8490-91a73481a0ba"],
 
 Cell[BoxData[
  TagBox[
@@ -314487,7 +314490,7 @@ Cell[BoxData[
    TraditionalForm],
   TraditionalForm,
   Editable->True]], "DisplayFormula",
- TextAlignment->Center,ExpressionUUID->"7cd8aca1-4806-4b47-92e1-d2eee7a87845"],
+ TextAlignment->Center,ExpressionUUID->"7b398a54-a8de-48aa-87e5-15b08dfa0f94"],
 
 Cell[TextData[{
  "regions. That is the Zhang-Naitzat-Lim upper bound for a 1-hidden-layer \
@@ -314505,10 +314508,10 @@ ReLU classifier with 2D input. We sweep ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "11058b4b-b26e-4e27-827e-cbbd41ee35cf"],
+  "1cb3d231-87e3-443a-97da-e82ecf12fd2e"],
  " on two-moons (3 seeds each), count realised activation patterns on a 400\
 \[Times]400 grid, and compare to the bound."
-}], "Text",ExpressionUUID->"9410e4b2-a2b6-4748-b856-aca3ab151d57"],
+}], "Text",ExpressionUUID->"fac7584b-80ea-4e3d-9b3d-b4299f8291e9"],
 
 Cell[BoxData[
  StyleBox[
@@ -317508,7 +317511,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgH7x/wNRpIft
    PlotRange->{{0, 820.08}, {0, 533.16}}],
   StripOnInput->False,
   Magnification->0.55 Inherited]], "Output",
- CellFrame->False,ExpressionUUID->"f59d0319-eb1e-43bd-9a73-24354f029b83"],
+ CellFrame->False,ExpressionUUID->"328918ab-ce9d-4580-a12c-7d19dd8bba66"],
 
 Cell["\<\
 Figure 4. Empirical region count vs hidden width tracks the Zaslavsky bound \
@@ -317519,7 +317522,7 @@ same asymptotic class.\
  TextAlignment->Center,
  FontFamily->"Helvetica",
  FontSize->11,
- FontSlant->Italic,ExpressionUUID->"836e7617-d3eb-487a-85fa-2d9f449eb5f8"],
+ FontSlant->Italic,ExpressionUUID->"1f0daaa3-92dd-46c3-b192-752ac6665c25"],
 
 Cell[TextData[{
  "The slope-2 fit is genuine ",
@@ -317532,7 +317535,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "8f31ffc1-d1f8-410f-88a6-434ac7c5aeff"],
+  "8c84044c-d924-4df3-be11-4312cb822de8"],
  " scaling. Doubling the hidden width roughly quadruples the expressivity, \
 measured in linear regions. For deeper networks (",
  Cell[BoxData[
@@ -317543,7 +317546,7 @@ measured in linear regions. For deeper networks (",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "75b99dc3-4c25-4b45-b378-f2a63a0efb80"],
+  "ef4c9938-8e8a-440d-8e1a-1236d255338f"],
  " layers of width ",
  Cell[BoxData[
   TagBox[
@@ -317553,7 +317556,7 @@ measured in linear regions. For deeper networks (",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "d4ccf41a-ff40-4bbf-866c-3a40063967f9"],
+  "25950a14-e411-413e-b987-0b37a579777c"],
  "), the same tropical analysis gives an upper bound of order ",
  Cell[BoxData[
   TagBox[
@@ -317565,12 +317568,12 @@ measured in linear regions. For deeper networks (",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "64b5bed1-9c11-4fc8-b034-e82618acba48"],
+  "8af254aa-8176-42d4-81f7-aa5e539822c1"],
  " regions for 2D input -- which is why depth helps and why the deepest \
 network with the smallest total parameter count tends to win."
-}], "Text",ExpressionUUID->"4518b79e-48d6-49ac-b6b6-b42b2203268f"],
+}], "Text",ExpressionUUID->"fa0eeec2-803c-4e40-8b43-29e7953513dd"],
 
-Cell["17.  A note on Maxout", "Section",ExpressionUUID->"b7e8cd3c-65b2-4cba-86e2-cdf1472be989"],
+Cell["17.  A note on Maxout", "Section",ExpressionUUID->"178fd0ac-268c-4ced-9814-fd3447e3b990"],
 
 Cell[TextData[{
  "If we replace the ReLU layer with a maxout layer of group size ",
@@ -317582,7 +317585,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "1d1774f6-8676-4ad5-b2db-ddc20655bc39"],
+  "ac0f1d77-c556-4b01-a002-1ecb4b63a52c"],
  ", the network output is a tropical polynomial -- not a difference of two -- \
 because the only \"negation\" in our story came from the sign of the output \
 weights. With maxout we are already in ",
@@ -317597,7 +317600,7 @@ weights. With maxout we are already in ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "899dd3cc-e3e7-488a-b1db-37ff96d235e8"],
+  "98ee257b-73ce-49bc-95dc-cef5d4e60aba"],
  " alone, no ",
  Cell[BoxData[
   TagBox[
@@ -317607,24 +317610,24 @@ weights. With maxout we are already in ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "72ba6c61-2921-4887-a3a5-cac7ff05e1eb"],
+  "9b9f04d0-eae3-49c7-b6ce-ffb54c376fb9"],
  ". This is more than aesthetic. A pure tropical polynomial has a single \
 Newton polytope, a single upper hull, a single dual subdivision of input \
 space, and so its decision boundary is a single tropical hypersurface rather \
 than the intersection of two. Many of the analytical tools below sharpen \
 dramatically in this setting."
-}], "Text",ExpressionUUID->"40ce6011-1202-4984-a805-6d6ae5ce6229"],
+}], "Text",ExpressionUUID->"90cebab4-8e23-4556-a090-bbdaf0861254"],
 
-Cell["18.  Beyond standard papers", "Section",ExpressionUUID->"a999bd77-69f1-4d23-84bf-96374e72a3df"],
+Cell["18.  Beyond standard papers", "Section",ExpressionUUID->"e9f30f34-69f8-4568-9596-4ab83a423cbd"],
 
 Cell["\<\
 The tropical viewpoint gives us three concrete capabilities that go beyond \
 the standard \"ReLU networks are tropical rationals\" literature. Each is \
 implementable in a few lines on top of the WL machinery already developed, \
 and each is genuinely useful.\
-\>", "Text",ExpressionUUID->"e0c1e648-49af-438f-8ce8-a5f0f1c20761"],
+\>", "Text",ExpressionUUID->"8aa0c4a1-72e9-451b-b4c3-df979bf8d41a"],
 
-Cell["18.1  Tight Lipschitz constant", "Subsection",ExpressionUUID->"ed932c35-bd3e-4e1d-937e-973794150d32"],
+Cell["18.1  Tight Lipschitz constant", "Subsection",ExpressionUUID->"d307c1f5-b4d8-49ec-8d20-bfe4082e9726"],
 
 Cell[TextData[{
  "Standard upper bounds on the Lipschitz constant of a ReLU network multiply \
@@ -317633,7 +317636,7 @@ The tropical viewpoint gives the ",
  StyleBox["exact",
   FontWeight->"Bold"],
  " Lipschitz constant on any bounded input domain."
-}], "Text",ExpressionUUID->"33143508-e1f9-4125-ba8a-cd0e2897d8a3"],
+}], "Text",ExpressionUUID->"56048934-d619-4dd1-b009-ea71f957d092"],
 
 Cell[TextData[{
  "Reason: the trained network is piecewise-affine. On the open region of \
@@ -317653,7 +317656,7 @@ affine function ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "a4820bab-f532-4bae-b52a-40ffe899101e"],
+  "b12362ea-9e0c-450b-8086-7f42a13c8f93"],
  " whose gradient is ",
  Cell[BoxData[
   TagBox[
@@ -317669,7 +317672,7 @@ affine function ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "dd0c6f68-02c2-42bb-869c-bcd8b345507a"],
+  "023bca4f-3e0c-4f57-b06d-75a0a831f20e"],
  ". The Lipschitz constant of the whole function is therefore the maximum of ",
  Cell[BoxData[
   TagBox[
@@ -317682,10 +317685,10 @@ affine function ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "67f4a0c7-c3fd-4b94-b652-efb7da1af01d"],
+  "deaa5773-4601-4a58-84c5-f993bd13c11e"],
  " over realised activation patterns. We enumerate them on a fine grid, \
 compute the gradient on each, and take the max:"
-}], "Text",ExpressionUUID->"c46af285-ea3a-4587-89d4-339c25ba1a1d"],
+}], "Text",ExpressionUUID->"175286c3-8efd-4692-b397-e6eeeadd81d1"],
 
 Cell["\<\
 dom   = {{-2., 2.}, {-2., 2.}};
@@ -317695,7 +317698,7 @@ lipschitz = MPExactLipschitz[<|\"A\" -> A, \"b\" -> b, \"c\" -> c,
 {lipschitz[\"Lipschitz\"],
  lipschitz[\"Patterns\"],
  lipschitz[\"ArgMaxPattern\"]}\
-\>", "Input",ExpressionUUID->"f6c8f0aa-b4ee-4993-bb44-6ff8e1b8df77"],
+\>", "Input",ExpressionUUID->"b9ee006c-db7d-493a-9ef3-d5dd55619b5d"],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -317704,7 +317707,7 @@ Cell[BoxData[
     RowBox[{
     "1", ",", "1", ",", "1", ",", "1", ",", "0", ",", "0", ",", "0", ",", "1",
       ",", "0", ",", "0", ",", "0", ",", "1"}], "}"}]}], "}"}]], "Output",Expr\
-essionUUID->"c7b6218f-adfb-42dd-8b64-83db3dd2d673"],
+essionUUID->"08d95f88-8f09-4bac-9d99-62a5077b8206"],
 
 Cell[TextData[{
  "The tight Lipschitz constant of the trained moons classifier on ",
@@ -317721,7 +317724,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "00303ca9-d062-41eb-8afe-4ff2895426bc"],
+  "3901d9a3-5cf8-4aaa-a779-c43fff1815cb"],
  " is ",
  Cell[BoxData[
   TagBox[
@@ -317732,7 +317735,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "32d87a61-df5c-4812-a223-1e5e6fb62c78"],
+  "e86849c2-a849-4d3a-88d6-fba4608458b1"],
  ", attained on the linear region with activation pattern ",
  Cell[BoxData[
   TagBox[
@@ -317743,14 +317746,14 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "2d175eea-cafe-43ce-9464-5dcd51dfad0a"],
+  "152f5469-bd0c-471b-8b95-8d8765cd3e64"],
  " (i.e. these specific hidden units are simultaneously active). The \
 product-of-layer-norms upper bound for the same network would typically be \
 3-5\[Times] larger; the tight number is what you need for certified \
 adversarial robustness and for sharp generalisation bounds."
-}], "Text",ExpressionUUID->"10672163-e923-44c5-a534-b8b8a212ec85"],
+}], "Text",ExpressionUUID->"79641bd5-582f-4957-9b9c-acda13bca665"],
 
-Cell["18.2  Dead-neuron detection", "Subsection",ExpressionUUID->"d5a23cf2-69cc-48e2-8203-95ef4efc2c46"],
+Cell["18.2  Dead-neuron detection", "Subsection",ExpressionUUID->"5bdf5716-244d-4e50-a5f6-caad5f329067"],
 
 Cell[TextData[{
  "A common failure mode of ReLU training is ",
@@ -317760,7 +317763,7 @@ Cell[TextData[{
 the unit always outputs zero and never gets gradient. The standard detection \
 method is to evaluate on a held-out set and check whether the unit ever \
 fires. The tropical viewpoint gives a zero-data alternative."
-}], "Text",ExpressionUUID->"0d1f9c78-fdd5-43fd-a408-50e5becb4786"],
+}], "Text",ExpressionUUID->"a74a6e8f-f190-405a-bde7-6c7826e5ab7d"],
 
 Cell[TextData[{
  "Each unit's pre-activation ",
@@ -317776,14 +317779,14 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "e09712a0-bcb9-41aa-95a2-d4f710627d8f"],
+  "1b806c5d-a7a7-400f-bece-cf73d4093aba"],
  " is an affine function. Its maximum on an axis-aligned rectangle is \
 attained at one of the four corners. So we can ",
  StyleBox["read off",
   FontWeight->"Bold"],
  " whether the unit is dead on a given input domain by evaluating at the \
 corners:"
-}], "Text",ExpressionUUID->"b7a33a93-140a-4d1d-ba91-43b1389d69de"],
+}], "Text",ExpressionUUID->"4235eb2e-1b10-4cb7-ade1-d33ca90b027f"],
 
 Cell["\<\
 netAssoc = <|\"A\" -> A, \"b\" -> b, \"c\" -> c, \"d\" -> d|>;
@@ -317791,7 +317794,7 @@ netAssoc = <|\"A\" -> A, \"b\" -> b, \"c\" -> c, \"d\" -> d|>;
   \"dead on [-2, 2]^2\"      -> MPDeadUnits[netAssoc, {{-2, 2}, {-2, 2}}],
   \"dead on [-0.5, 0.5]^2\"  -> MPDeadUnits[netAssoc, {{-.5, .5}, {-.5, .5}}]
 } // TableForm\
-\>", "Input",ExpressionUUID->"126620f8-7090-4222-a190-a5eaa9899cda"],
+\>", "Input",ExpressionUUID->"9a6424d0-e760-42bd-ba73-5057b7c25766"],
 
 Cell[BoxData[
  TagBox[
@@ -317824,7 +317827,7 @@ Cell[BoxData[
    Column],
   Function[BoxForm`e$, 
    TableForm[BoxForm`e$]]]], "Output",
- CellFrame->False,ExpressionUUID->"c87954f0-5ea4-4918-beb8-152520d6d930"],
+ CellFrame->False,ExpressionUUID->"29353b8e-e599-4809-b8fb-5645887c5e72"],
 
 Cell[TextData[{
  "On the full plot rectangle, no unit of the trained moons network is dead. \
@@ -317842,7 +317845,7 @@ On the smaller box ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "bca23fdf-0d71-4843-96d9-5e5fe62b3de7"],
+  "70f93ef1-c43b-4110-80f7-35b312a256be"],
  " around the origin, however, unit ",
  Cell[BoxData[
   TagBox[
@@ -317856,7 +317859,7 @@ On the smaller box ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "c4f418df-0876-4b46-843b-56ae9b9be2b6"],
+  "da506ea1-3687-4a5d-a024-ca75972acdbf"],
  " is ",
  StyleBox["always active",
   FontSlant->"Italic"],
@@ -317864,9 +317867,9 @@ On the smaller box ",
  StyleBox["fold that unit into the output bias",
   FontWeight->"Bold"],
  " on this domain and save one ReLU evaluation per forward pass."
-}], "Text",ExpressionUUID->"6e1f41a8-38c0-4cc0-aec7-a49a601bc8e3"],
+}], "Text",ExpressionUUID->"8ed321d7-96da-444d-863e-2c2dbec6f611"],
 
-Cell["18.3  Lossless minimisation", "Subsection",ExpressionUUID->"84efea1f-e781-4a95-b1b7-21fa5415c1c6"],
+Cell["18.3  Lossless minimisation", "Subsection",ExpressionUUID->"9481a19b-172a-47b2-a58e-fe5695617016"],
 
 Cell[TextData[{
  "Combining the two observations above gives an exact network minimiser: drop \
@@ -317877,13 +317880,13 @@ interest). The resulting smaller network computes ",
   FontWeight->"Bold"],
  " the same function as the original on the chosen domain -- not an \
 approximation."
-}], "Text",ExpressionUUID->"a5106066-52d9-41c4-aa42-4de91a7c8f67"],
+}], "Text",ExpressionUUID->"273491ad-7de2-4aa0-9abc-dee7f90b5569"],
 
 Cell["\<\
 pruned = MPPruneDeadUnits[netAssoc, {{-0.5, 0.5}, {-0.5, 0.5}}];
 {pruned[\"OriginalUnits\"], pruned[\"KeptUnits\"],
  pruned[\"AffineHead\", \"Slope\"]}\
-\>", "Input",ExpressionUUID->"0b09761e-f77b-4e11-bbd4-8e7e47faba93"],
+\>", "Input",ExpressionUUID->"0fc2f75b-10c4-48ab-a920-92cd254ae275"],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -317891,7 +317894,7 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"0.5180888218354163`", ",", 
      RowBox[{"-", "0.005519689277882905`"}]}], "}"}]}], "}"}]], "Output",Expre\
-ssionUUID->"552d92f7-31b0-4742-9306-431f01e70c44"],
+ssionUUID->"2219c332-6b98-4b24-88d7-bb568a548240"],
 
 Cell[TextData[{
  "On the smaller domain, the 12-unit moons network is equivalent to an \
@@ -317906,7 +317909,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "699ae945-28d5-429d-8ace-786bf8f7a26e"],
+  "44d4e91a-7ed1-4138-9cbe-ac4ea85394ab"],
  " with ",
  Cell[BoxData[
   TagBox[
@@ -317917,7 +317920,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "94db9efd-92f0-4f75-88db-78e9ebadd182"],
+  "5fae5048-52e3-43ec-8a2a-0c82785d2a7e"],
  " = ",
  Cell[BoxData[
   TagBox[
@@ -317929,7 +317932,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "115ae270-05ca-4860-b7df-ed71a6469a48"],
+  "df5c6276-ce3f-456b-8403-adcdc9ec7653"],
  ". The reduction is ",
  StyleBox["lossless",
   FontWeight->"Bold"],
@@ -317939,7 +317942,7 @@ Cell[TextData[{
   FontFamily->"Source Code Pro",
   Background->GrayLevel[0.95]],
  ")."
-}], "Text",ExpressionUUID->"d568c20a-8890-4fc3-920d-23976c35a02c"],
+}], "Text",ExpressionUUID->"9049996a-a8e0-42e0-b176-7e5c2971c88a"],
 
 Cell[TextData[{
  "For a wider trained network (say 64 or 128 hidden units), the fraction of \
@@ -317950,14 +317953,14 @@ gives a principled, exact way to ",
  " the network without retraining and without measurable loss of behaviour on \
 the operating domain -- a fundamentally different mechanism from standard \
 distillation or quantization, both of which trade fidelity for size."
-}], "Text",ExpressionUUID->"1ea4a027-f6b1-4ea2-9770-9a4c139c9a37"],
+}], "Text",ExpressionUUID->"b198652a-2f39-462c-9b73-f62cc46174cc"],
 
-Cell["What else falls out", "Subsection",ExpressionUUID->"e2450057-9f67-4e21-8313-e4a284f6fd3b"],
+Cell["What else falls out", "Subsection",ExpressionUUID->"57eba749-b5ce-49ae-a1d5-b62bb0545e98"],
 
 Cell["\<\
 Several other results follow immediately from the same picture; we sketch \
 them for completeness:\
-\>", "Text",ExpressionUUID->"802d48ce-b9ce-4b0a-9c72-3743562e7ac5"],
+\>", "Text",ExpressionUUID->"e5b0b93d-3786-4a9c-b5c9-699f513a3f99"],
 
 Cell[TextData[{
  "\[Bullet] ",
@@ -317972,7 +317975,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "f124eca6-f916-4ccf-9bcc-951b04c5cb80"],
+  "8f7a3af1-084d-48ab-bb1e-491b15540d3a"],
  "; the decision boundary ",
  Cell[BoxData[
   TagBox[
@@ -317984,7 +317987,7 @@ Cell[TextData[{
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "7933869b-228c-46cf-af1a-fec2c69afb8e"],
+  "02eb6914-bb52-416e-b56d-6fac560aca11"],
  " is the union of line segments where adjacent pieces switch sign, with \
 explicit equations.\n",
  "\[Bullet] ",
@@ -318000,7 +318003,7 @@ explicit equations.\n",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "92d8aae3-f609-42e0-aed0-a1108466449d"],
+  "98ddbabc-80ae-4070-a460-7b3f0cbf90b5"],
  " we can compute the largest radius ",
  Cell[BoxData[
   TagBox[
@@ -318010,7 +318013,7 @@ explicit equations.\n",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "3204642e-0447-4e4a-b5de-bce207643797"],
+  "b711e5e1-27bf-4fc1-a1c9-0861ec10ebb3"],
  " of an L^\[Infinity] ball around ",
  Cell[BoxData[
   TagBox[
@@ -318021,7 +318024,7 @@ explicit equations.\n",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "b532f48a-b46b-4466-a1e3-eaa0aed525b6"],
+  "7ea634a4-0f79-4d03-9eef-eeab4afe9834"],
  " on which the classifier output sign is constant, by checking the affine \
 piece on each cell that the ball intersects -- a finite linear-programming \
 problem.\n",
@@ -318038,7 +318041,7 @@ decompositions have the same upper hulls in both ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "7e998c21-1a0e-4f13-b4a6-5711d2ba4a1e"],
+  "23255617-95c0-4c80-9290-b736908f03de"],
  " and ",
  Cell[BoxData[
   TagBox[
@@ -318048,7 +318051,7 @@ decompositions have the same upper hulls in both ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "9362c4b6-f25b-4176-b456-bcd27dcc60e6"],
+  "5e04b70c-60ed-4191-91d6-b4f964f4af72"],
  ". This is a much sharper test than comparing weights -- many weight \
 assignments give the same function.\n",
  "\[Bullet] ",
@@ -318065,212 +318068,175 @@ a pure tropical polynomial (no ",
     TraditionalForm],
    TraditionalForm,
    Editable->True]], "InlineFormula",ExpressionUUID->
-  "a07146e5-9080-4bbc-878b-6d6aa6333d67"],
+  "dc489f92-79ec-4f21-964e-bfa729260bbb"],
  " split), and the Newton polytope vertices correspond bijectively to \
 realised regions. There is no \"hidden\" structure to the decision boundary."
-}], "Text",ExpressionUUID->"30433170-890b-41c0-a730-9ab1754dfdbe"],
+}], "Text",ExpressionUUID->"c7e210f1-c0a9-462e-8ca1-ff7b4441fd55"],
 
-Cell["19.  Putting it together", "Section",ExpressionUUID->"0f9b9032-48fd-4add-9274-06b4b5c8309e"],
+Cell["19.  Putting it together", "Section",ExpressionUUID->"e0a3c7c2-aae1-49ba-9496-d31cbf4ce79b"],
 
-Cell["The whole story compresses into one table:", "Text",ExpressionUUID->"467c555d-b93d-4efc-a528-9aad2092885a"],
+Cell["The whole story compresses into one table:", "Text",ExpressionUUID->"166e16bb-7201-4178-944a-4c631490167a"],
 
 Cell[BoxData[
  TagBox[GridBox[{
     {
-     RowBox[{"StyleBox", "[", 
-      RowBox[{"\<\"classical / ReLU view\"\>", ",", 
-       RowBox[{"FontWeight", "\[Rule]", "\<\"Bold\"\>"}]}], "]"}], 
-     RowBox[{"StyleBox", "[", 
-      RowBox[{"\<\"tropical / max-plus view\"\>", ",", 
-       RowBox[{"FontWeight", "\[Rule]", "\<\"Bold\"\>"}]}], "]"}]},
+     StyleBox["\<\"classical / ReLU view\"\>",
+      StripOnInput->False,
+      LineColor->GrayLevel[1],
+      FrontFaceColor->GrayLevel[1],
+      BackFaceColor->GrayLevel[1],
+      GraphicsColor->GrayLevel[1],
+      FontFamily->"Helvetica",
+      FontSize->13,
+      FontWeight->Bold,
+      FontColor->GrayLevel[1]], 
+     StyleBox["\<\"tropical / max-plus view\"\>",
+      StripOnInput->False,
+      LineColor->GrayLevel[1],
+      FrontFaceColor->GrayLevel[1],
+      BackFaceColor->GrayLevel[1],
+      GraphicsColor->GrayLevel[1],
+      FontFamily->"Helvetica",
+      FontSize->13,
+      FontWeight->Bold,
+      FontColor->GrayLevel[1]]},
     {
-     RowBox[{"StyleBox", "[", 
-      RowBox[{"\<\"Max[0, W x + b]  per layer\"\>", ",", 
-       RowBox[{"FontFamily", "\[Rule]", "\<\"Source Code Pro\"\>"}], ",", 
-       RowBox[{"Background", "\[Rule]", 
-        TemplateBox[<|"color" -> GrayLevel[0.95]|>,
-         "GrayLevelColorSwatchTemplate"]}]}], "]"}], 
-     RowBox[{"StyleBox", "[", 
-      RowBox[{"\<\"tropical polynomial in x\"\>", ",", 
-       RowBox[{"FontFamily", "\[Rule]", "\<\"Source Code Pro\"\>"}], ",", 
-       RowBox[{"Background", "\[Rule]", 
-        TemplateBox[<|"color" -> GrayLevel[0.95]|>,
-         "GrayLevelColorSwatchTemplate"]}]}], "]"}]},
+     StyleBox["\<\"Max[0, W x + b]  per layer\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro",
+      FontSize->12], 
+     StyleBox["\<\"tropical polynomial in x\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro",
+      FontSize->12]},
     {
-     RowBox[{"StyleBox", "[", 
-      RowBox[{"\<\"scalar output f(x)\[Element]R\"\>", ",", 
-       RowBox[{"FontFamily", "\[Rule]", "\<\"Source Code Pro\"\>"}], ",", 
-       RowBox[{"Background", "\[Rule]", 
-        TemplateBox[<|"color" -> GrayLevel[0.95]|>,
-         "GrayLevelColorSwatchTemplate"]}]}], "]"}], 
-     RowBox[{"StyleBox", "[", 
-      RowBox[{"\<\"P(x) - Q(x), P, Q tropical polys\"\>", ",", 
-       RowBox[{"FontFamily", "\[Rule]", "\<\"Source Code Pro\"\>"}], ",", 
-       RowBox[{"Background", "\[Rule]", 
-        TemplateBox[<|"color" -> GrayLevel[0.95]|>,
-         "GrayLevelColorSwatchTemplate"]}]}], "]"}]},
+     StyleBox["\<\"scalar output f(x) in R\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro",
+      FontSize->12], 
+     StyleBox["\<\"P(x) - Q(x), P, Q tropical polys\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro",
+      FontSize->12]},
     {
-     RowBox[{"StyleBox", "[", 
-      RowBox[{"\<\"decision boundary {f = 0}\"\>", ",", 
-       RowBox[{"FontFamily", "\[Rule]", "\<\"Source Code Pro\"\>"}], ",", 
-       RowBox[{"Background", "\[Rule]", 
-        TemplateBox[<|"color" -> GrayLevel[0.95]|>,
-         "GrayLevelColorSwatchTemplate"]}]}], "]"}], 
-     RowBox[{"StyleBox", "[", 
-      RowBox[{"\<\"tropical hypersurface {P = Q}\"\>", ",", 
-       RowBox[{"FontFamily", "\[Rule]", "\<\"Source Code Pro\"\>"}], ",", 
-       RowBox[{"Background", "\[Rule]", 
-        TemplateBox[<|"color" -> GrayLevel[0.95]|>,
-         "GrayLevelColorSwatchTemplate"]}]}], "]"}]},
+     StyleBox["\<\"decision boundary {f = 0}\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro",
+      FontSize->12], 
+     StyleBox["\<\"tropical hypersurface {P = Q}\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro",
+      FontSize->12]},
     {
-     RowBox[{"StyleBox", "[", 
-      RowBox[{"\<\"activation crease lines\"\>", ",", 
-       RowBox[{"FontFamily", "\[Rule]", "\<\"Source Code Pro\"\>"}], ",", 
-       RowBox[{"Background", "\[Rule]", 
-        TemplateBox[<|"color" -> GrayLevel[0.95]|>,
-         "GrayLevelColorSwatchTemplate"]}]}], "]"}], 
-     RowBox[{"StyleBox", "[", 
-      RowBox[{"\<\"regular subdivision of Newt(P\[CirclePlus]Q)\"\>", ",", 
-       RowBox[{"FontFamily", "\[Rule]", "\<\"Source Code Pro\"\>"}], ",", 
-       RowBox[{"Background", "\[Rule]", 
-        TemplateBox[<|"color" -> GrayLevel[0.95]|>,
-         "GrayLevelColorSwatchTemplate"]}]}], "]"}]},
+     StyleBox["\<\"activation crease lines\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro",
+      FontSize->12], 
+     StyleBox["\<\"regular subdivision of Newt(P + Q)\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro",
+      FontSize->12]},
     {
-     RowBox[{"StyleBox", "[", 
-      RowBox[{"\<\"linear regions vs width n\"\>", ",", 
-       RowBox[{"FontFamily", "\[Rule]", "\<\"Source Code Pro\"\>"}], ",", 
-       RowBox[{"Background", "\[Rule]", 
-        TemplateBox[<|"color" -> GrayLevel[0.95]|>,
-         "GrayLevelColorSwatchTemplate"]}]}], "]"}], 
-     RowBox[{"StyleBox", "[", 
-      RowBox[{"\<\"Zaslavsky bound  1 + n + C(n, 2)\"\>", ",", 
-       RowBox[{"FontFamily", "\[Rule]", "\<\"Source Code Pro\"\>"}], ",", 
-       RowBox[{"Background", "\[Rule]", 
-        TemplateBox[<|"color" -> GrayLevel[0.95]|>,
-         "GrayLevelColorSwatchTemplate"]}]}], "]"}]},
+     StyleBox["\<\"linear regions vs width n\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro",
+      FontSize->12], 
+     StyleBox["\<\"Zaslavsky bound  1 + n + C(n, 2)\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro",
+      FontSize->12]},
     {
-     RowBox[{"StyleBox", "[", 
-      RowBox[{"\<\"mat-vec  W x + b\"\>", ",", 
-       RowBox[{"FontFamily", "\[Rule]", "\<\"Source Code Pro\"\>"}], ",", 
-       RowBox[{"Background", "\[Rule]", 
-        TemplateBox[<|"color" -> GrayLevel[0.95]|>,
-         "GrayLevelColorSwatchTemplate"]}]}], "]"}], 
-     RowBox[{"StyleBox", "[", 
-      RowBox[{"\<\"tropical mat-vec  A \[CircleDot] x \[CircleTimes] b\"\>", ",", 
-       RowBox[{"FontFamily", "\[Rule]", "\<\"Source Code Pro\"\>"}], ",", 
-       RowBox[{"Background", "\[Rule]", 
-        TemplateBox[<|"color" -> GrayLevel[0.95]|>,
-         "GrayLevelColorSwatchTemplate"]}]}], "]"}]},
+     StyleBox["\<\"mat-vec  W x + b\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro",
+      FontSize->12], 
+     StyleBox["\<\"tropical mat-vec  A \[CircleDot] x \[CircleTimes] b\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro",
+      FontSize->12]},
     {
-     RowBox[{"StyleBox", "[", 
-      RowBox[{"\<\"Bellman-Ford shortest paths\"\>", ",", 
-       RowBox[{"FontFamily", "\[Rule]", "\<\"Source Code Pro\"\>"}], ",", 
-       RowBox[{"Background", "\[Rule]", 
-        TemplateBox[<|"color" -> GrayLevel[0.95]|>,
-         "GrayLevelColorSwatchTemplate"]}]}], "]"}], 
-     RowBox[{"StyleBox", "[", 
-      RowBox[{"\<\"same tropical mat-vec, min-plus\"\>", ",", 
-       RowBox[{"FontFamily", "\[Rule]", "\<\"Source Code Pro\"\>"}], ",", 
-       RowBox[{"Background", "\[Rule]", 
-        TemplateBox[<|"color" -> GrayLevel[0.95]|>,
-         "GrayLevelColorSwatchTemplate"]}]}], "]"}]},
+     StyleBox["\<\"Bellman-Ford shortest paths\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro",
+      FontSize->12], 
+     StyleBox["\<\"same tropical mat-vec, min-plus\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro",
+      FontSize->12]},
     {
-     RowBox[{"StyleBox", "[", 
-      RowBox[{"\<\"PERT longest path\"\>", ",", 
-       RowBox[{"FontFamily", "\[Rule]", "\<\"Source Code Pro\"\>"}], ",", 
-       RowBox[{"Background", "\[Rule]", 
-        TemplateBox[<|"color" -> GrayLevel[0.95]|>,
-         "GrayLevelColorSwatchTemplate"]}]}], "]"}], 
-     RowBox[{"StyleBox", "[", 
-      RowBox[{"\<\"tropical Kleene star\"\>", ",", 
-       RowBox[{"FontFamily", "\[Rule]", "\<\"Source Code Pro\"\>"}], ",", 
-       RowBox[{"Background", "\[Rule]", 
-        TemplateBox[<|"color" -> GrayLevel[0.95]|>,
-         "GrayLevelColorSwatchTemplate"]}]}], "]"}]},
+     StyleBox["\<\"PERT longest path\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro",
+      FontSize->12], 
+     StyleBox["\<\"tropical Kleene star\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro",
+      FontSize->12]},
     {
-     RowBox[{"StyleBox", "[", 
-      RowBox[{"\<\"leaky ReLU / MaxPool / maxout\"\>", ",", 
-       RowBox[{"FontFamily", "\[Rule]", "\<\"Source Code Pro\"\>"}], ",", 
-       RowBox[{"Background", "\[Rule]", 
-        TemplateBox[<|"color" -> GrayLevel[0.95]|>,
-         "GrayLevelColorSwatchTemplate"]}]}], "]"}], 
-     RowBox[{"StyleBox", "[", 
-      RowBox[{"\<\"pure tropical operations\"\>", ",", 
-       RowBox[{"FontFamily", "\[Rule]", "\<\"Source Code Pro\"\>"}], ",", 
-       RowBox[{"Background", "\[Rule]", 
-        TemplateBox[<|"color" -> GrayLevel[0.95]|>,
-         "GrayLevelColorSwatchTemplate"]}]}], "]"}]},
+     StyleBox["\<\"leaky ReLU / MaxPool / maxout\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro",
+      FontSize->12], 
+     StyleBox["\<\"pure tropical operations\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro",
+      FontSize->12]},
     {
-     RowBox[{"StyleBox", "[", 
-      RowBox[{"\<\"skip connection x + F(x)\"\>", ",", 
-       RowBox[{"FontFamily", "\[Rule]", "\<\"Source Code Pro\"\>"}], ",", 
-       RowBox[{"Background", "\[Rule]", 
-        TemplateBox[<|"color" -> GrayLevel[0.95]|>,
-         "GrayLevelColorSwatchTemplate"]}]}], "]"}], 
-     RowBox[{"StyleBox", "[", 
-      RowBox[{"\<\"tropical product x \[CircleTimes] F(x)\"\>", ",", 
-       RowBox[{"FontFamily", "\[Rule]", "\<\"Source Code Pro\"\>"}], ",", 
-       RowBox[{"Background", "\[Rule]", 
-        TemplateBox[<|"color" -> GrayLevel[0.95]|>,
-         "GrayLevelColorSwatchTemplate"]}]}], "]"}]},
+     StyleBox["\<\"skip connection x + F(x)\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro",
+      FontSize->12], 
+     StyleBox["\<\"tropical product x \[CircleTimes] F(x)\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro",
+      FontSize->12]},
     {
-     RowBox[{"StyleBox", "[", 
-      RowBox[{"\<\"product-of-layer-norms Lipschitz bound\"\>", ",", 
-       RowBox[{"FontFamily", "\[Rule]", "\<\"Source Code Pro\"\>"}], ",", 
-       RowBox[{"Background", "\[Rule]", 
-        TemplateBox[<|"color" -> GrayLevel[0.95]|>,
-         "GrayLevelColorSwatchTemplate"]}]}], "]"}], 
-     RowBox[{"StyleBox", "[", 
-      RowBox[{"\<\"EXACT Lipschitz via gradient-norm max\"\>", ",", 
-       RowBox[{"FontFamily", "\[Rule]", "\<\"Source Code Pro\"\>"}], ",", 
-       RowBox[{"Background", "\[Rule]", 
-        TemplateBox[<|"color" -> GrayLevel[0.95]|>,
-         "GrayLevelColorSwatchTemplate"]}]}], "]"}]},
+     StyleBox["\<\"product-of-layer-norms Lipschitz bound\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro",
+      FontSize->12], 
+     StyleBox["\<\"EXACT Lipschitz via gradient-norm max\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro",
+      FontSize->12]},
     {
-     RowBox[{"StyleBox", "[", 
-      RowBox[{"\<\"dead neurons -- detected by held-out data\"\>", ",", 
-       RowBox[{"FontFamily", "\[Rule]", "\<\"Source Code Pro\"\>"}], ",", 
-       RowBox[{"Background", "\[Rule]", 
-        TemplateBox[<|"color" -> GrayLevel[0.95]|>,
-         "GrayLevelColorSwatchTemplate"]}]}], "]"}], 
-     RowBox[{"StyleBox", "[", 
-      RowBox[{"\<\"dead neurons -- detected by 4-corner LP\"\>", ",", 
-       RowBox[{"FontFamily", "\[Rule]", "\<\"Source Code Pro\"\>"}], ",", 
-       RowBox[{"Background", "\[Rule]", 
-        TemplateBox[<|"color" -> GrayLevel[0.95]|>,
-         "GrayLevelColorSwatchTemplate"]}]}], "]"}]},
+     StyleBox["\<\"dead neurons via held-out data\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro",
+      FontSize->12], 
+     StyleBox["\<\"dead neurons via 4-corner LP\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro",
+      FontSize->12]},
     {
-     RowBox[{"StyleBox", "[", 
-      RowBox[{"\<\"pruning -- approximate, needs retraining\"\>", ",", 
-       RowBox[{"FontFamily", "\[Rule]", "\<\"Source Code Pro\"\>"}], ",", 
-       RowBox[{"Background", "\[Rule]", 
-        TemplateBox[<|"color" -> GrayLevel[0.95]|>,
-         "GrayLevelColorSwatchTemplate"]}]}], "]"}], 
-     RowBox[{"StyleBox", "[", 
-      RowBox[{"\<\"pruning -- EXACT via dead-unit minimiser\"\>", ",", 
-       RowBox[{"FontFamily", "\[Rule]", "\<\"Source Code Pro\"\>"}], ",", 
-       RowBox[{"Background", "\[Rule]", 
-        TemplateBox[<|"color" -> GrayLevel[0.95]|>,
-         "GrayLevelColorSwatchTemplate"]}]}], "]"}]}
+     StyleBox["\<\"pruning - approximate, needs retraining\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro",
+      FontSize->12], 
+     StyleBox["\<\"pruning - EXACT via dead-unit minimiser\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro",
+      FontSize->12]}
    },
    AutoDelete->False,
+   FrameStyle->Directive[
+     GrayLevel[0.5]],
    GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Center}}},
-   GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {
-       Directive[
-        GrayLevel[1], Bold, Background -> RGBColor[0.18, 0.3, 0.55]], None, 
-       None, None, None, None, None, None, None, None, None, None, None}},
+   GridBoxBackground->{
+    "Columns" -> {{None}}, "RowsIndexed" -> {1 -> RGBColor[0.18, 0.3, 0.55]}},
+   
    GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
    GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
    GridBoxSpacings->{"Columns" -> {{2}}, "Rows" -> {{1.2}}}],
   "Grid"]], "Output",
- CellFrame->False,ExpressionUUID->"af0360eb-8a14-49e3-b81a-fe282a23c0e2"],
+ CellFrame->False,ExpressionUUID->"c8e97b8b-cbdc-425d-b991-929e4c7b3e11"],
 
 Cell["\<\
 Everything that ReLU networks do, max-plus algebra already does -- and the \
 last three rows are gifts that ordinary analysis does not give us.\
-\>", "Text",ExpressionUUID->"7e7a8285-d8a7-4f0a-b0f8-c524676a6820"],
+\>", "Text",ExpressionUUID->"c56f5ac9-e94d-4b6e-8900-d24b7ceba439"],
 
-Cell["References", "Section",ExpressionUUID->"f6a3abf5-53a7-4857-a552-1039094a93c7"],
+Cell["References", "Section",ExpressionUUID->"9ce73664-7a64-4a0d-91c3-b99f460ef004"],
 
 Cell[TextData[{
  "L. Zhang, G. Naitzat, L.-H. Lim. ",
@@ -318300,13 +318266,13 @@ community.wolfram.com/groups/-/m/t/162609\n\n",
   FontFamily->"Source Code Pro",
   Background->GrayLevel[0.95]],
  "."
-}], "Text",ExpressionUUID->"53facaee-06ad-446a-8937-6beb39416008"]
+}], "Text",ExpressionUUID->"fbedec71-85aa-456e-9985-f71859abc092"]
 },
 WindowSize->{1000, 800},
 WindowMargins->{{Automatic, Automatic}, {Automatic, Automatic}},
 FrontEndVersion->"15.0 for Mac OS X ARM (64-bit) (October 27, 2025)",
 StyleDefinitions->"Default.nb",
-ExpressionUUID->"a66cbda8-2e3d-4702-885e-e81e41a7c8df"
+ExpressionUUID->"a077e594-ae15-4003-89c1-584e96010bec"
 ]
 (* End of Notebook Content *)
 
@@ -318319,217 +318285,217 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[554, 20, 105, 0, 70, "Title",ExpressionUUID->"462f5667-437e-4b5f-99cf-b9b9d5606509"],
-Cell[662, 22, 1033, 18, 70, "Text",ExpressionUUID->"2e05558b-a02e-4ad5-9fae-6d37f41eda50"],
-Cell[1698, 42, 456, 9, 70, "Text",ExpressionUUID->"213cd185-e95f-4ff3-beb4-3ce6b5edc647"],
-Cell[2157, 53, 521, 9, 70, "Text",ExpressionUUID->"70bfd40c-44de-4f8d-97ba-1d7955c7be65"],
-Cell[2681, 64, 4979765, 81641, 70, "Output",ExpressionUUID->"8b58d68d-e626-4d26-b69e-96ee0270e90f"],
-Cell[4982449, 81707, 406, 9, 70, "Text",ExpressionUUID->"67f63d46-44bf-42cb-b252-77bda5f3249e"],
-Cell[4982858, 81718, 113, 0, 70, "Section",ExpressionUUID->"c091d069-7aba-4820-a5bd-a7da0424c777"],
-Cell[4982974, 81720, 173, 3, 70, "Text",ExpressionUUID->"31890c44-2259-40ab-ba67-af3026cc091a"],
-Cell[4983150, 81725, 222, 6, 70, "InlineFormula",ExpressionUUID->"85ff842a-d52c-4894-a51f-65063e9d8fc7"],
-Cell[4983375, 81733, 186, 3, 70, "Text",ExpressionUUID->"6554a418-3415-4619-a974-596890d1449e"],
-Cell[4983564, 81738, 354, 12, 70, "DisplayFormula",ExpressionUUID->"70d16927-d9a3-4d8a-8400-92362036e049"],
-Cell[4983921, 81752, 321, 11, 70, "DisplayFormula",ExpressionUUID->"452f719c-eb47-498e-a831-e880552ef2d4"],
-Cell[4984245, 81765, 2034, 79, 70, "Text",ExpressionUUID->"73eff372-2e95-4037-bcb2-18a138d6f573"],
-Cell[4986282, 81846, 480, 15, 70, "DisplayFormula",ExpressionUUID->"ca765fc6-6f74-471a-a2ce-c645b954f616"],
-Cell[4986765, 81863, 1059, 22, 70, "Text",ExpressionUUID->"444f5239-76a5-48e8-b17b-2dabb6574b86"],
-Cell[4987827, 81887, 92, 0, 70, "Subsection",ExpressionUUID->"89c7674b-aa7a-4e43-bea9-4a7925fd4f4e"],
-Cell[4987922, 81889, 1035, 35, 70, "Text",ExpressionUUID->"dd446f7c-aa33-47f1-aff1-2cd0b91b12bd"],
-Cell[4988960, 81926, 851, 20, 70, "Input",ExpressionUUID->"bada251b-ed0a-4c2b-8624-a2f5978c9c56"],
-Cell[4989814, 81948, 272, 7, 70, "Output",ExpressionUUID->"aab3f4ca-7eb7-4ad2-9642-95e50b745edf"],
-Cell[4990089, 81957, 1583, 53, 70, "Text",ExpressionUUID->"8537e2d7-c873-41ff-87dc-c0b063df80f3"],
-Cell[4991675, 82012, 107, 0, 70, "Section",ExpressionUUID->"c5aed417-06f3-46d7-8dd3-7677e51129da"],
-Cell[4991785, 82014, 257, 4, 70, "Text",ExpressionUUID->"72841c3b-b640-4c67-a33f-5b6c6c2a3a3c"],
-Cell[4992045, 82020, 573, 20, 70, "DisplayFormula",ExpressionUUID->"3461d9a1-6e37-4eae-904d-07c0efec7827"],
-Cell[4992621, 82042, 789, 28, 70, "Text",ExpressionUUID->"1800f904-11d7-47ab-9712-85f93e801cc2"],
-Cell[4993413, 82072, 655, 18, 70, "Input",ExpressionUUID->"24558106-ae4c-4832-9949-6b4237da683b"],
-Cell[4994071, 82092, 1777, 56, 70, "Output",ExpressionUUID->"d02da469-180a-482f-b2d7-79dbe6325574"],
-Cell[4995851, 82150, 3355, 126, 70, "Text",ExpressionUUID->"38df8b0c-5aff-4562-a914-57167f051916"],
-Cell[4999209, 82278, 92, 0, 70, "Subsection",ExpressionUUID->"4e1f6376-2df8-4eb0-90d1-87eec22e6800"],
-Cell[4999304, 82280, 384, 12, 70, "Text",ExpressionUUID->"a5112e95-41ec-47a0-9539-8d68b3496537"],
-Cell[4999691, 82294, 631, 19, 70, "DisplayFormula",ExpressionUUID->"b0514330-028d-434c-a4bc-76913b059ca5"],
-Cell[5000325, 82315, 1205, 45, 70, "Text",ExpressionUUID->"32793955-d563-426c-baef-de3cca7b6536"],
-Cell[5001533, 82362, 501, 16, 70, "Input",ExpressionUUID->"41f0bbc7-fa5d-4132-87bf-494d54a54d02"],
-Cell[5002037, 82380, 667, 20, 70, "Output",ExpressionUUID->"b031b69e-5bfb-4620-8b5a-66e1a31660de"],
-Cell[5002707, 82402, 1164, 44, 70, "Text",ExpressionUUID->"22b6a9d7-7ebe-4e5e-9f84-1eb2c8b39e0e"],
-Cell[5003874, 82448, 117, 0, 70, "Section",ExpressionUUID->"168b34ac-5c96-4d25-936a-121860372a67"],
-Cell[5003994, 82450, 1131, 45, 70, "Text",ExpressionUUID->"87a57093-7d19-40ad-8b08-8d7d2b7cff73"],
-Cell[5005128, 82497, 557, 19, 70, "DisplayFormula",ExpressionUUID->"06f5a326-dc9e-4682-b4c2-ffb0f97eb04e"],
-Cell[5005688, 82518, 264, 4, 70, "Text",ExpressionUUID->"06414353-3aba-4ba7-b143-0dcdb4890552"],
-Cell[5005955, 82524, 290, 6, 70, "Text",ExpressionUUID->"87988082-f917-4f11-916d-b364dd5a8caf"],
-Cell[5006248, 82532, 487, 15, 70, "Input",ExpressionUUID->"6be06a5e-4f9d-48b7-9133-d403e9e1069e"],
-Cell[5006738, 82549, 765, 19, 70, "Output",ExpressionUUID->"d987020d-0838-4a0d-98fb-19beffb6d724"],
-Cell[5007506, 82570, 1280, 47, 70, "Text",ExpressionUUID->"e10011c5-d40b-459a-aa8d-de3c30df8f95"],
-Cell[5008789, 82619, 3318031, 54399, 70, "Output",ExpressionUUID->"e43b2ad5-b1b3-4d2d-ad60-add33423af95"],
-Cell[8326823, 137020, 354, 8, 70, "Text",ExpressionUUID->"a18a0b6f-cafb-4721-bf2d-407ed9357249"],
-Cell[8327180, 137030, 107651, 1773, 70, "Output",ExpressionUUID->"5a9df2e5-2097-41fe-856d-6fca60c3bd15"],
-Cell[8434834, 138805, 260, 7, 70, "Text",ExpressionUUID->"d51ee429-457d-4cb2-b6b4-d4aae6788c9c"],
-Cell[8435097, 138814, 121, 0, 70, "Section",ExpressionUUID->"c623203c-62e0-497a-bcfe-a74f871bd9d1"],
-Cell[8435221, 138816, 1936, 76, 70, "Text",ExpressionUUID->"61cb3f09-cba3-4db9-97d4-18f86b2d7683"],
-Cell[8437160, 138894, 229, 4, 70, "Input",ExpressionUUID->"4e3ca839-2ccf-4e62-a0cd-9557a58fee08"],
-Cell[8437392, 138900, 566, 15, 70, "Output",ExpressionUUID->"708a5d37-b6ab-4186-bb4f-35380a7ebd90"],
-Cell[8437961, 138917, 656, 20, 70, "Text",ExpressionUUID->"980647bf-bfe0-4833-ad40-2054fe7c0070"],
-Cell[8438620, 138939, 166595, 2740, 70, "Output",ExpressionUUID->"b7042d4f-0c22-4fc7-8fb0-03f0f0521cae"],
-Cell[8605218, 141681, 334, 8, 70, "Text",ExpressionUUID->"e4974c8f-2860-4e04-ba82-015d2aa0c6c6"],
-Cell[8605555, 141691, 114, 0, 70, "Section",ExpressionUUID->"ee5e9757-7597-4495-8ed0-fdd8ebea8eb7"],
-Cell[8605672, 141693, 209, 5, 70, "Text",ExpressionUUID->"3904647a-3502-4ad8-8e73-80af550608de"],
-Cell[8605884, 141700, 484, 17, 70, "DisplayFormula",ExpressionUUID->"fd8fa79b-83b6-4b93-8ef6-5c9d4b250258"],
-Cell[8606371, 141719, 1735, 64, 70, "Text",ExpressionUUID->"3bcbe1d5-7f15-468c-b1ea-7d5844bf9eb5"],
-Cell[8608109, 141785, 248, 4, 70, "Input",ExpressionUUID->"3164a277-842c-4d7b-9871-770409d0d9dd"],
-Cell[8608360, 141791, 163, 3, 70, "Output",ExpressionUUID->"11db8947-229a-4a04-9c0e-86a6e8cceee9"],
-Cell[8608526, 141796, 2296, 96, 70, "Text",ExpressionUUID->"c970f2d9-697f-4cd1-8a88-67acbb6fa064"],
-Cell[8610825, 141894, 170754, 2808, 70, "Output",ExpressionUUID->"70b388b6-9f8e-4985-a1fb-718143278d20"],
-Cell[8781582, 144704, 302, 7, 70, "Text",ExpressionUUID->"5c030fec-a46f-4838-8366-2f0c6938b3af"],
-Cell[8781887, 144713, 115, 0, 70, "Section",ExpressionUUID->"fe4e0c91-9866-4eaa-aadc-0bf9a98d1860"],
-Cell[8782005, 144715, 1335, 39, 70, "Text",ExpressionUUID->"3a1cf946-7d90-45eb-b08b-5a7b77ef33f5"],
-Cell[8783343, 144756, 238, 4, 70, "Input",ExpressionUUID->"0dd76e8f-b378-4bf9-b928-d720f6020d28"],
-Cell[8783584, 144762, 140, 3, 70, "Output",ExpressionUUID->"29ee36ec-0473-486b-954d-a9dcfa505531"],
-Cell[8783727, 144767, 2027, 80, 70, "Text",ExpressionUUID->"5114ca2e-698a-4412-b299-4f799189da06"],
-Cell[8785757, 144849, 115094, 1895, 70, "Output",ExpressionUUID->"55e75e5d-974c-40a3-a763-8e5aed0de448"],
-Cell[8900854, 146746, 304, 7, 70, "Text",ExpressionUUID->"413bf443-a4cd-4492-8dad-83f58a039205"],
-Cell[8901161, 146755, 118, 0, 70, "Section",ExpressionUUID->"35d6bf2a-e783-4233-9496-97adf7fe6f72"],
-Cell[8901282, 146757, 436, 13, 70, "Text",ExpressionUUID->"a1527d2c-708c-43cd-a0fe-702f3a2f0264"],
-Cell[8901721, 146772, 490, 15, 70, "DisplayFormula",ExpressionUUID->"a057512d-2e16-4ca1-a322-747fc62ae2d4"],
-Cell[8902214, 146789, 1621, 62, 70, "Text",ExpressionUUID->"000d25e4-e98a-4921-8c0c-151a50491093"],
-Cell[8903838, 146853, 521, 11, 70, "Input",ExpressionUUID->"b5b698a6-577d-4b58-9e72-a16dc579d4f1"],
-Cell[8904362, 146866, 775, 22, 70, "Output",ExpressionUUID->"2d6d4243-995e-4d6a-89f6-c169f342dca6"],
-Cell[8905140, 146890, 1009, 38, 70, "Text",ExpressionUUID->"70abb471-952a-4037-90ef-9964c23ad78c"],
-Cell[8906152, 146930, 176, 4, 70, "Input",ExpressionUUID->"959cf689-885d-4d01-abdf-86bacb8d5243"],
-Cell[8906331, 146936, 275, 5, 70, "Output",ExpressionUUID->"313456e5-e32f-4b4f-a921-7796c2f249ab"],
-Cell[8906609, 146943, 612, 23, 70, "Text",ExpressionUUID->"e73aa8c3-a15d-445a-97c8-a14b7a88045b"],
-Cell[8907224, 146968, 153397, 2523, 70, "Output",ExpressionUUID->"91932225-5f94-4b0c-9d72-e95934ee8a88"],
-Cell[9060624, 149493, 313, 7, 70, "Text",ExpressionUUID->"aba8ac33-d6aa-4697-b9bd-4ac6e19f0570"],
-Cell[9060940, 149502, 120, 0, 70, "Section",ExpressionUUID->"e913106d-8a0b-4485-9b31-62ed7c9f2378"],
-Cell[9061063, 149504, 328, 6, 70, "Text",ExpressionUUID->"9b592c74-caba-456d-af01-a585e98582b5"],
-Cell[9061394, 149512, 409, 13, 70, "DisplayFormula",ExpressionUUID->"a8cabc5d-6037-4afb-9bbf-5b4b4296fb87"],
-Cell[9061806, 149527, 740, 24, 70, "Text",ExpressionUUID->"4ea5c759-a61f-4b43-b7b8-7da27e363d28"],
-Cell[9062549, 149553, 547, 18, 70, "DisplayFormula",ExpressionUUID->"b8c3b1d6-cbe3-4b89-8de5-7465f1dd8e10"],
-Cell[9063099, 149573, 769, 26, 70, "Text",ExpressionUUID->"8e553ef9-0b98-4d19-a2a6-b94e8fdf59f7"],
-Cell[9063871, 149601, 3225193, 52877, 70, "Output",ExpressionUUID->"e31b9fe4-7c68-4b93-a77d-be5cec67959b"],
-Cell[12289067, 202480, 379, 8, 70, "Text",ExpressionUUID->"d4f7df5b-4796-43b8-974e-204df4bb6feb"],
-Cell[12289449, 202490, 99, 0, 70, "Section",ExpressionUUID->"014744b6-2967-4692-a862-10253059420a"],
-Cell[12289551, 202492, 270, 6, 70, "Text",ExpressionUUID->"3cb1b2d8-9b8c-453b-b30f-8b218d817e9e"],
-Cell[12289824, 202500, 514, 17, 70, "DisplayFormula",ExpressionUUID->"503e2bc1-4911-4d26-b34b-7cb04e6e67fe"],
-Cell[12290341, 202519, 99, 0, 70, "Text",ExpressionUUID->"e28bbbcd-9ebb-4716-b9da-1e4ff764bc10"],
-Cell[12290443, 202521, 551, 16, 70, "DisplayFormula",ExpressionUUID->"7ca76693-246a-4606-a3c6-65dc21511ead"],
-Cell[12290997, 202539, 347, 7, 70, "Text",ExpressionUUID->"16cbd508-5f85-465f-b96a-181677a77fc7"],
-Cell[12291347, 202548, 304, 7, 70, "Input",ExpressionUUID->"170b8ea6-17ea-45a3-a5fd-12375f8707b4"],
-Cell[12291654, 202557, 2421, 88, 70, "Output",ExpressionUUID->"c1b82dba-d390-4e9c-9775-78ab072de7a1"],
-Cell[12294078, 202647, 212, 3, 70, "Text",ExpressionUUID->"7f077637-6447-423d-a4d8-5d1b160a24b0"],
-Cell[12294293, 202652, 129, 0, 70, "Section",ExpressionUUID->"f2a0eca2-c70e-431e-b5c3-415d6a14bc0a"],
-Cell[12294425, 202654, 1269, 52, 70, "Text",ExpressionUUID->"cedcc9ad-a590-4a7d-867a-284f2f26b9b8"],
-Cell[12295697, 202708, 470, 16, 70, "DisplayFormula",ExpressionUUID->"2b9ae6e0-5060-414a-beb7-19b313803c85"],
-Cell[12296170, 202726, 309, 11, 70, "DisplayFormula",ExpressionUUID->"2bc0fa13-7d77-4edc-b193-19d24e56617c"],
-Cell[12296482, 202739, 91, 0, 70, "Subsection",ExpressionUUID->"52621104-a60b-4911-b4ad-0b01c71eb567"],
-Cell[12296576, 202741, 1061, 40, 70, "Text",ExpressionUUID->"de1e7f40-da3e-4c24-bc74-3475fe2b50ba"],
-Cell[12297640, 202783, 579, 20, 70, "DisplayFormula",ExpressionUUID->"dd7a78a9-2a43-43d9-aca4-6739bf42e47c"],
-Cell[12298222, 202805, 923, 36, 70, "Text",ExpressionUUID->"178aa511-2be1-48aa-95f5-de5dd9e1efb6"],
-Cell[12299148, 202843, 91, 0, 70, "Subsection",ExpressionUUID->"41271584-b3a0-46b3-b700-edb5b24734f2"],
-Cell[12299242, 202845, 995, 39, 70, "Text",ExpressionUUID->"c9e7afe0-34fb-4c26-ac4d-4f24f49e3b9d"],
-Cell[12300240, 202886, 614, 21, 70, "DisplayFormula",ExpressionUUID->"416ce802-c95c-4b18-9d57-900c24ae4d92"],
-Cell[12300857, 202909, 1575, 60, 70, "Text",ExpressionUUID->"3ace82f0-6660-4c59-b674-a725ef37d448"],
-Cell[12302435, 202971, 1762, 75, 70, "Text",ExpressionUUID->"ff869d66-52a6-4a76-a550-fb352271ab67"],
-Cell[12304200, 203048, 780, 21, 70, "Input",ExpressionUUID->"d4d079de-d8bb-4d2b-bb4c-1498d90dd23b"],
-Cell[12304983, 203071, 394, 12, 70, "Text",ExpressionUUID->"7743c3af-f256-425a-83c3-40ef19f7a10f"],
-Cell[12305380, 203085, 129, 0, 70, "Section",ExpressionUUID->"1769eb1d-de56-437b-bb87-0bbd1b76ee1d"],
-Cell[12305512, 203087, 245, 4, 70, "Text",ExpressionUUID->"401f74bd-5dea-4213-8eb6-5b4de7cddf45"],
-Cell[12305760, 203093, 581, 20, 70, "DisplayFormula",ExpressionUUID->"047cd42f-de07-486e-9fef-7c6cce19b0a5"],
-Cell[12306344, 203115, 454, 16, 70, "DisplayFormula",ExpressionUUID->"ceb7bb05-b107-479a-8349-9777af1c62e4"],
-Cell[12306801, 203133, 105, 0, 70, "Subsection",ExpressionUUID->"926983f2-2f59-4c21-936b-f3047a9e2978"],
-Cell[12306909, 203135, 127, 0, 70, "Text",ExpressionUUID->"6e33dd26-67e3-488f-8f22-4a2ad99b8c3a"],
-Cell[12307039, 203137, 814, 26, 70, "DisplayFormula",ExpressionUUID->"f7de59ce-af93-4820-a570-528a09bfc852"],
-Cell[12307856, 203165, 1139, 38, 70, "Text",ExpressionUUID->"6d12907e-b037-45f0-bae7-d5cf26ed5910"],
-Cell[12308998, 203205, 88, 0, 70, "Subsection",ExpressionUUID->"7933fb44-cdf2-4a88-b5e5-5d81c0891082"],
-Cell[12309089, 203207, 627, 26, 70, "Text",ExpressionUUID->"d43752fb-cf99-4e47-8016-a56f1a7c46fa"],
-Cell[12309719, 203235, 440, 15, 70, "DisplayFormula",ExpressionUUID->"e31ebeb1-0247-4794-863c-74069e9ea64a"],
-Cell[12310162, 203252, 451, 16, 70, "DisplayFormula",ExpressionUUID->"7665e1a4-3bb2-4619-8b72-5932806fb9db"],
-Cell[12310616, 203270, 234, 4, 70, "Text",ExpressionUUID->"17da3057-52b7-4320-8d74-e89114f1a84a"],
-Cell[12310853, 203276, 111, 0, 70, "Section",ExpressionUUID->"86bea655-8723-4846-a835-d22913fc8e39"],
-Cell[12310967, 203278, 211, 3, 70, "Text",ExpressionUUID->"cb25b4da-8fe8-43be-8ba7-0a8ad6224d30"],
-Cell[12311181, 203283, 87, 0, 70, "Subsection",ExpressionUUID->"897e5827-8c57-4db5-86e6-0ffde77ef2b8"],
-Cell[12311271, 203285, 525, 16, 70, "DisplayFormula",ExpressionUUID->"64b6cb94-55fe-4097-af5a-91fd31014110"],
-Cell[12311799, 203303, 262, 4, 70, "Text",ExpressionUUID->"27415aeb-8ad0-4b9b-8475-1139b6d6d709"],
-Cell[12312064, 203309, 178, 3, 70, "Input",ExpressionUUID->"5ec8946a-5313-4614-bd9a-457e51f2908f"],
-Cell[12312245, 203314, 213, 5, 70, "Output",ExpressionUUID->"b077fafa-664e-4014-b4de-225e1246fcb3"],
-Cell[12312461, 203321, 84, 0, 70, "Subsection",ExpressionUUID->"cf701df8-4bbd-440c-af22-bd68e3eab333"],
-Cell[12312548, 203323, 582, 22, 70, "Text",ExpressionUUID->"84c6dc02-a946-4b53-a1cd-babf3d787ace"],
-Cell[12313133, 203347, 676, 20, 70, "DisplayFormula",ExpressionUUID->"46fe651d-f760-4450-93d8-7534b6343cc3"],
-Cell[12313812, 203369, 210, 3, 70, "Text",ExpressionUUID->"bf5f7001-9c4f-4066-ab76-d09153437316"],
-Cell[12314025, 203374, 218, 5, 70, "Input",ExpressionUUID->"f3688ffb-c99c-4d66-89e3-139b77b46bb1"],
-Cell[12314246, 203381, 181, 3, 70, "Output",ExpressionUUID->"068a2e3e-242c-46d5-b72b-7033c029faa9"],
-Cell[12314430, 203386, 86, 0, 70, "Subsection",ExpressionUUID->"c38fb527-daea-41a1-b5a1-a8fb0b9ced99"],
-Cell[12314519, 203388, 451, 15, 70, "DisplayFormula",ExpressionUUID->"7417fa48-d66e-4397-af8a-1e15ed3c15d1"],
-Cell[12314973, 203405, 276, 4, 70, "Text",ExpressionUUID->"5c4037dc-3485-4093-9e0e-97f1d25c4158"],
-Cell[12315252, 203411, 109, 0, 70, "Subsection",ExpressionUUID->"d2d7f789-3e2e-46aa-8321-1dd1dc0e1a20"],
-Cell[12315364, 203413, 572, 22, 70, "Text",ExpressionUUID->"c11355e5-f733-4c82-82d8-9229c4364088"],
-Cell[12315939, 203437, 518, 17, 70, "DisplayFormula",ExpressionUUID->"97835706-c68e-4267-a8f3-d9f3e5ccf494"],
-Cell[12316460, 203456, 466, 8, 70, "Text",ExpressionUUID->"32a31697-a824-4b10-af66-fccd30f89e4a"],
-Cell[12316929, 203466, 252, 7, 70, "Input",ExpressionUUID->"bdd65d80-6980-4683-a11e-e1ffb1aa3c16"],
-Cell[12317184, 203475, 86, 0, 70, "Output",ExpressionUUID->"97cb86fa-cbd8-4c7e-94bd-7f8ec3ff719f"],
-Cell[12317273, 203477, 93, 0, 70, "Subsection",ExpressionUUID->"00a18d7c-b1e0-42ca-8c6d-1f882ad3c312"],
-Cell[12317369, 203479, 468, 14, 70, "DisplayFormula",ExpressionUUID->"27053f79-9521-4d91-90fd-f938b2a46b38"],
-Cell[12317840, 203495, 422, 10, 70, "Input",ExpressionUUID->"e937941e-97b0-422f-8415-356b1eb80495"],
-Cell[12318265, 203507, 113, 0, 70, "Section",ExpressionUUID->"9d821967-2a4a-43cf-b074-e865e5354c8f"],
-Cell[12318381, 203509, 189, 3, 70, "Text",ExpressionUUID->"3a79c6f1-05bc-41c0-831f-9b4ae74479ca"],
-Cell[12318573, 203514, 1053, 28, 70, "Input",ExpressionUUID->"d8bb432f-8ce5-44fd-8560-f46564b43189"],
-Cell[12319629, 203544, 140, 2, 70, "Text",ExpressionUUID->"a9edf059-abf9-4dda-b969-f7d9c56febe9"],
-Cell[12319772, 203548, 527, 16, 70, "Input",ExpressionUUID->"1b4bc1f7-3fd3-4790-987a-65850f6a2262"],
-Cell[12320302, 203566, 106, 0, 70, "Output",ExpressionUUID->"2e304412-007b-47f3-8cdc-3e9f168e2a4d"],
-Cell[12320411, 203568, 419, 13, 70, "Text",ExpressionUUID->"ea10858f-b7a1-44ea-993e-5d45432dfff8"],
-Cell[12320833, 203583, 170126, 2796, 70, "Output",ExpressionUUID->"1850df4d-700b-45a9-8bfa-2c47ed13a206"],
-Cell[12490962, 206381, 362, 8, 70, "Text",ExpressionUUID->"41904c5e-d2c6-4421-87e8-2ee2299f2366"],
-Cell[12491327, 206391, 123, 0, 70, "Section",ExpressionUUID->"af9b78f4-832a-488c-8bd3-c439c2f14dcf"],
-Cell[12491453, 206393, 2416, 93, 70, "Text",ExpressionUUID->"98dda320-b663-4f01-bb39-8f3fb13a148d"],
-Cell[12493872, 206488, 4543253, 74485, 70, "Output",ExpressionUUID->"bc3988e3-3b81-4a5a-b007-46b1f7c49468"],
-Cell[17037128, 280975, 380, 8, 70, "Text",ExpressionUUID->"1d3618d5-3c19-4e2e-b999-5e07b9cf151f"],
-Cell[17037511, 280985, 1773534, 29082, 70, "Output",ExpressionUUID->"082e4644-9b01-4a09-8ebe-34c5b4fac132"],
-Cell[18811048, 310069, 459, 9, 70, "Text",ExpressionUUID->"c2930c7a-d52a-4efb-8ad2-329ba6624335"],
-Cell[18811510, 310080, 117, 0, 70, "Section",ExpressionUUID->"e31a823c-9f67-410b-82e1-9d1767d194c2"],
-Cell[18811630, 310082, 1988, 80, 70, "Text",ExpressionUUID->"9664c30f-75e6-4d2f-9afb-3cda62c0b18d"],
-Cell[18813621, 310164, 245, 4, 70, "Input",ExpressionUUID->"5d620e6f-2ace-4c2b-bee6-c097014657c5"],
-Cell[18813869, 310170, 128, 2, 70, "Output",ExpressionUUID->"33e5055a-55c6-45ac-b28b-b4f67957fe9e"],
-Cell[18814000, 310174, 1224, 44, 70, "Text",ExpressionUUID->"7d61daba-78be-4bb9-a27a-01a80ca0b032"],
-Cell[18815227, 310220, 256376, 4210, 70, "Output",ExpressionUUID->"44c2177c-5e88-4cc3-b7bf-2af4b4b134a7"],
-Cell[19071606, 314432, 550, 10, 70, "Text",ExpressionUUID->"0f4bf37a-a1bd-4dd4-a48d-d49f137f4371"],
-Cell[19072159, 314444, 108, 0, 70, "Section",ExpressionUUID->"b6eacfbf-3add-47d6-8c19-1eaa1a65490e"],
-Cell[19072270, 314446, 635, 23, 70, "Text",ExpressionUUID->"3c35edd3-e534-4104-bdc8-58b8dd37063d"],
-Cell[19072908, 314471, 536, 18, 70, "DisplayFormula",ExpressionUUID->"7cd8aca1-4806-4b47-92e1-d2eee7a87845"],
-Cell[19073447, 314491, 691, 19, 70, "Text",ExpressionUUID->"9410e4b2-a2b6-4748-b856-aca3ab151d57"],
-Cell[19074141, 314512, 182390, 2998, 70, "Output",ExpressionUUID->"f59d0319-eb1e-43bd-9a73-24354f029b83"],
-Cell[19256534, 317512, 423, 9, 70, "Text",ExpressionUUID->"836e7617-d3eb-487a-85fa-2d9f449eb5f8"],
-Cell[19256960, 317523, 1380, 47, 70, "Text",ExpressionUUID->"4518b79e-48d6-49ac-b6b6-b42b2203268f"],
-Cell[19258343, 317572, 95, 0, 70, "Section",ExpressionUUID->"b7e8cd3c-65b2-4cba-86e2-cdf1472be989"],
-Cell[19258441, 317574, 1403, 41, 70, "Text",ExpressionUUID->"40ce6011-1202-4984-a805-6d6ae5ce6229"],
-Cell[19259847, 317617, 101, 0, 70, "Section",ExpressionUUID->"a999bd77-69f1-4d23-84bf-96374e72a3df"],
-Cell[19259951, 317619, 338, 5, 70, "Text",ExpressionUUID->"e0c1e648-49af-438f-8ce8-a5f0f1c20761"],
-Cell[19260292, 317626, 107, 0, 70, "Subsection",ExpressionUUID->"ed932c35-bd3e-4e1d-937e-973794150d32"],
-Cell[19260402, 317628, 369, 7, 70, "Text",ExpressionUUID->"33143508-e1f9-4125-ba8a-cd0e2897d8a3"],
-Cell[19260774, 317637, 1594, 50, 70, "Text",ExpressionUUID->"c46af285-ea3a-4587-89d4-339c25ba1a1d"],
-Cell[19262371, 317689, 318, 8, 70, "Input",ExpressionUUID->"f6c8f0aa-b4ee-4993-bb44-6ff8e1b8df77"],
-Cell[19262692, 317699, 318, 7, 70, "Output",ExpressionUUID->"c7b6218f-adfb-42dd-8b64-83db3dd2d673"],
-Cell[19263013, 317708, 1377, 42, 70, "Text",ExpressionUUID->"10672163-e923-44c5-a534-b8b8a212ec85"],
-Cell[19264393, 317752, 104, 0, 70, "Subsection",ExpressionUUID->"d5a23cf2-69cc-48e2-8203-95ef4efc2c46"],
-Cell[19264500, 317754, 472, 8, 70, "Text",ExpressionUUID->"0d1f9c78-fdd5-43fd-a408-50e5becb4786"],
-Cell[19264975, 317764, 680, 21, 70, "Text",ExpressionUUID->"b7a33a93-140a-4d1d-ba91-43b1389d69de"],
-Cell[19265658, 317787, 312, 6, 70, "Input",ExpressionUUID->"126620f8-7090-4222-a190-a5eaa9899cda"],
-Cell[19265973, 317795, 1158, 31, 70, "Output",ExpressionUUID->"c87954f0-5ea4-4918-beb8-152520d6d930"],
-Cell[19267134, 317828, 1197, 38, 70, "Text",ExpressionUUID->"6e1f41a8-38c0-4cc0-aec7-a49a601bc8e3"],
-Cell[19268334, 317868, 104, 0, 70, "Subsection",ExpressionUUID->"84efea1f-e781-4a95-b1b7-21fa5415c1c6"],
-Cell[19268441, 317870, 496, 9, 70, "Text",ExpressionUUID->"a5106066-52d9-41c4-aa42-4de91a7c8f67"],
-Cell[19268940, 317881, 231, 4, 70, "Input",ExpressionUUID->"0b09761e-f77b-4e11-bbd4-8e7e47faba93"],
-Cell[19269174, 317887, 250, 6, 70, "Output",ExpressionUUID->"552d92f7-31b0-4742-9306-431f01e70c44"],
-Cell[19269427, 317895, 1357, 46, 70, "Text",ExpressionUUID->"d568c20a-8890-4fc3-920d-23976c35a02c"],
-Cell[19270787, 317943, 540, 9, 70, "Text",ExpressionUUID->"1ea4a027-f6b1-4ea2-9770-9a4c139c9a37"],
-Cell[19271330, 317954, 96, 0, 70, "Subsection",ExpressionUUID->"e2450057-9f67-4e21-8313-e4a284f6fd3b"],
-Cell[19271429, 317956, 177, 3, 70, "Text",ExpressionUUID->"802d48ce-b9ce-4b0a-9c72-3743562e7ac5"],
-Cell[19271609, 317961, 3181, 109, 70, "Text",ExpressionUUID->"30433170-890b-41c0-a730-9ab1754dfdbe"],
-Cell[19274793, 318072, 98, 0, 70, "Section",ExpressionUUID->"0f9b9032-48fd-4add-9274-06b4b5c8309e"],
-Cell[19274894, 318074, 113, 0, 70, "Text",ExpressionUUID->"467c555d-b93d-4efc-a528-9aad2092885a"],
-Cell[19275010, 318076, 9251, 189, 70, "Output",ExpressionUUID->"af0360eb-8a14-49e3-b81a-fe282a23c0e2"],
-Cell[19284264, 318267, 222, 3, 70, "Text",ExpressionUUID->"7e7a8285-d8a7-4f0a-b0f8-c524676a6820"],
-Cell[19284489, 318272, 84, 0, 70, "Section",ExpressionUUID->"f6a3abf5-53a7-4857-a552-1039094a93c7"],
-Cell[19284576, 318274, 1069, 28, 70, "Text",ExpressionUUID->"53facaee-06ad-446a-8937-6beb39416008"]
+Cell[554, 20, 105, 0, 70, "Title",ExpressionUUID->"8a8819e0-6f53-4d67-a844-39faaa276b37"],
+Cell[662, 22, 1033, 18, 70, "Text",ExpressionUUID->"04dc079d-bedc-425f-913e-3d5bad21ea52"],
+Cell[1698, 42, 456, 9, 70, "Text",ExpressionUUID->"6f2b6668-66e1-48f5-a50d-42a7335b9fcc"],
+Cell[2157, 53, 521, 9, 70, "Text",ExpressionUUID->"cf7f295e-847a-4f4b-a31b-85a50e682e09"],
+Cell[2681, 64, 4979765, 81641, 70, "Output",ExpressionUUID->"05cc6976-a402-467c-84d6-d9d4d2604a6a"],
+Cell[4982449, 81707, 406, 9, 70, "Text",ExpressionUUID->"75b2b8b3-d4cb-425f-bf2e-3d1c876c085e"],
+Cell[4982858, 81718, 113, 0, 70, "Section",ExpressionUUID->"ed74adcd-27b5-4741-a2dc-42a9083942da"],
+Cell[4982974, 81720, 173, 3, 70, "Text",ExpressionUUID->"2045e38a-45ef-4950-ab0d-0531cb46d96d"],
+Cell[4983150, 81725, 222, 6, 70, "InlineFormula",ExpressionUUID->"2610a865-48b9-406b-a301-a09d07587eb5"],
+Cell[4983375, 81733, 186, 3, 70, "Text",ExpressionUUID->"18260c2c-ecca-4e19-9a8e-9db75be89ee2"],
+Cell[4983564, 81738, 354, 12, 70, "DisplayFormula",ExpressionUUID->"94e2d14c-5948-4292-9f9b-e1b00c549a2d"],
+Cell[4983921, 81752, 321, 11, 70, "DisplayFormula",ExpressionUUID->"a3ba8e21-42e0-442c-ba11-d5dfaf35e161"],
+Cell[4984245, 81765, 2034, 79, 70, "Text",ExpressionUUID->"13286cd3-b3ef-46b6-a1a1-0c8080b6f484"],
+Cell[4986282, 81846, 480, 15, 70, "DisplayFormula",ExpressionUUID->"50ca78d0-1fca-4617-aba1-f8d23aede86d"],
+Cell[4986765, 81863, 1059, 22, 70, "Text",ExpressionUUID->"24d42964-8385-428c-b552-868af6b20ea0"],
+Cell[4987827, 81887, 92, 0, 70, "Subsection",ExpressionUUID->"87dce79d-cce1-41de-9486-b3dcf2574fe0"],
+Cell[4987922, 81889, 1035, 35, 70, "Text",ExpressionUUID->"b01dbd8d-8fb2-49b1-898d-4001cd54f050"],
+Cell[4988960, 81926, 851, 20, 70, "Input",ExpressionUUID->"a1df4b44-5958-4813-86c1-4619d753e450"],
+Cell[4989814, 81948, 272, 7, 70, "Output",ExpressionUUID->"e234d39f-07c2-4943-aad4-ca0668400ff3"],
+Cell[4990089, 81957, 1583, 53, 70, "Text",ExpressionUUID->"bb2c8c45-7e93-40bf-acf6-2cfdef09f5cb"],
+Cell[4991675, 82012, 107, 0, 70, "Section",ExpressionUUID->"c6ce1e32-f1a9-4434-89d9-fd25da496b60"],
+Cell[4991785, 82014, 257, 4, 70, "Text",ExpressionUUID->"4eb9ff95-659d-4867-99ec-a0d6ea9c9b0b"],
+Cell[4992045, 82020, 573, 20, 70, "DisplayFormula",ExpressionUUID->"607a38ed-8c65-4bdd-ba64-9dd428628deb"],
+Cell[4992621, 82042, 789, 28, 70, "Text",ExpressionUUID->"ec2a721a-56aa-4ac0-9252-788aeb3365bf"],
+Cell[4993413, 82072, 655, 18, 70, "Input",ExpressionUUID->"e980cec1-1b65-4705-8417-430cc011dba3"],
+Cell[4994071, 82092, 1777, 56, 70, "Output",ExpressionUUID->"4f1a93d5-1139-45c5-9e66-6b1ff912d4e3"],
+Cell[4995851, 82150, 3355, 126, 70, "Text",ExpressionUUID->"71d0e690-a640-49cb-bfb1-a1d9ac80ee9c"],
+Cell[4999209, 82278, 92, 0, 70, "Subsection",ExpressionUUID->"e2a6ff03-790d-4614-bc25-571fc1f196f3"],
+Cell[4999304, 82280, 384, 12, 70, "Text",ExpressionUUID->"61198844-c26d-4c36-896f-6d23b8466705"],
+Cell[4999691, 82294, 631, 19, 70, "DisplayFormula",ExpressionUUID->"eac4a5d1-9cf0-4ec9-ae24-51da98b433e2"],
+Cell[5000325, 82315, 1205, 45, 70, "Text",ExpressionUUID->"eeffc03f-ba84-489e-86d2-2a2e1cdc774a"],
+Cell[5001533, 82362, 501, 16, 70, "Input",ExpressionUUID->"8f8b88d1-6a43-4ff4-b070-e277e22fc524"],
+Cell[5002037, 82380, 667, 20, 70, "Output",ExpressionUUID->"0f8ea457-1941-4e7c-ab80-608f9e1bec4d"],
+Cell[5002707, 82402, 1164, 44, 70, "Text",ExpressionUUID->"857dd83e-eb33-4032-b154-68e9475c8271"],
+Cell[5003874, 82448, 117, 0, 70, "Section",ExpressionUUID->"3fb9fcc6-aff2-4b8b-8a0a-e336c908ca4a"],
+Cell[5003994, 82450, 1131, 45, 70, "Text",ExpressionUUID->"cfb94666-3dff-4d83-b365-41aa0b30f6ef"],
+Cell[5005128, 82497, 557, 19, 70, "DisplayFormula",ExpressionUUID->"472bd216-d667-4ef6-bf17-0b618f6df2a5"],
+Cell[5005688, 82518, 264, 4, 70, "Text",ExpressionUUID->"7dcbdde5-3f0a-45b9-859f-3f05ed1c6be9"],
+Cell[5005955, 82524, 290, 6, 70, "Text",ExpressionUUID->"42435542-7090-4a54-9bcf-34ed7e325c27"],
+Cell[5006248, 82532, 487, 15, 70, "Input",ExpressionUUID->"99e5f71d-a627-4fa8-8cc3-07381d819a3e"],
+Cell[5006738, 82549, 765, 19, 70, "Output",ExpressionUUID->"68312302-1e0f-43b5-8ba7-3f942b7e5f26"],
+Cell[5007506, 82570, 1280, 47, 70, "Text",ExpressionUUID->"ab26103c-827d-4150-a551-8dd2d3b79d2c"],
+Cell[5008789, 82619, 3318031, 54399, 70, "Output",ExpressionUUID->"480eaba8-594f-4689-98f0-d0ed31bc60b5"],
+Cell[8326823, 137020, 354, 8, 70, "Text",ExpressionUUID->"c7bc004c-b4a8-4bf4-bb0c-5f22b000e691"],
+Cell[8327180, 137030, 107651, 1773, 70, "Output",ExpressionUUID->"4f0c7a7c-3805-4a3b-a5aa-b850fa3dfe6c"],
+Cell[8434834, 138805, 260, 7, 70, "Text",ExpressionUUID->"bda89968-c9dc-449d-9c95-93d6452d73ca"],
+Cell[8435097, 138814, 121, 0, 70, "Section",ExpressionUUID->"e4f21200-c3b8-4ede-a1fe-0b32d97d5254"],
+Cell[8435221, 138816, 1936, 76, 70, "Text",ExpressionUUID->"4e0f9a1b-6b28-4ce4-acc1-317bf2ffbd84"],
+Cell[8437160, 138894, 229, 4, 70, "Input",ExpressionUUID->"957de9c8-dca4-493c-82f5-bb8fc38bcbe1"],
+Cell[8437392, 138900, 566, 15, 70, "Output",ExpressionUUID->"4eeba0fd-5c2c-41a3-bc00-cc293002498c"],
+Cell[8437961, 138917, 656, 20, 70, "Text",ExpressionUUID->"2e374c2f-5baf-4410-a7c5-727368b9c38a"],
+Cell[8438620, 138939, 166595, 2740, 70, "Output",ExpressionUUID->"92cc9ce8-1aff-4d35-8405-f13e86348907"],
+Cell[8605218, 141681, 334, 8, 70, "Text",ExpressionUUID->"c5224a61-b58c-4a7e-9f41-b2fff2cc446b"],
+Cell[8605555, 141691, 114, 0, 70, "Section",ExpressionUUID->"896f7631-a357-438f-ab39-66f65f01a931"],
+Cell[8605672, 141693, 209, 5, 70, "Text",ExpressionUUID->"c7c7d8ab-cef9-4799-bb8a-38ec3bbeba6a"],
+Cell[8605884, 141700, 484, 17, 70, "DisplayFormula",ExpressionUUID->"fd59f45d-904a-4759-9889-cb77b51b1d1f"],
+Cell[8606371, 141719, 1735, 64, 70, "Text",ExpressionUUID->"37ee7276-ad6c-458f-8ac3-0fbe2b1468dc"],
+Cell[8608109, 141785, 248, 4, 70, "Input",ExpressionUUID->"f09a01a0-9ded-41bb-be83-cf7ce5aaf8ec"],
+Cell[8608360, 141791, 163, 3, 70, "Output",ExpressionUUID->"10e9b3d1-2f9b-4506-a517-6129e13f7cd4"],
+Cell[8608526, 141796, 2296, 96, 70, "Text",ExpressionUUID->"9a155a5d-6b05-497d-8693-945f82f3bebf"],
+Cell[8610825, 141894, 170754, 2808, 70, "Output",ExpressionUUID->"62445d21-d3b5-452a-8085-eda4942e78ec"],
+Cell[8781582, 144704, 302, 7, 70, "Text",ExpressionUUID->"d03029ba-da70-4fbd-b7c8-74e4affb9d74"],
+Cell[8781887, 144713, 115, 0, 70, "Section",ExpressionUUID->"bf83a5f0-11f2-42bf-b7e6-004365a5d34a"],
+Cell[8782005, 144715, 1335, 39, 70, "Text",ExpressionUUID->"64acceda-64ce-4268-ad55-f014933a63d3"],
+Cell[8783343, 144756, 238, 4, 70, "Input",ExpressionUUID->"f891bc07-77ee-463a-87e9-2840b857c37f"],
+Cell[8783584, 144762, 140, 3, 70, "Output",ExpressionUUID->"0b018f54-26cf-408f-88b0-c1326e22be2d"],
+Cell[8783727, 144767, 2027, 80, 70, "Text",ExpressionUUID->"d209b7f7-1573-4f0d-b7ad-26d4fabb4176"],
+Cell[8785757, 144849, 115094, 1895, 70, "Output",ExpressionUUID->"882bd6b3-29a6-41f6-8972-44ac4cf1ee82"],
+Cell[8900854, 146746, 304, 7, 70, "Text",ExpressionUUID->"06e868a6-c1c1-48c9-b197-66b97d6da027"],
+Cell[8901161, 146755, 118, 0, 70, "Section",ExpressionUUID->"542f9476-3b0c-4dbe-9291-bce79893fbbb"],
+Cell[8901282, 146757, 436, 13, 70, "Text",ExpressionUUID->"d504a7a2-c15b-4adb-aacb-89eead2a608c"],
+Cell[8901721, 146772, 490, 15, 70, "DisplayFormula",ExpressionUUID->"9c6128f1-25ee-40e3-9688-fa4395bf53df"],
+Cell[8902214, 146789, 1621, 62, 70, "Text",ExpressionUUID->"d973ece5-d2a6-42db-81cb-823814a8a348"],
+Cell[8903838, 146853, 521, 11, 70, "Input",ExpressionUUID->"e3468541-9835-4d5f-8752-30c27fd68f01"],
+Cell[8904362, 146866, 775, 22, 70, "Output",ExpressionUUID->"3a2c59a9-cc0c-4b7d-ab91-32aefb4c38bd"],
+Cell[8905140, 146890, 1009, 38, 70, "Text",ExpressionUUID->"eced0b6f-dea5-435f-88e2-e0169e4ec6b2"],
+Cell[8906152, 146930, 176, 4, 70, "Input",ExpressionUUID->"c4d0dd36-f155-4b53-a648-f1e393f8de16"],
+Cell[8906331, 146936, 275, 5, 70, "Output",ExpressionUUID->"8df4767b-3230-440a-bc5b-400fb7f0599c"],
+Cell[8906609, 146943, 612, 23, 70, "Text",ExpressionUUID->"6728c534-609c-4ea5-a801-236d197733f4"],
+Cell[8907224, 146968, 153397, 2523, 70, "Output",ExpressionUUID->"5a435143-8e42-4d16-b59a-23adfb741d3a"],
+Cell[9060624, 149493, 313, 7, 70, "Text",ExpressionUUID->"33337e6d-50e5-4e95-ac72-0a6a88a8f973"],
+Cell[9060940, 149502, 120, 0, 70, "Section",ExpressionUUID->"b2267bb1-b9e1-4756-a994-3d3d62478f7d"],
+Cell[9061063, 149504, 328, 6, 70, "Text",ExpressionUUID->"fe348169-4bd0-46c2-bf68-7f756af2b9c5"],
+Cell[9061394, 149512, 409, 13, 70, "DisplayFormula",ExpressionUUID->"6d5e1fb8-5eca-47a5-b4ff-f358d1c7f8b5"],
+Cell[9061806, 149527, 740, 24, 70, "Text",ExpressionUUID->"a07658af-e172-4cfc-a14a-a55956e7d643"],
+Cell[9062549, 149553, 547, 18, 70, "DisplayFormula",ExpressionUUID->"9b779986-9c76-4b86-814c-75373eacec29"],
+Cell[9063099, 149573, 769, 26, 70, "Text",ExpressionUUID->"409e42cb-c7ed-4e49-9c2a-efb54fd65b11"],
+Cell[9063871, 149601, 3225193, 52877, 70, "Output",ExpressionUUID->"7afa3625-0a7e-41b4-a9d1-825b45f1a9a9"],
+Cell[12289067, 202480, 379, 8, 70, "Text",ExpressionUUID->"ad39aefb-bb1d-4dde-b7ef-2039562c826c"],
+Cell[12289449, 202490, 99, 0, 70, "Section",ExpressionUUID->"ad2748ca-590e-42a7-85c9-cb86808b28af"],
+Cell[12289551, 202492, 270, 6, 70, "Text",ExpressionUUID->"50c14e6d-4088-430e-a3f7-38740df22e83"],
+Cell[12289824, 202500, 514, 17, 70, "DisplayFormula",ExpressionUUID->"c4efc9db-24d8-4470-bbff-0da972e9dcd6"],
+Cell[12290341, 202519, 99, 0, 70, "Text",ExpressionUUID->"a3bc0702-a2d1-4965-8cd1-98041a6abcc1"],
+Cell[12290443, 202521, 551, 16, 70, "DisplayFormula",ExpressionUUID->"cbbe0172-febc-421e-b4f2-9fd2ec40eb42"],
+Cell[12290997, 202539, 347, 7, 70, "Text",ExpressionUUID->"be41ecf7-7471-4947-aa03-d49e963be914"],
+Cell[12291347, 202548, 304, 7, 70, "Input",ExpressionUUID->"2cb1f57e-2843-41d4-b292-fc22f7cf7809"],
+Cell[12291654, 202557, 2421, 88, 70, "Output",ExpressionUUID->"3de8d818-6740-4854-9961-879c38ca9924"],
+Cell[12294078, 202647, 212, 3, 70, "Text",ExpressionUUID->"07ea5427-a2bb-4769-b41d-e8746a7ae2c2"],
+Cell[12294293, 202652, 129, 0, 70, "Section",ExpressionUUID->"fe8de24e-f7de-474b-a62d-9f060af712c6"],
+Cell[12294425, 202654, 1269, 52, 70, "Text",ExpressionUUID->"234acbad-c8cb-4612-93cf-c5634c62911c"],
+Cell[12295697, 202708, 470, 16, 70, "DisplayFormula",ExpressionUUID->"9744ab60-4af6-4f34-b706-ff4244d3b533"],
+Cell[12296170, 202726, 309, 11, 70, "DisplayFormula",ExpressionUUID->"1ae1c2bf-76a3-4062-b664-620bda6c551a"],
+Cell[12296482, 202739, 91, 0, 70, "Subsection",ExpressionUUID->"62d14e2b-672b-4724-a54f-b8314f88d92e"],
+Cell[12296576, 202741, 1061, 40, 70, "Text",ExpressionUUID->"2946548e-41a5-4099-b65b-4e17b51be2dc"],
+Cell[12297640, 202783, 579, 20, 70, "DisplayFormula",ExpressionUUID->"6e14e6dd-3b74-45e3-9b0e-d8ddd0c5e418"],
+Cell[12298222, 202805, 923, 36, 70, "Text",ExpressionUUID->"ece95068-c5ff-4e5f-9aae-40e149795e49"],
+Cell[12299148, 202843, 91, 0, 70, "Subsection",ExpressionUUID->"e1d5bcd2-6242-47e9-a38b-ae0432729a99"],
+Cell[12299242, 202845, 995, 39, 70, "Text",ExpressionUUID->"c042ea29-f4bb-408c-bcfc-17eaa3b7d1ce"],
+Cell[12300240, 202886, 614, 21, 70, "DisplayFormula",ExpressionUUID->"41516d70-723e-4c85-a1e8-4e1fd2a5ed06"],
+Cell[12300857, 202909, 1575, 60, 70, "Text",ExpressionUUID->"1aa5a93b-493d-4f20-98af-f12868c10c94"],
+Cell[12302435, 202971, 1762, 75, 70, "Text",ExpressionUUID->"daf9017c-0281-4358-a566-9fe5faf1f759"],
+Cell[12304200, 203048, 780, 21, 70, "Input",ExpressionUUID->"35f54dd4-f222-4644-865c-1b12d3d3b2fc"],
+Cell[12304983, 203071, 394, 12, 70, "Text",ExpressionUUID->"92bf9f9f-41a2-44ee-a15f-e33e16322c21"],
+Cell[12305380, 203085, 129, 0, 70, "Section",ExpressionUUID->"6fd69294-be48-40bf-a388-578b1b136769"],
+Cell[12305512, 203087, 245, 4, 70, "Text",ExpressionUUID->"85675cd4-5b7f-4027-a23c-769f1b5db268"],
+Cell[12305760, 203093, 581, 20, 70, "DisplayFormula",ExpressionUUID->"95bcc656-e99b-4d4c-b03e-550bcab27a88"],
+Cell[12306344, 203115, 454, 16, 70, "DisplayFormula",ExpressionUUID->"6f36c63a-a304-48e7-acda-66c6d2eb9de1"],
+Cell[12306801, 203133, 105, 0, 70, "Subsection",ExpressionUUID->"872f775d-1983-4400-898a-f0b5845615be"],
+Cell[12306909, 203135, 127, 0, 70, "Text",ExpressionUUID->"aa43dedc-7bb2-4943-880d-77713198ad1f"],
+Cell[12307039, 203137, 814, 26, 70, "DisplayFormula",ExpressionUUID->"f863ad18-9887-4665-854e-183e6943362c"],
+Cell[12307856, 203165, 1139, 38, 70, "Text",ExpressionUUID->"3894f00d-fc4c-4153-87b1-3bdb227421fb"],
+Cell[12308998, 203205, 88, 0, 70, "Subsection",ExpressionUUID->"e85236cb-5fee-498b-8427-2ab403bce010"],
+Cell[12309089, 203207, 627, 26, 70, "Text",ExpressionUUID->"bc02fb77-f697-489b-a5cd-0a01c678cea1"],
+Cell[12309719, 203235, 440, 15, 70, "DisplayFormula",ExpressionUUID->"f1308296-5db0-4b62-81df-4e6e451ab990"],
+Cell[12310162, 203252, 451, 16, 70, "DisplayFormula",ExpressionUUID->"6f864d74-325a-46ea-84ef-cfacc41eb5ac"],
+Cell[12310616, 203270, 234, 4, 70, "Text",ExpressionUUID->"9d93d861-7134-4f8e-88bf-996e84655de4"],
+Cell[12310853, 203276, 111, 0, 70, "Section",ExpressionUUID->"44fd9e5d-cb8e-4fc2-9f8f-9985b733d8bc"],
+Cell[12310967, 203278, 211, 3, 70, "Text",ExpressionUUID->"387de697-bf66-4147-87b4-571e60060c8f"],
+Cell[12311181, 203283, 87, 0, 70, "Subsection",ExpressionUUID->"c9dd7f42-8ee6-4d40-bb27-8dce7673602d"],
+Cell[12311271, 203285, 525, 16, 70, "DisplayFormula",ExpressionUUID->"5530e812-4e4a-4381-bff7-1ecfa6ef3350"],
+Cell[12311799, 203303, 262, 4, 70, "Text",ExpressionUUID->"37f845df-fe09-45a1-b682-92077d686d8d"],
+Cell[12312064, 203309, 178, 3, 70, "Input",ExpressionUUID->"b5b870af-5018-4173-b396-051890cdc485"],
+Cell[12312245, 203314, 213, 5, 70, "Output",ExpressionUUID->"5e41e4f9-f323-4583-bc94-644d5c9db7b8"],
+Cell[12312461, 203321, 84, 0, 70, "Subsection",ExpressionUUID->"aee5b40f-7b3b-4c54-a186-238240023e1a"],
+Cell[12312548, 203323, 582, 22, 70, "Text",ExpressionUUID->"4c38ca88-6450-4f8f-9ae2-4aa1841cb41d"],
+Cell[12313133, 203347, 676, 20, 70, "DisplayFormula",ExpressionUUID->"b1e6b286-2f6e-4163-b16e-53976c902d48"],
+Cell[12313812, 203369, 210, 3, 70, "Text",ExpressionUUID->"b1a61acc-e7e2-477a-8842-b77d1938eb7a"],
+Cell[12314025, 203374, 218, 5, 70, "Input",ExpressionUUID->"66cd5753-08bd-47f1-b598-ce073cba128a"],
+Cell[12314246, 203381, 181, 3, 70, "Output",ExpressionUUID->"638ce2a5-7fa7-4fb3-907c-9fc7fc773e31"],
+Cell[12314430, 203386, 86, 0, 70, "Subsection",ExpressionUUID->"d9c4b76e-a869-4d1f-89aa-4ae6a42ccecd"],
+Cell[12314519, 203388, 451, 15, 70, "DisplayFormula",ExpressionUUID->"d623941d-fcf2-4ab8-9239-61363930779a"],
+Cell[12314973, 203405, 276, 4, 70, "Text",ExpressionUUID->"8bdafae0-927d-4e93-92ac-2a29ccb1e261"],
+Cell[12315252, 203411, 109, 0, 70, "Subsection",ExpressionUUID->"5f10238c-5396-4b76-adb4-4a51bad4fbec"],
+Cell[12315364, 203413, 572, 22, 70, "Text",ExpressionUUID->"aec1f83b-f10e-483d-a1f7-34e0cad899a7"],
+Cell[12315939, 203437, 518, 17, 70, "DisplayFormula",ExpressionUUID->"e85f40b8-e303-49b7-baaf-f6aad67a0db7"],
+Cell[12316460, 203456, 466, 8, 70, "Text",ExpressionUUID->"d644cfc8-55c7-44f8-bdeb-98a290cb15a1"],
+Cell[12316929, 203466, 252, 7, 70, "Input",ExpressionUUID->"6c11068c-3320-4e73-b026-ed7cf8a1d9b8"],
+Cell[12317184, 203475, 86, 0, 70, "Output",ExpressionUUID->"7ecf32a1-14a3-49e0-8d3a-1b93b8c8b3b8"],
+Cell[12317273, 203477, 93, 0, 70, "Subsection",ExpressionUUID->"21365f18-5cab-4a7d-a631-d88f012e3a1e"],
+Cell[12317369, 203479, 468, 14, 70, "DisplayFormula",ExpressionUUID->"6507fadf-9f1d-49f5-a297-1427ee98f167"],
+Cell[12317840, 203495, 455, 13, 70, "Text",ExpressionUUID->"b0476982-fe18-43be-a48c-0fc196cacd7c"],
+Cell[12318298, 203510, 113, 0, 70, "Section",ExpressionUUID->"ae40d2a0-56d1-46e8-8a20-b6e17c323505"],
+Cell[12318414, 203512, 189, 3, 70, "Text",ExpressionUUID->"54efb988-dc7d-49fd-8846-263253e32c26"],
+Cell[12318606, 203517, 1053, 28, 70, "Input",ExpressionUUID->"edbc8f9c-c781-477b-8b7e-81cf177f4886"],
+Cell[12319662, 203547, 140, 2, 70, "Text",ExpressionUUID->"8e74b2aa-5b83-472e-8fad-716f451450d4"],
+Cell[12319805, 203551, 527, 16, 70, "Input",ExpressionUUID->"5db2068d-3e48-4d54-a739-7810ac7f4641"],
+Cell[12320335, 203569, 106, 0, 70, "Output",ExpressionUUID->"69623e08-d37a-4e47-9628-4a4360008f5b"],
+Cell[12320444, 203571, 419, 13, 70, "Text",ExpressionUUID->"1aaf42b3-e36d-4f84-ad3f-b6d1afb31fec"],
+Cell[12320866, 203586, 170126, 2796, 70, "Output",ExpressionUUID->"2b5670d7-2d83-4f88-a213-2423add54ed9"],
+Cell[12490995, 206384, 362, 8, 70, "Text",ExpressionUUID->"daf0930c-c958-48e0-a724-827bea517aa5"],
+Cell[12491360, 206394, 123, 0, 70, "Section",ExpressionUUID->"7bf2a169-fc6a-42b3-9fc9-c51e8a099628"],
+Cell[12491486, 206396, 2416, 93, 70, "Text",ExpressionUUID->"0b63c152-3862-4104-a670-b2d75abf1df0"],
+Cell[12493905, 206491, 4543253, 74485, 70, "Output",ExpressionUUID->"240e2c56-608b-44a7-be94-31c996149d4c"],
+Cell[17037161, 280978, 380, 8, 70, "Text",ExpressionUUID->"5ca5acb7-5209-457f-ad1d-eee511c506c1"],
+Cell[17037544, 280988, 1773534, 29082, 70, "Output",ExpressionUUID->"5784aa80-3fb2-433b-80c2-f8034fbdcdf4"],
+Cell[18811081, 310072, 459, 9, 70, "Text",ExpressionUUID->"2195838c-acf3-4eec-9b39-bf554b234d0e"],
+Cell[18811543, 310083, 117, 0, 70, "Section",ExpressionUUID->"1abc6d50-bbe7-46fa-9a80-9831cac7ffe9"],
+Cell[18811663, 310085, 1988, 80, 70, "Text",ExpressionUUID->"fd84179d-b784-44f8-a846-f6bf32e9280f"],
+Cell[18813654, 310167, 245, 4, 70, "Input",ExpressionUUID->"bf07ee3f-270a-4d6d-b36c-797f0b247701"],
+Cell[18813902, 310173, 128, 2, 70, "Output",ExpressionUUID->"e151b461-dca1-48ea-8159-06f43788ec25"],
+Cell[18814033, 310177, 1224, 44, 70, "Text",ExpressionUUID->"fee3fac9-d0ee-4b45-bfd1-2e593c0d1412"],
+Cell[18815260, 310223, 256376, 4210, 70, "Output",ExpressionUUID->"42d588ed-3da4-4fba-9bed-33b73afcd45d"],
+Cell[19071639, 314435, 550, 10, 70, "Text",ExpressionUUID->"5b2a173c-a6c0-4995-9b3a-e0c1a1380f52"],
+Cell[19072192, 314447, 108, 0, 70, "Section",ExpressionUUID->"dbb17ad7-23e6-415a-8841-6697de156096"],
+Cell[19072303, 314449, 635, 23, 70, "Text",ExpressionUUID->"3a5f9752-dc7a-4205-8490-91a73481a0ba"],
+Cell[19072941, 314474, 536, 18, 70, "DisplayFormula",ExpressionUUID->"7b398a54-a8de-48aa-87e5-15b08dfa0f94"],
+Cell[19073480, 314494, 691, 19, 70, "Text",ExpressionUUID->"fac7584b-80ea-4e3d-9b3d-b4299f8291e9"],
+Cell[19074174, 314515, 182390, 2998, 70, "Output",ExpressionUUID->"328918ab-ce9d-4580-a12c-7d19dd8bba66"],
+Cell[19256567, 317515, 423, 9, 70, "Text",ExpressionUUID->"1f0daaa3-92dd-46c3-b192-752ac6665c25"],
+Cell[19256993, 317526, 1380, 47, 70, "Text",ExpressionUUID->"fa0eeec2-803c-4e40-8b43-29e7953513dd"],
+Cell[19258376, 317575, 95, 0, 70, "Section",ExpressionUUID->"178fd0ac-268c-4ced-9814-fd3447e3b990"],
+Cell[19258474, 317577, 1403, 41, 70, "Text",ExpressionUUID->"90cebab4-8e23-4556-a090-bbdaf0861254"],
+Cell[19259880, 317620, 101, 0, 70, "Section",ExpressionUUID->"e9f30f34-69f8-4568-9596-4ab83a423cbd"],
+Cell[19259984, 317622, 338, 5, 70, "Text",ExpressionUUID->"8aa0c4a1-72e9-451b-b4c3-df979bf8d41a"],
+Cell[19260325, 317629, 107, 0, 70, "Subsection",ExpressionUUID->"d307c1f5-b4d8-49ec-8d20-bfe4082e9726"],
+Cell[19260435, 317631, 369, 7, 70, "Text",ExpressionUUID->"56048934-d619-4dd1-b009-ea71f957d092"],
+Cell[19260807, 317640, 1594, 50, 70, "Text",ExpressionUUID->"175286c3-8efd-4692-b397-e6eeeadd81d1"],
+Cell[19262404, 317692, 318, 8, 70, "Input",ExpressionUUID->"b9ee006c-db7d-493a-9ef3-d5dd55619b5d"],
+Cell[19262725, 317702, 318, 7, 70, "Output",ExpressionUUID->"08d95f88-8f09-4bac-9d99-62a5077b8206"],
+Cell[19263046, 317711, 1377, 42, 70, "Text",ExpressionUUID->"79641bd5-582f-4957-9b9c-acda13bca665"],
+Cell[19264426, 317755, 104, 0, 70, "Subsection",ExpressionUUID->"5bdf5716-244d-4e50-a5f6-caad5f329067"],
+Cell[19264533, 317757, 472, 8, 70, "Text",ExpressionUUID->"a74a6e8f-f190-405a-bde7-6c7826e5ab7d"],
+Cell[19265008, 317767, 680, 21, 70, "Text",ExpressionUUID->"4235eb2e-1b10-4cb7-ade1-d33ca90b027f"],
+Cell[19265691, 317790, 312, 6, 70, "Input",ExpressionUUID->"9a6424d0-e760-42bd-ba73-5057b7c25766"],
+Cell[19266006, 317798, 1158, 31, 70, "Output",ExpressionUUID->"29353b8e-e599-4809-b8fb-5645887c5e72"],
+Cell[19267167, 317831, 1197, 38, 70, "Text",ExpressionUUID->"8ed321d7-96da-444d-863e-2c2dbec6f611"],
+Cell[19268367, 317871, 104, 0, 70, "Subsection",ExpressionUUID->"9481a19b-172a-47b2-a58e-fe5695617016"],
+Cell[19268474, 317873, 496, 9, 70, "Text",ExpressionUUID->"273491ad-7de2-4aa0-9abc-dee7f90b5569"],
+Cell[19268973, 317884, 231, 4, 70, "Input",ExpressionUUID->"0fc2f75b-10c4-48ab-a920-92cd254ae275"],
+Cell[19269207, 317890, 250, 6, 70, "Output",ExpressionUUID->"2219c332-6b98-4b24-88d7-bb568a548240"],
+Cell[19269460, 317898, 1357, 46, 70, "Text",ExpressionUUID->"9049996a-a8e0-42e0-b176-7e5c2971c88a"],
+Cell[19270820, 317946, 540, 9, 70, "Text",ExpressionUUID->"b198652a-2f39-462c-9b73-f62cc46174cc"],
+Cell[19271363, 317957, 96, 0, 70, "Subsection",ExpressionUUID->"57eba749-b5ce-49ae-a1d5-b62bb0545e98"],
+Cell[19271462, 317959, 177, 3, 70, "Text",ExpressionUUID->"e5b0b93d-3786-4a9c-b5c9-699f513a3f99"],
+Cell[19271642, 317964, 3181, 109, 70, "Text",ExpressionUUID->"c7e210f1-c0a9-462e-8ca1-ff7b4441fd55"],
+Cell[19274826, 318075, 98, 0, 70, "Section",ExpressionUUID->"e0a3c7c2-aae1-49ba-9496-d31cbf4ce79b"],
+Cell[19274927, 318077, 113, 0, 70, "Text",ExpressionUUID->"166e16bb-7201-4178-944a-4c631490167a"],
+Cell[19275043, 318079, 4974, 152, 70, "Output",ExpressionUUID->"c8e97b8b-cbdc-425d-b991-929e4c7b3e11"],
+Cell[19280020, 318233, 222, 3, 70, "Text",ExpressionUUID->"c56f5ac9-e94d-4b6e-8900-d24b7ceba439"],
+Cell[19280245, 318238, 84, 0, 70, "Section",ExpressionUUID->"9ce73664-7a64-4a0d-91c3-b99f460ef004"],
+Cell[19280332, 318240, 1069, 28, 70, "Text",ExpressionUUID->"fbedec71-85aa-456e-9985-f71859abc092"]
 }
 ]
 *)
