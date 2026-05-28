@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-BeginPackage["TropicalReLU`"];
+BeginPackage["TropicalReLU`", {"MaxPlus`"}];
 
 (* --- public symbols --- *)
 
@@ -43,10 +43,17 @@ Begin["`Private`"];
 
 (* ---------------- forward passes ---------------- *)
 
-ReLUForward[net_Association, x_?VectorQ] := Module[{a, b, c, d, h},
+ReLUForward[net_Association, x_?VectorQ] := Module[
+  {a, b, c, d, h, head, headContribution},
   {a, b, c, d} = Lookup[net, {"A", "b", "c", "d"}];
   h = Map[Max[0, #] &, a . x + b];
-  c . h + d
+  head = Lookup[net, "AffineHead", None];
+  headContribution = If[
+    AssociationQ[head],
+    Lookup[head, "Slope", ConstantArray[0., Length[x]]] . x +
+      Lookup[head, "Bias", 0.],
+    0.];
+  c . h + d + headContribution
 ];
 
 ReLUForward[net_Association, X_?MatrixQ] :=
@@ -74,7 +81,7 @@ tropicalContribution[aj_, bj_, cj_] := Module[{s},
 ];
 
 MaxPlusForward[net_Association, x_?VectorQ] := Module[
-  {a, b, c, d, dp, dm, pTerms, qTerms, P, Q},
+  {a, b, c, d, dp, dm, pTerms, qTerms, P, Q, head, headContribution},
   {a, b, c, d} = Lookup[net, {"A", "b", "c", "d"}];
   dp = Max[d, 0]; dm = Max[-d, 0];
   pTerms = Table[
@@ -89,7 +96,13 @@ MaxPlusForward[net_Association, x_?VectorQ] := Module[
     {j, Length[c]}];
   P = Total[pTerms] + dp;
   Q = Total[qTerms] + dm;
-  P - Q
+  head = Lookup[net, "AffineHead", None];
+  headContribution = If[
+    AssociationQ[head],
+    Lookup[head, "Slope", ConstantArray[0., Length[x]]] . x +
+      Lookup[head, "Bias", 0.],
+    0.];
+  (P - Q) + headContribution
 ];
 
 MaxPlusForward[net_Association, X_?MatrixQ] :=

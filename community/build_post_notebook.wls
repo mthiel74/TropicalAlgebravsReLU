@@ -164,6 +164,32 @@ fwReLU    = TropicalReLU`ReLUForward[moonsNet, fwTestPts];
 fwMaxPlus = TropicalReLU`MaxPlusForward[moonsNet, fwTestPts];
 fwErr     = Max[Abs[fwReLU - fwMaxPlus]];
 
+(* §13 numerical walkthrough: one input, both pipelines side by side *)
+walkX     = {0.5, 0.3};
+walkA     = moonsNet["A"];
+walkb     = moonsNet["b"];
+walkc     = moonsNet["c"];
+walkd     = moonsNet["d"];
+walkPre   = walkA . walkX + walkb;            (* pre-activations a_j.x + b_j *)
+walkReLU  = Max[0, #] & /@ walkPre;            (* ReLU activations  *)
+walkfReLU = walkc . walkReLU + walkd;          (* classical output *)
+walkP     = Total[Table[
+              If[walkc[[j]] > 0,
+                 Max[0, walkc[[j]] (walkA[[j]] . walkX) + walkc[[j]] walkb[[j]]],
+                 0],
+              {j, Length[walkc]}]] + Max[walkd, 0];
+walkQ     = Total[Table[
+              If[walkc[[j]] < 0,
+                 Max[0, -walkc[[j]] (walkA[[j]] . walkX) - walkc[[j]] walkb[[j]]],
+                 0],
+              {j, Length[walkc]}]] + Max[-walkd, 0];
+walkTrop  = walkP - walkQ;
+walkErrPt = Abs[walkfReLU - walkTrop];
+walkNHidden     = Length[walkc];
+walkPosUnits    = Length[Select[walkc, # > 0 &]];
+walkNegUnits    = Length[Select[walkc, # < 0 &]];
+walkActiveUnits = Total[Boole[Thread[walkPre > 0]]];
+
 (* §17 -- Newton polytope: count alive vs dead monomials *)
 dec = TropicalReLU`TropicalDecomposition[moonsNet];
 pmons = Length[dec["Pmon"]] + 1;   (* +1 for constant *)
@@ -177,6 +203,27 @@ deadSmall  = MaxPlus`MPDeadUnits[moonsNet, {{-0.5, 0.5}, {-0.5, 0.5}}];
 pruneBig   = MaxPlus`MPPruneDeadUnits[moonsNet, lipDom];
 pruneSmall = MaxPlus`MPPruneDeadUnits[moonsNet,
                 {{-0.5, 0.5}, {-0.5, 0.5}}];
+
+(* Product-of-layer-norms upper bound, for comparison.
+   For f(x) = c . ReLU(A x + b) + d the chain rule gives
+   |f(x) - f(y)| <= ||c||_2 * ||A||_op * ||x - y||_2.
+   Norm[A, 2] is the spectral norm (largest singular value). *)
+lipChainBound  = Norm[moonsNet["c"]] * Norm[moonsNet["A"], 2];
+lipRatio       = lipChainBound / lipRes["Lipschitz"];
+
+(* Sanity-check that the 240x240 grid actually hits every linear region.
+   Zaslavsky's bound for n hidden units in 2D is 1 + n + C(n,2). *)
+lipZaslavsky    = 1 + 12 + Binomial[12, 2];
+
+(* §18.3 verification: ReLUForward of the pruned net matches the
+   original on a random batch in the pruning domain.                *)
+SeedRandom[42];
+prunePts     = RandomReal[{-0.5, 0.5}, {500, 2}];
+pruneOrigOut = TropicalReLU`ReLUForward[moonsNet, #] & /@ prunePts;
+prunePrunOut = TropicalReLU`ReLUForward[pruneSmall, #] & /@ prunePts;
+pruneTropOut = TropicalReLU`MaxPlusForward[pruneSmall, #] & /@ prunePts;
+pruneErrCls  = Max[Abs[pruneOrigOut - prunePrunOut]];
+pruneErrTrp  = Max[Abs[prunePrunOut - pruneTropOut]];
 
 (* =====================================================================
    NOTEBOOK CONTENT
@@ -196,10 +243,11 @@ inside the algebra -- and only then cross over to neural networks. \
 By the end, we will have rewritten a trained ReLU classifier as a \
 difference of two tropical polynomials, visualised its decision \
 boundary as a tropical hypersurface, and used the tropical lens to \
-derive three results that go beyond the standard literature: the ",
-    ib["tight"], " Lipschitz constant of the trained network, a \
-zero-cost detector for ", ib["dead"], " neurons on any bounded input \
-domain, and an exact lossless network minimiser."
+derive three results that go beyond the standard literature: a \
+much sharper, region-enumerated Lipschitz constant; a ",
+    ib["zero-data"], " detector for ", ib["dead"], " neurons on any \
+bounded input domain; and a ", ib["zero-retraining network pruner"],
+    " that is provably exact on the chosen domain."
   }],
 
   text[{
@@ -211,6 +259,28 @@ evaluate anything. Companion repository: ",
   }],
 
   text[{
+    "To re-evaluate the cells yourself in a fresh kernel, place the \
+two companion packages ", mono["MaxPlus.wl"], " and ",
+    mono["TropicalReLU.wl"],
+    " (downloadable from the repository above) in the ",
+    bd["same directory as this notebook"],
+    " and evaluate the cell below. Every analytical tool used later \
+in the post -- ", mono["TropicalPolynomial"], ", ",
+    mono["TropicalEval"], ", ", mono["MPSchedule"], ", ",
+    mono["MPCycleMean"], ", ", mono["MPLinearSystemEvolve"], ", ",
+    mono["TropicalDecomposition"], ", ", mono["MPExactLipschitz"],
+    ", ", mono["MPDeadUnits"], ", ", mono["MPPruneDeadUnits"],
+    " -- is defined in those two files."
+  }],
+
+  CodeOnly[
+"SetDirectory[NotebookDirectory[]];
+Get[\"MaxPlus.wl\"];
+Get[\"TropicalReLU.wl\"];
+Needs[\"MaxPlus`\"];"
+  ],
+
+  text[{
     "Primary reference: L. Zhang, G. Naitzat, L.-H. Lim, ",
     ib["Tropical Geometry of Deep Neural Networks"],
     ", ICML 2018 (arXiv:1805.07091).  This essay extends their picture \
@@ -220,7 +290,7 @@ with concrete WL implementations of the standard tropical machinery \
 are not in the ICML paper."
   }],
 
-  ImageFig[FileNameJoin[{figureDir, "13_semiring_landscapes.png"}],
+  ImageFig[FileNameJoin[{figureDir, "13_semiring_landscapes.jpg"}],
     "Two windows on two algebras. Left: the smooth, continuous world \
 of classical arithmetic (R, +, *). Right: the same landscape under \
 (max, +) -- every operation produces a crisp polyhedral surface. The \
@@ -270,6 +340,110 @@ a convex piecewise-linear function"],
 trivial consequence of the semiring axioms once you have the right \
 operator names. This is the lever the rest of the post pulls on."
   }],
+
+  subsection["Why 'tropical'?"],
+
+  text[{
+    "The name was coined in the 1980s by French computer scientists \
+-- most often attributed to Christian Choffrut, working in the \
+circle of Dominique Perrin, Jean-\[CapitalEAcute]ric Pin, and \
+Marcel-Paul Sch\[UDoubleDot]tzenberger -- in honour of Imre Simon, a \
+Brazilian-Hungarian mathematician (born in Budapest 1943, emigrated \
+to Brazil after the 1956 revolution, professor at IME-USP) who \
+pioneered the use of the ", math[Subscript[R, "max"]],
+    " semiring in formal language theory. There is no deeper \
+geometric meaning -- 'tropical' is simply a tribute to where Simon \
+worked. The algebra itself is as old as ", ib["operations research"],
+    ": Bellman's dynamic-programming recurrences from the 1950s are \
+implicit max-plus matrix-vector products. What is new is the use of \
+the tropical lens in ", bd["neural networks"],
+    ", which is the thread we will follow."
+  }],
+
+  subsection["Idempotence: a new identity"],
+
+  text[{
+    "One identity of classical algebra is conspicuously ", ib["not"],
+    " inherited: ", math[a + a == 2 a], " has no tropical analogue, \
+because ", math[a \[CirclePlus] a == Max[a, a] == a], ". The \
+tropical sum of anything with itself is itself. This is the ",
+    bd["idempotence"], " axiom, and it is the algebraic shadow of \
+the fact that the maximum of a set does not change when you repeat \
+its elements. A small numerical check makes the asymmetry concrete:"
+  }],
+
+  CodeWithOutput[
+"(* Side-by-side: same six numerical experiments in both algebras *)
+Grid[
+  Join[
+    {{\"classical\", \"=\", \"tropical\", \"=\", \"reading\"}},
+    {
+      {\"3 + 5\",  3 + 5,
+       \"3 \\[CirclePlus] 5\",  3 \\[CirclePlus] 5,
+       \"\\[CirclePlus] picks the larger\"},
+      {\"3 \\[Times] 5\", 3 \\[Times] 5,
+       \"3 \\[CircleTimes] 5\", 3 \\[CircleTimes] 5,
+       \"\\[CircleTimes] is the classical sum\"},
+      {\"3 + 3\",  3 + 3,
+       \"3 \\[CirclePlus] 3\",  3 \\[CirclePlus] 3,
+       \"\\[CirclePlus] is idempotent:  a \\[CirclePlus] a = a\"},
+      {\"3 \\[Times] 3\", 3 \\[Times] 3,
+       \"3 \\[CircleTimes] 3\", 3 \\[CircleTimes] 3,
+       \"powers become repeated translation\"},
+      {\"3 + (-\\[Infinity])\", 3 + -Infinity,
+       \"3 \\[CirclePlus] (-\\[Infinity])\", 3 \\[CirclePlus] -Infinity,
+       \"\\[Minus]\\[Infinity] is the tropical 0\"},
+      {\"3 \\[Times] 0\", 3 \\[Times] 0,
+       \"3 \\[CircleTimes] 0\", 3 \\[CircleTimes] 0,
+       \"0 is the tropical 1\"}
+    }
+  ],
+  Frame -> All, Spacings -> {2, 1.0}, Alignment -> {Left, Center},
+  Background -> {None, {1 -> RGBColor[0.18, 0.30, 0.55]}},
+  ItemStyle -> {None, {1 -> Directive[White, Bold]}}
+]",
+    Grid[{
+      {"classical", "=", "tropical", "=", "reading"},
+      {"3 + 5",  8,  "3 \[CirclePlus] 5",  5,
+       "\[CirclePlus] picks the larger"},
+      {"3 \[Times] 5",  15, "3 \[CircleTimes] 5", 8,
+       "\[CircleTimes] is the classical sum"},
+      {"3 + 3",  6,  "3 \[CirclePlus] 3",  3,
+       "\[CirclePlus] is idempotent:  a \[CirclePlus] a = a"},
+      {"3 \[Times] 3",  9,  "3 \[CircleTimes] 3", 6,
+       "powers become repeated translation"},
+      {"3 + (-\[Infinity])", -Infinity,
+       "3 \[CirclePlus] (-\[Infinity])", 3,
+       "\[Minus]\[Infinity] is the tropical 0"},
+      {"3 \[Times] 0",  0,  "3 \[CircleTimes] 0", 3,
+       "0 is the tropical 1"}},
+      Frame -> All, Spacings -> {2, 1.0},
+      Alignment -> {Left, Center},
+      Background -> {None, {1 -> RGBColor[0.18, 0.30, 0.55]}},
+      ItemStyle -> {None, {1 -> Directive[White, Bold]}}],
+    "Default"
+  ],
+
+  text[{
+    "Read the rows top-to-bottom. Three is bigger than itself in \
+neither algebra: classically ", math[3 + 3], " adds new mass, \
+tropically ", math[3 \[CirclePlus] 3], " stays put. The bottom two \
+rows pin down the role of the new identities -- ", math[-Infinity],
+    " absorbs ", math[Max], " (so it is the \"tropical zero\"), and ",
+    math[0], " absorbs ", math[Plus], " (so it is the \"tropical \
+one\"). Anyone meeting max-plus for the first time will want to \
+hand-evaluate a few rows like these until the swap feels natural."
+  }],
+
+  ImageFig[FileNameJoin[{figureDir, "17_maxplus_by_hand.jpg"}],
+    "Two arithmetic operations as physical actions. Left: three \
+pillars of different heights; the tropical sum a \[CirclePlus] b \
+\[CirclePlus] c picks the tallest. Right: the same three pillars \
+laid end-to-end; the tropical product a \[CircleTimes] b \[CircleTimes] \
+c stacks their lengths. No carries, no negative numbers -- max-plus \
+arithmetic is what you would do if all you had was a ruler and the \
+ability to compare lengths.",
+    0.55],
 
   subsection["Operators in WL"],
 
@@ -368,14 +542,91 @@ B = {{0, -1}, {2, 4}};
   ],
 
   text[{
-    "Compare the second row: classical ", math[A . B], " is ",
-    math[{{4, 6}, {6, -3}}], " whereas tropical ",
+    "Compare the first two rows: classical ", math[A . B], " is ",
+    math[{{4, 7}, {0, -3}}], " whereas tropical ",
     math[A \[CircleDot] B], " is ", math[{{4, 6}, {3, 4}}],
     ". Entry ", math[Subscript["(A\[CircleDot]B)", "1,1"]],
     " of the tropical product is ",
     math[Max[1 + 0, 2 + 2]], " = ", math[4], ", and so on. The \
 identity matrix really is an identity: ",
     math[Subscript[I, 2] \[CircleDot] A], " = ", math[A], "."
+  }],
+
+  subsection["What is the tropical matrix product computing?"],
+
+  text[{
+    "The formula ",
+    math[Subscript["(A \[CircleDot] B)", i, j] ==
+      Underscript[Max, k] (Subscript[A, i, k] + Subscript[B, k, j])],
+    " has an immediate graph reading. Think of ", math[A], " and ",
+    math[B], " as ",
+    bd["weighted adjacency matrices"],
+    " of two directed graphs on the same vertex set, with ",
+    math[Subscript[A, i, k]],
+    " the weight of the edge ", math[i \[Rule] k],
+    " in graph A (or ", math[-Infinity],
+    " if no such edge exists), and ",
+    math[Subscript[B, k, j]], " similarly. Then ",
+    math[Subscript["(A \[CircleDot] B)", i, j]],
+    " is the weight of the ",
+    bd["heaviest two-step walk"],
+    " from ", math[i], " to ", math[j],
+    " that first uses an A-edge and then a B-edge, the maximum being \
+taken over the intermediate vertex ", math[k], "."
+  }],
+
+  text[{
+    "Concretely on our 2\[Times]2 example: viewing ", math[A],
+    " and ", math[B], " as labelled edges from \"row\" to \"column\","
+  }],
+
+  CodeWithOutput[
+"(* The four candidate paths feeding entry (1, 1) of A \\[CircleDot] B *)
+candidates = Table[
+  Module[{w = A[[1, k]] + B[[k, 1]]},
+    {\"path 1 -> \" <> ToString[k] <> \" -> 1\",
+     \"A[1,\" <> ToString[k] <> \"] + B[\" <> ToString[k] <> \",1]\",
+     ToString[A[[1, k]]] <> \" + \" <> ToString[B[[k, 1]]],
+     w}],
+  {k, 1, 2}];
+Grid[
+  Join[
+    {{\"intermediate path\", \"formula\", \"values\", \"weight\"}},
+    candidates,
+    {{\"winner\", \"max over k\", \"\",
+      Max @@ candidates[[All, 4]]}}],
+  Frame -> All, Spacings -> {2, 1.0}, Alignment -> {Left, Center},
+  Background -> {None,
+    {1 -> RGBColor[0.18, 0.30, 0.55],
+     -1 -> RGBColor[0.90, 0.60, 0.45]}},
+  ItemStyle -> {None,
+    {1 -> Directive[White, Bold],
+     -1 -> Directive[Black, Bold]}}]",
+    Grid[
+      Join[
+        {{"intermediate path", "formula", "values", "weight"}},
+        {
+          {"path 1 -> 1 -> 1", "A[1,1] + B[1,1]", "1 + 0", 1},
+          {"path 1 -> 2 -> 1", "A[1,2] + B[2,1]", "2 + 2", 4}
+        },
+        {{"winner", "max over k", "", 4}}],
+      Frame -> All, Spacings -> {2, 1.0}, Alignment -> {Left, Center},
+      Background -> {None,
+        {1 -> RGBColor[0.18, 0.30, 0.55],
+         -1 -> RGBColor[0.90, 0.60, 0.45]}},
+      ItemStyle -> {None,
+        {1 -> Directive[White, Bold],
+         -1 -> Directive[Black, Bold]}}],
+    "Default"
+  ],
+
+  text[{
+    "Two intermediate vertices, two candidate two-step paths, the \
+heavier one wins. Now repeat for every ", math[{i, j}],
+    " pair and you have ", math[A \[CircleDot] B], ". Iterate by ",
+    math[(A \[CircleDot] B) \[CircleDot] B], " to get heaviest \
+three-step paths, and so on. The next subsection collects all of \
+these at once."
   }],
 
   subsection["The Kleene star"],
@@ -450,8 +701,7 @@ matrix, hence the entire all-pairs distance matrix."],
 negates back:"}],
 
   CodeWithOutput[
-"MPShortestPathDistances[adj_?MatrixQ] :=
-  -KleeneStar[-adj /. -Infinity -> -Infinity];
+"MPShortestPathDistances[adj_?MatrixQ] := -KleeneStar[-adj];
 
 (* A small 5-node weighted digraph. *)
 edges = {1 -> 2 -> 3, 1 -> 3 -> 5, 2 -> 3 -> 1,
@@ -475,7 +725,7 @@ cheapest 1\[Rule]5 path: \
     math[6], ", matching ", math[spDist[[1, 5]]], "."
   }],
 
-  ImageFig[FileNameJoin[{figureDir, "15_graph_paths.png"}],
+  ImageFig[FileNameJoin[{figureDir, "15_graph_paths.jpg"}],
     "Illustration. A directed network with edge weights; the dim edges \
 are the full graph, the glowing coral curve is the cheapest path \
 between two nodes -- what the tropical mat-vec selects.", 0.55],
@@ -571,11 +821,25 @@ corners.", 0.5],
 attains the max; the resulting partition is the linear-region \
 decomposition. The Newton polytope is the convex hull of the \
 exponents ", math[{Subscript[a, i], Subscript[b, i]}],
-    ", and the upper convex hull of the lifted points induces a \
-regular subdivision of that polytope ", ib["dual"],
-    " to the linear-region decomposition (Maclagan-Sturmfels Ch.3). \
-For our coming neural-network application, this duality is the \
-central technical fact."
+    ", and the upper convex hull of the lifted points induces a ",
+    ib["regular subdivision"], " of that polytope -- ",
+    ib["dual"], " to the linear-region decomposition \
+(Maclagan-Sturmfels Ch.3). For our coming neural-network application, \
+this duality is the central technical fact."
+  }],
+
+  text[{
+    bd["Picture for 'regular subdivision'."],
+    " Place each exponent ", math[{Subscript[a, i], Subscript[b, i]}],
+    " on the plane and lift it up by its coefficient ",
+    math[Subscript[c, i]],
+    " into 3D. Take the upper convex hull of the lifted points and \
+project it straight back down. The shadow of those upper-hull facets \
+is the subdivision -- and the cells of the subdivision are in \
+one-to-one correspondence with the linear regions of ",
+    math[p], " in input space. (Monomials whose lifted point sits \
+strictly below the upper hull do not project to any cell -- those \
+are the \"dominated\" monomials that never realise a region.)"
   }],
 
   CodeWithOutput[
@@ -599,7 +863,16 @@ has four linear pieces (left) and Newton polytope the unit square \
 
   (* ================================================================== *)
 
-  section["7.  Tropical eigenvalues -- Karp's algorithm"],
+  section["7.  Tropical eigenvalues -- Karp's algorithm (aside)"],
+
+  text[{
+    bd["You can skip this section on a first read"],
+    " -- it is a beautiful classical result inside the tropical \
+algebra, but it is not used in the neural-network sections that \
+follow. Included because the eigenvalue / cycle-mean duality is the \
+prettiest illustration of the algebra's reach. Resume at \[Section]8 \
+if you want to head straight for the ReLU connection."
+  }],
 
   text[{
     "For a square tropical matrix ", math[A],
@@ -624,15 +897,14 @@ length up to ", math[n], "."
          {0,         -Infinity, -Infinity,  1},
          {4,         -Infinity, -Infinity, -Infinity}};
 {
-  \"MPCycleMean[karpA]\"           -> MPCycleMean[karpA],
-  \"MPEigenvalue[karpA]\"          -> MPEigenvalue[karpA],
-  \"main cycle: 1->2->3->4->1, weights\" ->
-                                 \"2+3+1+4=10, mean 2.5\"
+  \"MPCycleMean[karpA]\"  -> MPCycleMean[karpA],
+  \"MPEigenvalue[karpA]\" -> MPEigenvalue[karpA],
+  \"cycle 1->2->3->4->1\" -> \"weights 2+3+1+4 = 10, mean 2.5\"
 } // TableForm",
     {
-      "MPCycleMean[karpA]"           -> karpLambda,
-      "MPEigenvalue[karpA]"          -> karpLambda,
-      "main cycle 1->2->3->4->1, weights 2+3+1+4 = 10, mean " -> "2.5"
+      "MPCycleMean[karpA]"  -> karpLambda,
+      "MPEigenvalue[karpA]" -> karpLambda,
+      "cycle 1->2->3->4->1" -> "weights 2+3+1+4 = 10, mean 2.5"
     },
     "Table"
   ],
@@ -690,7 +962,7 @@ operation a ReLU network performs has a direct counterpart in the \
 max-plus algebra of \[Section]1--\[Section]7."
   }],
 
-  ImageFig[FileNameJoin[{figureDir, "14_relu_ridge.png"}],
+  ImageFig[FileNameJoin[{figureDir, "14_relu_ridge.jpg"}],
     "Illustration. ReLU as a single piecewise-linear ridge: a flat \
 shadow plateau meeting a sharp inclined facet at one kink. The whole \
 forward pass of a network is built by stacking and summing copies of \
@@ -849,11 +1121,16 @@ monomials (both signs positive). Let"
     "with ", math[Subscript[\[ScriptL], j] ==
       Subscript[a, j] Subscript[x, 1] +
       Subscript[b, j] Subscript[x, 2] + Subscript[c, j]],
-    ". Four monomials in ",
+    ". The four monomials live in ",
     math[{Subscript[x, 1], Subscript[x, 2]}],
-    " with exponents that form the Minkowski sum of the two single-\
-unit Newton segments and the origin, i.e. the four corners of the \
-parallelogram with sides (w1 a1, w1 b1) and (w2 a2, w2 b2)."
+    " with ", bd["exponent vectors"], " (slopes in ", math[Power[R, 2]],
+    ") that form the Minkowski sum of the two single-unit Newton \
+segments and the origin -- i.e. the four corners of the parallelogram \
+with sides ",
+    math[Subscript[w, 1] Subscript[a, 1]], " and ",
+    math[Subscript[w, 2] Subscript[a, 2]],
+    " in slope space (the intercepts ", math[Subscript[w, j] Subscript[b, j]],
+    " live separately as the lifting heights, not as a third side)."
   }],
 
   subsection["Mixed signs"],
@@ -919,9 +1196,17 @@ MaxPool1D[{1, 3, 2, 7, 4, 5, 2, 8, 1}, 3]",
   subsection["Hard tanh"],
 
   displayMath["HardTanh"[x] == Min[1, Max[-1, x]]],
-  text["A composition of one tropical sum and one classical \"min\". \
-The min-plus algebra and the max-plus algebra are duals of one \
-another (negate the values); so hard-tanh is a min-max-plus rational."],
+  text[{
+    "Hard-tanh mixes a max-plus operation (",
+    math["Max"[-1, x]],
+    ") with a min-plus one (the outer ", math[Min],
+    "). Min-plus is just max-plus on the negated values, so the same \
+algebra applies if we keep two parallel \"signs\" of the input. \
+Practically: the analytical tools below (Lipschitz, dead units, \
+pruning) still work on hard-tanh layers, but you need to track both \
+upper and lower hulls, doubling the bookkeeping. The pure ReLU case \
+is the cleanest entry point, which is what we will stick with."
+  }],
 
   subsection["Maxout (Goodfellow et al., 2013)"],
 
@@ -965,8 +1250,68 @@ of ReLU layers stays inside the tropical algebra."}],
 
   section["13.  Train a tiny classifier and verify"],
 
-  text["We pick the two-moons dataset and a 2 \[Rule] 12 \[Rule] 1 \
-ReLU MLP. The whole block runs in a fresh kernel:"],
+  subsection["The two-moons dataset"],
+
+  text[{
+    "Before we touch a single neuron we have to pick a problem. ",
+    bd["Two-moons"],
+    " is the classic 2D toy classification dataset: two interlocking \
+crescent-shaped point clouds in the plane, one labelled ", math[+1],
+    " and the other ", math[-1], ", with a little Gaussian noise \
+sprinkled on top. The two crescents cannot be separated by any \
+straight line -- that is the entire point of the dataset. Any \
+non-linear classifier worth its salt should be able to carve the \
+plane cleanly between them, and the shape of the carve is interesting \
+enough to make pretty pictures."
+  }],
+
+  ImageFig[FileNameJoin[{figureDir, "18_two_moons_dataset.jpg"}],
+    "Illustration. Two interlocking crescents of coloured beads on \
+sand -- our toy classification dataset. The class boundary is \
+necessarily curved, so a linear classifier fails. Two-moons is the \
+fruit fly of the small-MLP literature.", 0.55],
+
+  subsection["Architecture and notation"],
+
+  text[{
+    "We pick a ", bd["2 \[Rule] 12 \[Rule] 1"],
+    " ReLU multilayer perceptron -- two-dimensional input, twelve \
+hidden ReLU units, scalar output. In symbols, with ",
+    math[Element[x, Power[R, 2]]], ":"
+  }],
+  displayMath[
+    h == "ReLU"[A x + b] ==
+      Max[0, A x + b]],
+  displayMath[
+    f[x] == c . h + d
+  ],
+  text[{
+    "where ", math[A], " is a ", math[Times[12, 2]],
+    " weight matrix, ", math[b], " a length-12 hidden bias, ",
+    math[c], " a length-12 output weight row, and ", math[d],
+    " a scalar output bias. There are ",
+    math[12 \[Times] 2 + 12 + 12 + 1], " = ", math[49],
+    " trainable parameters in total -- almost nothing. The decision \
+rule is ", math["sign"[f[x]]],
+    ", so the trained classifier returns ", math[+1],
+    " on points where ", math[f > 0], " and ", math[-1],
+    " where ", math[f < 0],
+    ". The locus ", math[{f == 0}],
+    " is the decision boundary, the protagonist of \[Section]14."
+  }],
+
+  subsection["The training block"],
+
+  text[{
+    "The whole training run is six lines of high-level Wolfram \
+Language. The block builds the dataset, wraps a ",
+    mono["NetChain"], ", trains it for 800 epochs of mini-batch SGD, \
+and extracts the trained weights into plain arrays ",
+    math[{A, b, c, d}], " for the tropical analysis to come. It runs \
+in a fresh kernel in a few seconds; the resulting weights are \
+already saved in ", mono["data/moons_net.mx"],
+    " so the rest of the post can be reproduced without retraining."
+  }],
 
   CodeOnly[
 "SeedRandom[7];
@@ -996,6 +1341,21 @@ b = Normal @ NetExtract[trained, {1, \"Biases\"}];
 c = Flatten @ Normal @ NetExtract[trained, {3, \"Weights\"}];
 d = First @ Flatten @ Normal @ NetExtract[trained, {3, \"Biases\"}];"
   ],
+
+  text[{
+    "What did the training actually do? It nudged the 49 numbers in ",
+    math[{A, b, c, d}],
+    " around until the network outputs roughly ", math[+1], " on the \
+upper crescent and ", math[-1], " on the lower one. Different runs \
+land on different weights -- there are many networks that solve the \
+same task -- but the ", ib["function"],
+    " each one computes is what we now analyse. Of the trained ",
+    math[walkNHidden], " hidden units, ", math[walkPosUnits], " end \
+up with positive output weight ", math[Subscript[c, j] > 0],
+    " (they feed into the ", math[P], " polynomial of \[Section]9), \
+and ", math[walkNegUnits], " end up negative (they feed into ",
+    math[Q], ")."
+  }],
 
   text["Now write the two forward passes explicitly and compare them:"],
 
@@ -1028,6 +1388,91 @@ two different algebras."
 the ReLU forward pass and the max-plus forward pass agree at ~10^-14 \
 over 1400+ inputs each. Same function, two different algebras.", 0.45],
 
+  subsection["One concrete forward pass, both ways"],
+
+  text[{
+    "It pays to follow a single input through both pipelines once, \
+to feel why the equivalence is an algebraic identity rather than a \
+numerical coincidence. We take the test point ",
+    math[walkX], " and compute everything step by step on the \
+trained moons net. First the classical ReLU pipeline:"
+  }],
+
+  CodeWithOutput[
+"xWalk    = {0.5, 0.3};
+preact   = A . xWalk + b;        (* the 12 pre-activations  a_j . x + b_j *)
+hidden   = Map[Max[0, #] &, preact];  (* ReLU activations  *)
+outClass = c . hidden + d;       (* classical scalar output *)
+
+{
+  \"input x                  \" -> xWalk,
+  \"pre-activations  A x + b \" -> N[preact, 4],
+  \"hidden        ReLU(A x+b)\" -> N[hidden, 4],
+  \"output         c . h + d \" -> N[outClass, 6],
+  \"# units active (>0)      \" -> Count[preact, _?(# > 0 &)]
+} // TableForm",
+    {
+      "input x                  "                 -> walkX,
+      "pre-activations  A x + b "                 -> N[walkPre,  4],
+      "hidden        ReLU(A x+b)"                 -> N[walkReLU, 4],
+      "output         c . h + d "                 -> N[walkfReLU, 6],
+      "# units active (>0)      "                 -> walkActiveUnits
+    },
+    "Table"
+  ],
+
+  text[{
+    "Reading the rows: the 12 pre-activations are a mix of positive \
+and negative numbers; ", math[walkActiveUnits], " of the 12 hidden \
+units fire (their pre-activation is strictly positive), so ",
+    math[12 - walkActiveUnits],
+    " contribute zero to the output. Multiply the hidden vector by ",
+    math[c], ", add ", math[d],
+    ", and we get the scalar network output. Now the same input \
+through the tropical pipeline, computing the two convex \
+piecewise-linear surfaces ", math[P], " and ", math[Q],
+    " and subtracting:"
+  }],
+
+  CodeWithOutput[
+"P = Sum[If[c[[j]] > 0,
+            Max[0, c[[j]] (A[[j]] . xWalk) + c[[j]] b[[j]]],
+            0], {j, Length[c]}] + Max[d, 0];
+Q = Sum[If[c[[j]] < 0,
+            Max[0, -c[[j]] (A[[j]] . xWalk) - c[[j]] b[[j]]],
+            0], {j, Length[c]}] + Max[-d, 0];
+
+{
+  \"P(x)             \" -> N[P, 6],
+  \"Q(x)             \" -> N[Q, 6],
+  \"P(x) - Q(x)      \" -> N[P - Q, 6],
+  \"ReLU output      \" -> N[outClass, 6],
+  \"| P - Q - outRL |\" -> N[Abs[(P - Q) - outClass], 4]
+} // TableForm",
+    {
+      "P(x)             " -> N[walkP, 6],
+      "Q(x)             " -> N[walkQ, 6],
+      "P(x) - Q(x)      " -> N[walkTrop, 6],
+      "ReLU output      " -> N[walkfReLU, 6],
+      "| P - Q - outRL |" -> N[walkErrPt, 4]
+    },
+    "Table"
+  ],
+
+  text[{
+    "The two pipelines disagree by ", math[N[walkErrPt, 4]],
+    " -- pure floating-point round-off. The convex max-plus surface ",
+    math[P], " is the contribution of the ",
+    math[walkPosUnits], " positive-weight units (plus the positive \
+part of ", math[d],
+    "), and ", math[Q], " is the contribution of the ",
+    math[walkNegUnits], " negative-weight units; their difference ",
+    math[P - Q], " is the network function. This is the identity of \
+\[Section]9 made concrete on real trained weights -- no \
+approximation anywhere, just two different evaluation orders of the \
+same scalar."
+  }],
+
   (* ================================================================== *)
 
   section["14.  Decision boundary as a tropical hypersurface"],
@@ -1045,7 +1490,7 @@ region of the resulting arrangement, the activation pattern ",
     " meet -- a tropical hypersurface."
   }],
 
-  ImageFig[FileNameJoin[{figureDir, "16_decision_terrain.png"}],
+  ImageFig[FileNameJoin[{figureDir, "16_decision_terrain.jpg"}],
     "Illustration. A scattering of coral dots (class +1) and blue dots \
 (class -1) lives on opposite sides of a piecewise-linear crease that \
 winds across the plane -- the decision boundary of a trained ReLU \
@@ -1103,7 +1548,24 @@ redundancy we are about to exploit in \[Section]18.", 0.55],
   section["16.  Linear regions scale like n^2"],
 
   text[{
-    "By Zaslavsky's theorem, ", math[n],
+    "What does \"more hidden units\" do to the function the network \
+computes? Geometrically, each new unit cuts the input plane along \
+one more straight crease and lets the surface fold along it. With ",
+    math[n], " creases, the surface acquires up to ",
+    math[Order[Power[n, 2]]],
+    " flat facets -- a number that, for large ", math[n],
+    " grows much faster than ", math[n], " itself."
+  }],
+
+  ImageFig[FileNameJoin[{figureDir, "19_folded_landscape.jpg"}],
+    "Illustration. A richly folded paper landscape -- the kind of \
+piecewise-linear surface a stack of ReLU units produces. Each ridge \
+is one ReLU crease line; each flat facet is one activation pattern \
+of the network. Doubling the number of units roughly quadruples the \
+number of facets, which is the scaling law of \[Section]16.", 0.55],
+
+  text[{
+    "Quantitatively, by Zaslavsky's theorem ", math[n],
     " straight lines in general position in ",
     math[Power[R, 2]],
     " partition the plane into at most"
@@ -1131,9 +1593,19 @@ arrangement but they do live in the same asymptotic class.", 0.55],
     " scaling. Doubling the hidden width roughly quadruples the \
 expressivity, measured in linear regions. For deeper networks (",
     math[L], " layers of width ", math[n], "), the same tropical \
-analysis gives an upper bound of order ", math[Power[n, 2 L]],
-    " regions for 2D input -- which is why depth helps and why the \
-deepest network with the smallest total parameter count tends to win."
+analysis gives an ", bd["upper bound"], " of order ",
+    math[Power[n, 2 L]],
+    " regions for 2D input -- exponential in depth -- which is the \
+classical \"why depth helps\" story. The catch: trained networks \
+rarely come anywhere near that maximum. Hanin and Rolnick (2019) \
+proved that for typical (random or trained) weights the ",
+    ib["expected"],
+    " number of linear regions grows only ", bd["polynomially"],
+    " in the total neuron count, not exponentially in depth. Depth \
+is a force-multiplier on potential expressivity, not on the realised \
+count -- and the trained networks in our \[Section]16 sweep (which \
+sit at 0.5-0.95 of the Zaslavsky ceiling at fixed depth one) are \
+typical rather than exceptional in that respect."
   }],
 
   (* ================================================================== *)
@@ -1142,16 +1614,23 @@ deepest network with the smallest total parameter count tends to win."
 
   text[{
     "If we replace the ReLU layer with a maxout layer of group size ",
-    math[k], ", the network output is a tropical polynomial -- not a \
-difference of two -- because the only \"negation\" in our story came \
-from the sign of the output weights. With maxout we are already in ",
-    bd["pure"], " tropical polynomial territory: ", math[P], " alone, \
-no ", math[Q], ". This is more than aesthetic. A pure tropical \
-polynomial has a single Newton polytope, a single upper hull, a \
-single dual subdivision of input space, and so its decision boundary \
-is a single tropical hypersurface rather than the intersection of \
-two. Many of the analytical tools below sharpen dramatically in this \
-setting."
+    math[k],
+    ", the hidden layer itself is already a vector of tropical \
+polynomials by construction -- no positive / negative weight split \
+needed inside the activation. The full network's output, however, is \
+still ", math[c . h + d], " for some output weight vector ",
+    math[c],
+    ", so the P/Q decomposition continues to depend on the sign of \
+the output-layer weights. ", bd["When all output weights are \
+non-negative"], " the network becomes a ", bd["pure tropical \
+polynomial"], " -- ", math[P], " alone, no ", math[Q],
+    " -- and then the cells of the regular subdivision of its single \
+Newton polytope correspond bijectively to the realised linear \
+regions; the decision boundary is a single tropical hypersurface; \
+and the analytical tools below sharpen dramatically. With \
+mixed-sign output weights the same P/Q machinery as for ReLU is \
+needed; the only thing that changes is the per-monomial bookkeeping \
+inside each hidden unit."
   }],
 
   (* ================================================================== *)
@@ -1165,13 +1644,14 @@ literature. Each is implementable in a few lines on top of the WL \
 machinery already developed, and each is genuinely useful."
   }],
 
-  subsection["18.1  Tight Lipschitz constant"],
+  subsection["18.1  Lipschitz constant via region enumeration"],
 
   text[{
     "Standard upper bounds on the Lipschitz constant of a ReLU \
-network multiply layer-wise norms and become very loose -- often off \
-by orders of magnitude. The tropical viewpoint gives the ",
-    bd["exact"], " Lipschitz constant on any bounded input domain."
+network multiply layer-wise norms and become loose -- often by a \
+large factor. The tropical viewpoint replaces that bound with a \
+direct computation: the maximum gradient norm over realised \
+activation patterns."
   }],
 
   text[{
@@ -1202,16 +1682,53 @@ lipschitz = MPExactLipschitz[<|\"A\" -> A, \"b\" -> b, \"c\" -> c,
     "Default"],
 
   text[{
-    "The tight Lipschitz constant of the trained moons classifier on ",
-    math[Power[Times[{-2, 2}], 2]],
+    "Caveat: this is a grid-sampled enumeration, not an exact \
+combinatorial one. With 12 hidden units the 12 crease lines partition ",
+    math[Power[R, 2]],
+    " into at most ", math[lipZaslavsky],
+    " linear regions (Zaslavsky bound, \[Section]16). Our 240\[Times]\
+240 grid discovered ", math[lipRes["Patterns"]],
+    " realised patterns -- close to that ceiling, and stable under \
+refinement -- so we expect every linear region of the trained \
+network to be hit. For a strict certification one should enumerate \
+the arrangement exactly; the grid result is the best ", ib["finite"],
+    " lower bound and is tight whenever the grid is fine enough."
+  }],
+
+  text[{
+    "The grid-enumerated Lipschitz constant of the trained moons \
+classifier on ", math[Power[Times[{-2, 2}], 2]],
     " is ", math[lipRes["Lipschitz"]],
     ", attained on the linear region with activation pattern ",
     math[lipRes["ArgMaxPattern"]],
-    " (i.e. these specific hidden units are simultaneously active). \
-The product-of-layer-norms upper bound for the same network would \
-typically be 3-5\[Times] larger; the tight number is what you need \
-for certified adversarial robustness and for sharp generalisation \
-bounds."
+    " (these specific hidden units are simultaneously active). Now \
+compare to the standard product-of-layer-norms upper bound ",
+    math[Norm[c] \[Times] SubscriptBox[Norm[A], 2]],
+    " (Norm[A, 2] is the spectral norm of A, i.e. its largest \
+singular value):"
+  }],
+
+  CodeWithOutput[
+"chainBound = Norm[c] * Norm[A, 2];
+{
+  \"\\[ScriptCapitalL] (grid)        \" -> lipschitz[\"Lipschitz\"],
+  \"||c|| * ||A||_op  \"               -> chainBound,
+  \"chain / grid      \"               -> chainBound / lipschitz[\"Lipschitz\"]
+} // TableForm",
+    {
+      "\[ScriptCapitalL] (grid)        " -> lipRes["Lipschitz"],
+      "||c|| * ||A||_op  "               -> lipChainBound,
+      "chain / grid      "               -> lipRatio
+    },
+    "Table"],
+
+  text[{
+    "The chain-rule bound is ", math[N[lipRatio, 3]], "\[Times] \
+larger than the value we get from the actual gradient enumeration. \
+For deeper networks the gap grows multiplicatively per layer -- which \
+is exactly why product-of-layer-norms is famously slack. The \
+enumerated value is what you want for certified adversarial \
+robustness and for sharp generalisation bounds."
   }],
 
   subsection["18.2  Dead-neuron detection"],
@@ -1261,13 +1778,16 @@ save one ReLU evaluation per forward pass."
   subsection["18.3  Lossless minimisation"],
 
   text[{
-    "Combining the two observations above gives an exact network \
-minimiser: drop the never-active units (they contribute zero), and \
-absorb the always-active units into an affine head (their ReLU is \
-the identity on the domain of interest). The resulting smaller \
-network computes ", bd["exactly"],
-    " the same function as the original on the chosen domain -- not \
-an approximation."
+    "Combining the two observations above gives a ",
+    bd["zero-retraining network pruner"],
+    " that is guaranteed exact on any bounded domain. The recipe: \
+drop the never-active units (they contribute zero), and absorb the \
+always-active units into an affine head (their ReLU is the identity \
+on the domain of interest). The resulting smaller network -- plus a \
+constant linear correction stored in the returned association as ",
+    mono["AffineHead"], " -- computes ", bd["exactly"],
+    " the same function as the original on the chosen domain. No \
+approximation, no fidelity-vs-size trade-off."
   }],
 
   CodeWithOutput[
@@ -1284,10 +1804,37 @@ an 11-unit network plus a small affine head ",
     math[Subscript[w, "head"] . x],
     " with ", math[Subscript[w, "head"]], " = ",
     math[pruneSmall["AffineHead", "Slope"]],
-    ". The reduction is ", bd["lossless"],
-    " on this domain, verified by max-of-absolute-errors over a \
-random batch (zero to floating-point precision; see the smoke test \
-in ", mono["scripts/15_new_tools_smoke.wls"], ")."
+    ". ", mono["ReLUForward"], " and ", mono["MaxPlusForward"],
+    " consult the ", mono["AffineHead"],
+    " field automatically, so the pruned association is a drop-in \
+replacement. The next cell verifies losslessness inline on 500 \
+random inputs in the pruning domain:"
+  }],
+
+  CodeWithOutput[
+"SeedRandom[42];
+testPts = RandomReal[{-0.5, 0.5}, {500, 2}];
+{
+  \"max |f(x) - f_pruned(x)|       (classical) \" ->
+    Max[Abs[ReLUForward[netAssoc, #] & /@ testPts -
+            ReLUForward[pruned,   #] & /@ testPts]],
+  \"max |f_pruned(x) - (P-Q)(x)|   (tropical)  \" ->
+    Max[Abs[ReLUForward[pruned,   #] & /@ testPts -
+            MaxPlusForward[pruned, #] & /@ testPts]]
+} // TableForm",
+    {
+      "max |f(x) - f_pruned(x)|       (classical) " -> pruneErrCls,
+      "max |f_pruned(x) - (P-Q)(x)|   (tropical)  " -> pruneErrTrp
+    },
+    "Table"],
+
+  text[{
+    "Both errors are at floating-point round-off (",
+    math[Order[Power[10, -16]]],
+    "). The reduction is ", bd["lossless"],
+    " on this domain -- the pruned net computes pointwise the same \
+function as the original, both in the classical ReLU pipeline and \
+in the tropical ", math[P - Q], " evaluation."
   }],
 
   text[{
@@ -1315,23 +1862,40 @@ piece of ", math[f], "; the decision boundary ", math[{f == 0}],
 with explicit equations.\n",
     "\[Bullet] ", bd["Adversarial certification"],
     ": for an input ", math[Subscript[x, 0]],
-    " we can compute the largest radius ", math[r],
-    " of an L^\[Infinity] ball around ", math[Subscript[x, 0]],
-    " on which the classifier output sign is constant, by checking \
-the affine piece on each cell that the ball intersects -- a finite \
-linear-programming problem.\n",
+    " the largest radius ", math[r],
+    " of an attack ball around ", math[Subscript[x, 0]],
+    " on which the classifier output sign is constant is the (norm-\
+specific) distance from ", math[Subscript[x, 0]], " to the nearest \
+segment of the decision boundary ", math[{f == 0}],
+    ". For a region with gradient ", math[Subscript[w, \[Sigma]]],
+    " and offset ", math[Subscript[d, \[Sigma]]],
+    " the analytic distance from ", math[Subscript[x, 0]],
+    " to that piece of the hyperplane is ",
+    math[Abs[Subscript[w, \[Sigma]] . Subscript[x, 0] +
+        Subscript[d, \[Sigma]]] / Subscript[Norm[Subscript[w, \[Sigma]]], "\[Star]"]],
+    ", where the \[Star] subscript on the norm denotes the ",
+    bd["dual norm"], " of the attack norm (an ",
+    math[Power[L, 2]], " ball gives the ",
+    math[Power[L, 2]], " norm in the denominator; an ",
+    math[Power[L, \[Infinity]]], " ball gives the ", math[Power[L, 1]],
+    " norm; etc.). Minimise over realised patterns \[Sigma] and clip \
+to each region's own polytope to get the certified radius.\n",
     "\[Bullet] ", bd["Network equivalence"],
-    ": two trained networks compute the same function iff their \
-tropical decompositions have the same upper hulls in both ", math[P],
-    " and ", math[Q],
-    ". This is a much sharper test than comparing weights -- many \
-weight assignments give the same function.\n",
-    "\[Bullet] ", bd["Maxout > ReLU on regularity grounds"],
-    ": for maxout networks the entire machinery sharpens because the \
-network is a pure tropical polynomial (no ", math[P/Q],
-    " split), and the Newton polytope vertices correspond bijectively \
-to realised regions. There is no \"hidden\" structure to the \
-decision boundary."
+    ": if two trained networks have tropical decompositions whose \
+upper hulls coincide in both ", math[P], " and ", math[Q],
+    " then they compute the same function. The converse is not \
+automatic -- dominated monomials below the upper hull can differ \
+between two networks that compute the same piecewise-linear function, \
+so the test is sufficient, not necessary. Still much sharper than \
+comparing weights, because many weight assignments give the same \
+upper hull.\n",
+    "\[Bullet] ", bd["Maxout regularity bonus"],
+    ": when a maxout network's output layer has all non-negative \
+weights the entire machinery sharpens -- the network is a pure \
+tropical polynomial (no ", math[P/Q],
+    " split), and the cells of the regular subdivision of its single \
+Newton polytope correspond bijectively to the realised regions. With \
+mixed output-weight signs the same P/Q analysis as for ReLU applies."
   }],
 
   (* ================================================================== *)
@@ -1344,32 +1908,32 @@ decision boundary."
     Grid[{
       {gridBold["classical / ReLU view"],
        gridBold["tropical / max-plus view"]},
-      {gridMono["Max[0, W x + b]  per layer"],
+      {gridMono["Max[0, W x + b]  per ReLU layer"],
        gridMono["tropical polynomial in x"]},
       {gridMono["scalar output f(x) in R"],
        gridMono["P(x) - Q(x), P, Q tropical polys"]},
       {gridMono["decision boundary {f = 0}"],
        gridMono["tropical hypersurface {P = Q}"]},
       {gridMono["activation crease lines"],
-       gridMono["regular subdivision of Newt(P + Q)"]},
+       gridMono["regular subdivisions of Newt(P), Newt(Q)"]},
       {gridMono["linear regions vs width n"],
        gridMono["Zaslavsky bound  1 + n + C(n, 2)"]},
-      {gridMono["mat-vec  W x + b"],
-       gridMono["tropical mat-vec  A \[CircleDot] x \[CircleTimes] b"]},
+      {gridMono["dynamic programming on a DAG"],
+       gridMono["tropical mat-vec  A \[CircleDot] x"]},
       {gridMono["Bellman-Ford shortest paths"],
-       gridMono["same tropical mat-vec, min-plus"]},
-      {gridMono["PERT longest path"],
-       gridMono["tropical Kleene star"]},
+       gridMono["tropical Kleene star, min-plus"]},
+      {gridMono["PERT longest path / makespan"],
+       gridMono["tropical Kleene star, max-plus"]},
       {gridMono["leaky ReLU / MaxPool / maxout"],
        gridMono["pure tropical operations"]},
       {gridMono["skip connection x + F(x)"],
        gridMono["tropical product x \[CircleTimes] F(x)"]},
       {gridMono["product-of-layer-norms Lipschitz bound"],
-       gridMono["EXACT Lipschitz via gradient-norm max"]},
+       gridMono["Lipschitz via grid-enumerated gradient norms"]},
       {gridMono["dead neurons via held-out data"],
-       gridMono["dead neurons via 4-corner LP"]},
+       gridMono["dead neurons via 4-corner evaluation"]},
       {gridMono["pruning - approximate, needs retraining"],
-       gridMono["pruning - EXACT via dead-unit minimiser"]}
+       gridMono["pruning - exact on bounded domain, no retraining"]}
     },
     (* per-row background: row 1 is the navy header, rest are plain *)
     Background -> {None, {1 -> RGBColor[0.18, 0.30, 0.55]}},
@@ -1395,7 +1959,7 @@ does not give us."],
     "D. Maclagan, B. Sturmfels. ",
     ib["Introduction to Tropical Geometry"],
     ". AMS GSM 161 (2015).\n\n",
-    "P. Butkovic. ",
+    "P. Butkovi\[CHacek]. ",
     ib["Max-linear Systems: Theory and Algorithms"],
     ". Springer (2010).\n\n",
     "I. Goodfellow, D. Warde-Farley, M. Mirza, A. Courville, Y. Bengio. ",
@@ -1403,8 +1967,11 @@ does not give us."],
     "R. M. Karp. ",
     ib["A characterization of the minimum cycle mean in a digraph"],
     ". Discrete Math. 23 (1978), 309-311.\n\n",
-    "Wolfram Community discussion on max-plus algebra: \
-community.wolfram.com/groups/-/m/t/162609\n\n",
+    "B. Hanin, D. Rolnick. ",
+    ib["Complexity of Linear Regions in Deep Networks"],
+    ". ICML 2019. arXiv:1901.09021.\n\n",
+    "Wolfram Community discussion on max-plus algebra (by the same \
+author): community.wolfram.com/groups/-/m/t/162609\n\n",
     "Companion repository: ",
     mono["github.com/mthiel74/TropicalAlgebravsReLU"], "."
   }]

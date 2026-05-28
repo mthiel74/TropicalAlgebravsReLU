@@ -177,10 +177,12 @@ function on the region with activation pattern sigma: \
 the sum  Sum_{j : sigma[[j]] == 1} c_j a_j.";
 
 MPExactLipschitz::usage =
-"MPExactLipschitz[net, dom, n] computes the TIGHT (not just an upper \
-bound on) Lipschitz constant of the trained ReLU classifier net on the \
-rectangle dom, by enumerating realised activation patterns on an n x n \
-grid and taking the maximum gradient norm.";
+"MPExactLipschitz[net, dom, n] returns the maximum gradient norm over \
+realised activation patterns of the trained ReLU classifier net on the \
+rectangle dom, by enumerating patterns on an n x n grid. This is the \
+exact Lipschitz constant whenever the grid hits every linear region \
+(verifiable against Zaslavsky's bound on region count). Otherwise it \
+is a lower bound that becomes tight as n increases.";
 
 MPDeadUnits::usage =
 "MPDeadUnits[net, dom] returns the set of hidden-unit indices j whose \
@@ -328,7 +330,7 @@ LiftedPoints[TropicalPolynomial[exps_, coeffs_]] :=
 
 UpperHullFaces[poly_TropicalPolynomial] := Module[
   {lifted = LiftedPoints[poly], hull, coords, faces, normals, upMask,
-   coordIdx},
+   liftedIndex},
   If[Length[lifted] < 4, Return[{Range[Length[lifted]]}]];
   hull   = ConvexHullMesh[lifted];
   coords = MeshCoordinates[hull];
@@ -343,10 +345,13 @@ UpperHullFaces[poly_TropicalPolynomial] := Module[
       ]],
     faces];
   upMask = Positive[normals[[All, -1]]];
-  coordIdx = AssociationThread[coords -> Range[Length[coords]]];
+  (* Robust reverse lookup: hull vertex coords -> index in `lifted`,
+     using Nearest instead of FirstPosition (which is brittle under
+     any floating-point perturbation by ConvexHullMesh).             *)
+  liftedIndex = Nearest[lifted -> "Index"];
   Map[
     Function[face,
-      (First[FirstPosition[lifted, coords[[#]]]] &) /@ face],
+      First[liftedIndex[coords[[#]]]] & /@ face],
     Pick[faces, upMask]
   ]
 ];
@@ -374,20 +379,28 @@ TropicalCurvePlot[TropicalPolynomial[exps_, coeffs_], {x_Symbol, y_Symbol},
       DataRange -> dom, DataReversed -> True, AspectRatio -> 1,
       Frame -> True, FrameLabel -> {x, y}, PlotRangePadding -> 0],
     Graphics[{}, PlotRange -> dom, Frame -> True, AspectRatio -> 1]];
-  (* mark cells whose argmax differs from any neighbour *)
-  curveLines = Reap[
-    Do[
-      Module[{cur = argmax[[i, j]]},
-        If[i < n && argmax[[i + 1, j]] =!= cur,
-          Sow[{{xs[[j]], ys[[i]] + (ys[[2]] - ys[[1]]) / 2},
-               {xs[[j]] + 0, ys[[i]] + (ys[[2]] - ys[[1]]) / 2}}]];
-        If[j < n && argmax[[i, j + 1]] =!= cur,
-          Sow[{{xs[[j]] + (xs[[2]] - xs[[1]]) / 2, ys[[i]]},
-               {xs[[j]] + (xs[[2]] - xs[[1]]) / 2, ys[[i]] + 0}}]];
-      ], {i, n}, {j, n}]][[2]];
+  (* mark cells whose argmax differs from any neighbour: collect the
+     short segment along the boundary edge between the two cells.
+     We accumulate raw {p1, p2} point-pairs and pass the whole list to
+     a SINGLE Line[] primitive -- a 240 x 240 grid can otherwise
+     produce ~10^5 separate Line objects, which renders sluggishly. *)
+  curveSegments = Reap[
+    Module[{dx = xs[[2]] - xs[[1]], dy = ys[[2]] - ys[[1]]},
+      Do[
+        Module[{cur = argmax[[i, j]]},
+          If[i < n && argmax[[i + 1, j]] =!= cur,
+            Sow[{{xs[[j]] - dx/2, ys[[i]] + dy/2},
+                 {xs[[j]] + dx/2, ys[[i]] + dy/2}}]];
+          If[j < n && argmax[[i, j + 1]] =!= cur,
+            Sow[{{xs[[j]] + dx/2, ys[[i]] - dy/2},
+                 {xs[[j]] + dx/2, ys[[i]] + dy/2}}]];
+        ],
+        {i, n}, {j, n}]
+    ]][[2]];
   Show[bg,
-    Graphics[{OptionValue["CurveStyle"], PointSize[0.002],
-              Point[Flatten[curveLines, 1]]}, PlotRange -> dom]]
+    Graphics[{OptionValue["CurveStyle"],
+              If[curveSegments === {}, {}, Line[curveSegments[[1]]]]},
+      PlotRange -> dom]]
 ];
 
 Options[TropicalRegionPlot] = {"Resolution" -> 240};
@@ -417,7 +430,7 @@ TropicalRegionPlot[TropicalPolynomial[exps_, coeffs_], {x_Symbol, y_Symbol},
 
 MPLongestPathDistances[adj_?MatrixQ] := KleeneStar[adj];
 
-MPShortestPathDistances[adj_?MatrixQ] := -KleeneStar[-adj /. -Infinity -> -Infinity];
+MPShortestPathDistances[adj_?MatrixQ] := -KleeneStar[-adj];
 
 (* --- PERT-style task scheduling ---------------------------------- *)
 
@@ -425,9 +438,9 @@ MPSchedule[durations_?VectorQ, prereqs_List] := Module[
   {n = Length[durations], adj, paths, earlyStart, earlyFinish},
   adj = MPZero[n, n];
   Do[
-    With[{i = r[[1, 1]], j = r[[1, 2]]},
+    With[{i = r[[1]], j = r[[2]]},
       adj[[i, j]] = durations[[i]]],
-    {r, List @@@ {prereqs}}
+    {r, prereqs}
   ];
   paths = KleeneStar[adj, "MaxOrder" -> n];
   earlyStart  = Table[
@@ -486,7 +499,13 @@ TropicalRationalEval[<|"P" -> p_, "Q" -> q_|>, X_?MatrixQ] :=
 
 (* --- analytical tools ------------------------------------------- *)
 
-(* Realised activation patterns on a grid. *)
+(* Realised activation patterns on a grid.
+   Convention: strict inequality  a_j . x + b_j > 0  means "unit j is
+   active". A grid point that lands exactly on a crease (pre-activation
+   = 0) is therefore classified as INACTIVE, matching the standard
+   open-region semantics of the linear-region decomposition. The
+   measure-zero ambiguity at the crease itself is irrelevant for
+   pattern enumeration. *)
 MPRealisedPatterns[net_Association,
     dom_ : {{-3., 3.}, {-3., 3.}}, n_Integer : 200] := Module[
   {a, b, xs, ys, pts, sig},
@@ -579,6 +598,14 @@ MPPruneDeadUnits[net_Association,
     Total[c[[#]] b[[#]] & /@ alwaysOn]];
   newD = d + headBias;
 
+  (* INVARIANT: AffineHead["Bias"] is *always* zero in the returned
+     association; the bias contribution headBias of the always-active
+     units has already been absorbed into newD above. We keep "Bias" as
+     an explicit field so downstream consumers (ReLUForward,
+     MaxPlusForward) can read both pieces uniformly via
+       Slope . x + Bias
+     without case-splitting. Any future refactor that moves headBias
+     out of newD must update the constant here in lock-step.            *)
   <|"A" -> newA, "b" -> newB, "c" -> newC, "d" -> newD,
     "AffineHead" -> <|"Slope" -> headSlope, "Bias" -> 0.|>,
     "Removed" -> <|"NeverActive" -> neverOn, "AlwaysActive" -> alwaysOn|>,
